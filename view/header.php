@@ -23,6 +23,7 @@
             <nav class="navbar">
                 <ul class="nav-list">
                     <li><a href="index.php?page=home" class="nav-link active">Home</a></li>
+                    <li><a href="index.php?page=listings" class="nav-link active">Movies</a></li>
                     <li><a href="index.php?page=about" class="nav-link active">About Us</a></li>
                 </ul>
             </nav>
