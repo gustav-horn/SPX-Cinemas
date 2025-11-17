@@ -7,7 +7,7 @@ require_once __DIR__ . '/../model/Location.php';
 // Load the DatabaseSingleton, as the Repository needs its generic query execution methods.
 require_once __DIR__ . '/../database/DatabaseSingleton.php';
 
-class CinemaRepository {
+class LocationRepository {
 
     // Dependency Injection: The Repository requires the Database access object.
     private DatabaseSingleton $db;
