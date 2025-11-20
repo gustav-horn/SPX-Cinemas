@@ -33,7 +33,6 @@ class SessionRepository {
     private function createModelFromRow(array $row): Session {
         return new Session(
             (int)$row['sessionId'],
-            $row['sessionName'],
             $this->movies->findById($row['movieId']) ?? null, // Use null coalesce for optional fields
             $this->cinemas->findById($row['cinemaId']) ?? null,
             new DateTime($row['sessionTime']),
@@ -66,10 +65,35 @@ class SessionRepository {
      * @return Session[] An array of Session objects
      */
     public function findAll(): array {
-        $sql = "SELECT * FROM `session` ORDER BY `sessionId` ASC";
+        $sql = "SELECT * FROM `sessions` ORDER BY `sessionId` ASC";
         $results = $this->db->query($sql);
 
-        // Convert all raw results into an array of Movie objects
+        // Convert all raw results into an array of Session objects
+        return array_map($this->createModelFromRow(...), $results);
+    }
+
+    /**
+     * Finds all sessions showing in a given cinema
+     * @param int The cinemaId
+     * @return Session[] An array of Session objects
+     */
+    public function findByCinema(int $cinemaId): array {
+        $sql = "SELECT * FROM `sessions`WHERE `cinemaId` = :id ORDER BY `sessionId` ASC";
+        $results = $this->db->query($sql, ["id" => $cinemaId]);
+
+        // Convert all raw results into an array of Session objects
+        return array_map($this->createModelFromRow(...), $results);
+    }
+
+    /**
+     * Finds all sessions showing a given movie
+     * @param int The movieId
+     * @return Session[] An array of Session objects
+     */
+    public function findByMovie(int $movieId): array {
+        $sql = "SELECT * FROM `sessions` WHERE `movieId` = :id ORDER BY `sessionId` ASC";
+        $results = $this->db->query($sql, ["id" => $movieId]);
+
         return array_map($this->createModelFromRow(...), $results);
     }
 
