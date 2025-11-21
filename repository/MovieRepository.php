@@ -70,7 +70,7 @@ class MovieRepository {
      */
     public function findRandom(int $limit): array {
         // Uses SQL ORVER BY RAND() function
-        $sql = "SELECT * FROM movies ORDER BY RAND() LIMIT :limit";
+        $sql = "SELECT * FROM `movies` ORDER BY RAND() LIMIT :limit";
 
         $results = $this->db->query($sql, ["limit" => $limit]);
 

@@ -36,7 +36,7 @@ class LocationRepository {
      * Finds a single Location by its primary key ID.
      */
     public function findById(int $id): ?Location {
-        $sql = "SELECT * FROM `location` WHERE `locationId` = :id";
+        $sql = "SELECT * FROM `locations` WHERE `locationId` = :id";
 
         $results = $this->db->query($sql, ['id' => $id]);
 
@@ -53,7 +53,7 @@ class LocationRepository {
      * @return Location[] An array of Location objects
      */
     public function findAll(): array {
-        $sql = "SELECT * FROM `location` ORDER BY `locationId` ASC";
+        $sql = "SELECT * FROM `locations` ORDER BY `locationId` ASC";
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Movie objects
@@ -61,7 +61,7 @@ class LocationRepository {
     }
 
     public function findByName(string $name): ?Location {
-        $sql = "SELECT * FROM `location` WHERE `locationName` = :name";
+        $sql = "SELECT * FROM `locations` WHERE `locationName` = :name";
 
         $results = $this->db->query($sql, ['name' => $name]);
 

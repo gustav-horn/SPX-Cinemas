@@ -79,6 +79,11 @@ body {
     color: #ffffff;
 }
 
+/* ---------- Location Select ----- */
+.location-form {
+    padding: 2vh
+}
+
 /* ---------- Movie Grid ---------- */
 .movie-grid {
     display: grid;

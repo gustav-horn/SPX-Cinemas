@@ -7,12 +7,17 @@
 
 switch ($page) {
     case "home":
-        require_once __DIR__ . "./controller/HomeController.php";
+        require_once __DIR__ . "/controller/HomeController.php";
         $controller = new HomeController();
         $controller->displayHome();
         break;
+    case "listings":
+        require_once __DIR__ . "/controller/ListingsController.php";
+            $controller = new ListingsController();
+            $controller->displayListings();
+        break;
     case "about":
-        require_once __DIR__ . "./controller/AboutUsController.php";
+        require_once __DIR__ . "/controller/AboutUsController.php";
         $controller = new AboutUsController();
         $controller->displayAboutUs();
         break;

@@ -1,23 +1,29 @@
 <?php
 // controller/HomeController.php
-/* Controller for the home page
-    - Fetches 4 random movies from the database
-    - Passes them to the home view for rendering
+/* Controller for the movieListings page
+    - Filters movies by location
+    - sends the relevant movies to be displayed
 */
 
 //Include any models if needed
-require_once __DIR__ . '/../database/DatabaseSingleton.php';
 require_once __DIR__ . '/../model/Movie.php';
-require_once __DIR__ . '/../repository/MovieRepository.php';
+require_once __DIR__ . '/../model/Location.php';
+require_once __DIR__ . '/../repository/LocationRepository.php';
 
-class ListingsController
-{
+//Include the Listings Service
+require_once __DIR__ . '/../services/ListingsService.php';
+
+class ListingsController {
     public function displayListings()
     {
         //retrieve any data if needed
         $db = DatabaseSingleton::getInstance();
-        $movieRepository = new MovieRepository($db);
-        $movies = $movieRepository->findByLocation($_POST["location"] ?? "all");
+
+        $listingsService = new ListingsService($db);
+        $movies = $listingsService->findByLocation($_POST["location"] ?? "all");
+
+        $locationRepository = new LocationRepository($db);
+        $locations = $locationRepository->findAll();
 
         // Views are included from the project root path (index.php runs from root)
         include __DIR__ . '/../view/listings.php';

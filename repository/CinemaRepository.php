@@ -30,7 +30,7 @@ class CinemaRepository {
         return new Cinema(
             (int)$row['cinemaId'],
             $row['cinemaName'],
-            $this->locations.findById($row['locationId']) ?? null,
+            $this->locations->findById($row['locationId']),
         );
     }
 
@@ -59,10 +59,22 @@ class CinemaRepository {
      * @return Cinema[] An array of Cinema objects
      */
     public function findAll(): array {
-        $sql = "SELECT * FROM `cinema` ORDER BY `cinemaId` ASC";
+        $sql = "SELECT * FROM `cinemas` ORDER BY `cinemaId` ASC";
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Movie objects
+        return array_map($this->createModelFromRow(...), $results);
+    }
+
+    /**
+     * Finds all cinemas associated with a given locationId
+     * @param int An id associated with the given location
+     * @return Cinema[] An array of Cinema objects
+     */
+    public function findByLocation(int $locationId): array {
+        $sql = "SELECT * FROM `cinemas` WHERE locationId = :id ORDER BY `cinemaId` ASC";
+        $results = $this->db->query($sql, ["id" => $locationId]);
+
         return array_map($this->createModelFromRow(...), $results);
     }
 
