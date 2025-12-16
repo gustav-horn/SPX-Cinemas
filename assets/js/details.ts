@@ -16,8 +16,12 @@ var context: context = {
 document.addEventListener("click", function(ev) {
     let detail = context.activeDetail;
     if (detail && detail.isActive) {
-        let rect = detail.element.getBoundingClientRect();
-        if ((ev.clientX < rect.left || ev.clientX > rect.right) || (ev.clientY < rect.bottom || ev.clientY > rect.top)) {
+        let visible = detail.element.getElementsByClassName("details-content").item(0)!;
+        let rect = visible.getBoundingClientRect();
+        console.log(rect.left, rect.right, rect.bottom, rect.top);
+        console.log(ev.clientX, ev.clientY)
+        if ((ev.clientX < rect.left) || (ev.clientX > rect.right) || (ev.clientY > rect.bottom) || (ev.clientY < rect.top)) {
+            console.log("Closing")
             detail.element.style.display = "none"
         }
     }
@@ -44,7 +48,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Plumb the behaviour for the movie-cards
     document.querySelectorAll(".movie-card").forEach((card) => {
-        card.addEventListener("click", () => {let item = document.getElementById("movieDetails"+card.getAttribute("id")!)!; item.style.display = "flex"; context.activeDetail = {element: item, isActive: false}; setTimeout(() => context.activeDetail!.isActive = true, 1)});
+        card.addEventListener("click", () => {
+            let item = document.getElementById("movieDetails"+card.getAttribute("id")!)!; 
+            item.style.display = "flex"; 
+            context.activeDetail = {element: item, isActive: false}; 
+            setTimeout(() => context.activeDetail!.isActive = true, 1)
+            }
+        );
     })
 })
 
