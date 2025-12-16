@@ -20,13 +20,13 @@
     <?php if (empty($movies)): ?>
     <?php else: ?>
         <?php foreach ($movies as $movie): ?>
-            <article class="movie-card">
+            <article class="movie-card" id="<?= $movie["movie"]->movieId; ?>">
                 <img 
                     src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
                     alt = "<?= htmlspecialchars($movie["movie"]->movieName); ?>"
                     class = "movie-poster"
                 >
-                <div class = "movie-body" onclick="Something">
+                <div class = "movie-body">
                     <h2 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName); ?></h2>
                     <p class = "movie-desc"><?= htmlspecialchars($movie["movie"]->movieDescription); ?></p>
                     <div class="movie-meta">
@@ -42,17 +42,52 @@
     include __DIR__."/../view/footer.php";
 ?>
 
-<!-- Trailer Modal -->
-<div id="trailerModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <iframe id="trailerFrame"
-                width="100%"
-                height="400"
-                src=""
-                frameborder="0"
-                allowfullscreen>
-        </iframe>
-    </div>
-</div>
-<script src="assets/js/modal.js"></script>
+<!-- Details Pages -->
+<?php if (empty($movies)): ?>
+<?php else: ?>
+    <?php foreach ($movies as $movie): ?>
+        <div id="movieDetails<?= $movie["movie"]->movieId; ?>" class="modal">
+            <div class="details-content">
+                <div class="row">
+                    <span class="close">&times;</span>
+                    <div class="details-poster-container">
+                        <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
+                            alt = "<?= htmlspecialchars($movie["movie"]->movieName); ?>"
+                            class = "movie-poster" >
+                    </div>
+                    <span style="padding: 1%;"></span>
+                    <div class = "col details-movie-info">
+                        <h1 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName) ?></h1>
+                        <p class = "movie-body"><?= htmlspecialchars($movie["movie"]->movieDescription) ?></p>
+                    </div>
+                </div>
+                <?php if (empty($movie["sessions"])): ?>
+                    <p>No sessions available</p>
+                <?php else: ?>
+                    <table class="session-table">
+                        <thead>
+                            <tr>
+                                <th>Cinema</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Cost</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody><?php foreach ($movie["sessions"] as $session): ?>
+                            <tr class = "session">
+                                <td class = "session-cinema"><?= htmlspecialchars($session->cinema->cinemaName) ?></td>
+                                <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td>
+                                <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:m")) ?></td>
+                                <td class = "session-cost"><?= htmlspecialchars($session->sessionCost) ?></td>
+                                <td><button class = "session-book">Book Now!</button></td>
+                            </tr>
+                        <?php endforeach ?></tbody>
+                    </table>
+                    <span style = "padding: 2%"></span>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>
+<script src="assets/js/details.js"></script>

@@ -1,0 +1,54 @@
+interface context {
+    activeDetail?: detail,
+}
+
+interface detail {
+    element: HTMLElement,
+    isActive: boolean,
+}
+
+var context: context = {
+    activeDetail: undefined
+}
+
+
+// Let users click out of the details page
+document.addEventListener("click", function(ev) {
+    let detail = context.activeDetail;
+    if (detail && detail.isActive) {
+        let rect = detail.element.getBoundingClientRect();
+        if ((ev.clientX < rect.left || ev.clientX > rect.right) || (ev.clientY < rect.bottom || ev.clientY > rect.top)) {
+            detail.element.style.display = "none"
+        }
+    }
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Key assumption: One-one mapping of modals to items with class "close".
+    // i.e. All close buttons are matched with one and only one modal
+    var modals = document.getElementsByClassName("modal");
+    var btns = document.querySelectorAll(".close");
+
+    console.assert(modals.length == btns.length, "The number of modals and buttons don't match")
+
+    let closeBtn = function(btn: HTMLElement) {
+        return () => {assertHTMLElement(btn); btn.style.display = "none"}
+    }
+
+    // Set up the close buttons
+    for (var i = 0; i < modals.length; i++) {
+        let modal = modals[i]; 
+        assertHTMLElement(modal);
+        btns[i].addEventListener("click", closeBtn(modal))
+    }
+
+    // Plumb the behaviour for the movie-cards
+    document.querySelectorAll(".movie-card").forEach((card) => {
+        card.addEventListener("click", () => {let item = document.getElementById("movieDetails"+card.getAttribute("id")!)!; item.style.display = "flex"; context.activeDetail = {element: item, isActive: false}; setTimeout(() => context.activeDetail!.isActive = true, 1)});
+    })
+})
+
+
+function assertHTMLElement(element: Element): asserts element is HTMLElement {
+    console.assert(element instanceof HTMLElement, "Where are you using this? The only elements with className 'modal' should be HTMLElements.");
+}
