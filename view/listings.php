@@ -59,6 +59,9 @@
                     <div class = "col details-movie-info">
                         <h1 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName) ?></h1>
                         <p class = "movie-body"><?= htmlspecialchars($movie["movie"]->movieDescription) ?></p>
+                        <a href="#" class="trailer-link" data-trailer="<?= htmlspecialchars($movie["movie"]->trailerFileName); ?>">
+                            Watch Trailer
+                        </a>
                     </div>
                 </div>
                 <?php if (empty($movie["sessions"])): ?>
@@ -79,7 +82,7 @@
                                 <td class = "session-cinema"><?= htmlspecialchars($session->cinema->cinemaName) ?></td>
                                 <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td>
                                 <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:m")) ?></td>
-                                <td class = "session-cost"><?= htmlspecialchars($session->sessionCost) ?></td>
+                                <td class = "session-cost">$<?= htmlspecialchars($session->sessionCost) ?></td>
                                 <td><button class = "session-book">Book Now!</button></td>
                             </tr>
                         <?php endforeach ?></tbody>
@@ -91,3 +94,18 @@
     <?php endforeach ?>
 <?php endif ?>
 <script src="assets/js/details.js"></script>
+
+<!-- Trailer Modal -->
+<div id="trailerModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="trailerFrame"
+                width="100%"
+                height="400"
+                src=""
+                frameborder="0"
+                allowfullscreen>
+        </iframe>
+    </div>
+</div>
+<script src="assets/js/modal.js"></script>
