@@ -1,8 +1,7 @@
-"use strict";
 document.addEventListener("DOMContentLoaded", function () {
-    var modal = document.getElementById("trailerModal");
-    var trailerFrame = document.getElementById("trailerFrame");
-    var closeBtn = document.querySelector(".close");
+    var modal = document.getElementById("trailerModal")!;
+    var trailerFrame = document.getElementById("trailerFrame")!;
+    var closeBtn = document.querySelector(".close")!;
     // Open modal
     document.querySelectorAll(".trailer-link").forEach(function (link) {
         link.addEventListener("click", function (e) {
@@ -29,9 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-function assertIFrame(element) {
-    console.assert(element instanceof HTMLIFrameElement, "the only items with id 'trailerFrame' should be the IFrame in which the trailer will play");
+
+
+function assertIFrame(element: HTMLElement): asserts element is HTMLIFrameElement {
+     console.assert(element instanceof HTMLIFrameElement, "the only items with id 'trailerFrame' should be the IFrame in which the trailer will play");
 }
-function assertHTMLAnchorElement(element) {
-    console.assert(element instanceof HTMLAnchorElement, "the only items with class 'trailer-link' should be links that display the trailer");
+
+function assertHTMLAnchorElement(element: any): asserts element is HTMLAnchorElement {
+    console.assert(element instanceof HTMLAnchorElement, "the only items with class 'trailer-link' should be links that display the trailer")
 }
