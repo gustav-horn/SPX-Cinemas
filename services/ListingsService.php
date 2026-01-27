@@ -53,29 +53,44 @@ class ListingsService {
                 return $generateFromMovies($this->movies->findAll());
             }
             else {
-                // Collates list of all sessions to associative array of movies and sessions
-                return array_slice(array_reduce( //Slice to remove redundant first term
-                    array_slice( //Dispose of redundant first term
-                        array_reduce( // Merge list of all sessions at a given location
-                            array_map(fn($cinema) => $this->sessions->findByCinema($cinema->cinemaId), $this->cinemas->findByLocation($location->locationId)),
-                            fn($carry, $item) => array_merge($carry, $item),
-                            []
-                        ),
-                    1),
-                    function(array $prev, Session $session) {
-                        $movie = $session->movie;
-                        if ($index = array_find_key($prev, fn($item)=> $item["movie"]->movieId === $movie->movieId)) {
-                            array_push($prev[$index]["sessions"], $session);
-                            return $prev;
-                        }
-                        else {
-                            array_push($prev, ["movie" => $movie, "sessions" => [$session]]);
-                            return $prev;
-                        }
-                    },
-                    []
-                ), 1);
+                $sql = "SELECT movies.movieId, sessions.sessionId FROM movies 
+                        INNER JOIN sessions ON movies.movieId = sessions.movieId 
+                        INNER JOIN cinemas ON sessions.cinemaId = cinemas.cinemaId 
+                        WHERE cinemas.locationId = :location";
+                $results = accumulate(
+                    $this->db->query($sql, ["location" => $location->locationId]), 
+                    "movieId", 
+                    "sessionId"
+                    );
+                $results = array_map(
+                    fn($row) => [
+                            "movie" => $this->movies->findById($row["movieId"]), 
+                            "sessions" => array_map($this->sessions->findById(...), $row["sessionId"])
+                        ],
+                    $results
+                    );
+                return $results;
             }
         }
     }
+}
+
+/**
+ * Helper function that accumulates repeated keys into key - array{value} pairs
+ * @param array{key:mixed, value:mixed} $array
+ * @param string $key
+ * @param string $value
+ * @return array{key:mixed, value:mixed[]}
+ */
+function accumulate(array $array, string $key, string $value): array {
+    $stack = [];
+    foreach ($array as $item) {
+        if ($row = array_find($stack, fn($row) => $row[$key] == $item[$key])) {
+            array_push($row, $item[$value]);
+        }
+        else {
+            array_push($stack, [$key => $item[$key], $value => [$item[$value]]]);
+        }
+    }
+    return $stack;
 }
