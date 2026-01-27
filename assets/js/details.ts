@@ -30,8 +30,8 @@ document.addEventListener("click", function(ev) {
 document.addEventListener("DOMContentLoaded", function() {
     // Key assumption: One-one mapping of modals to items with class "close".
     // i.e. All close buttons are matched with one and only one modal
-    var modals = document.getElementsByClassName("modal");
-    var btns = document.querySelectorAll(".close");
+    var modals = document.getElementsByClassName("details-modal");
+    var btns = document.querySelectorAll(".details-close");
 
     console.assert(modals.length == btns.length, "The number of modals and buttons don't match")
 

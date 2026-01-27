@@ -46,10 +46,10 @@
 <?php if (empty($movies)): ?>
 <?php else: ?>
     <?php foreach ($movies as $movie): ?>
-        <div id="movieDetails<?= $movie["movie"]->movieId; ?>" class="modal">
+        <div id="movieDetails<?= $movie["movie"]->movieId; ?>" class="details-modal">
             <div class="details-content">
                 <div class="row">
-                    <span class="close">&times;</span>
+                    <span class="details-close">&times;</span>
                     <div class="details-poster-container">
                         <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
                             alt = "<?= htmlspecialchars($movie["movie"]->movieName); ?>"
