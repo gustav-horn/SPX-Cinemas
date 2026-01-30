@@ -89,11 +89,15 @@ class CinemaRepository {
     public function save(Cinema $cinema): bool {
         if ($cinema->cinemaId === null) {
             // INSERT (New Cinema)
-            return true;
+            $sql = "INSERT INTO cinemas VAlUES (:id, :name, :location)";
+            $rowsAffected = $this->db->execute($sql, ["id" => $cinema->cinemaId, "name" => $cinema->cinemaName, "location" => $cinema->location->locationId]);
+            return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Cinema)
-            return true;
+            $sql = "UPDATE cinemas SET cinemaName = :name, locationId = :location WHERE cinemaId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $cinema->cinemaId, "name" => $cinema->cinemaName, "location" => $cinema->location->locationId]);
+            return $rowsAffected == 1;
         }
     }
 }

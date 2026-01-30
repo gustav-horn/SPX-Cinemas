@@ -84,11 +84,15 @@ class LocationRepository {
     public function save(Location $location): bool {
         if ($location->locationId === null) {
             // INSERT (New Location)
-            return true;
+            $sql = "INSERT INTO locations VAlUES (:id, :name)";
+            $rowsAffected = $this->db->execute($sql, ["id" => $location->locationId, "name" => $location->locationName]);
+            return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Location)
-            return true;
+            $sql = "UPDATE locations SET locationName = :name WHERE locationId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $location->locationId, "name" => $location->locationName]);
+            return $rowsAffected == 1;
         }
     }
 }

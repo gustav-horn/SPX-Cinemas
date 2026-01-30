@@ -119,7 +119,7 @@ class MovieRepository {
                     "poster" => $movie->posterFileName
                 ]);
             
-            return true;
+            return $rowsAffected == 0;
         }
     }
 }

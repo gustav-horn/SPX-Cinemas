@@ -107,12 +107,16 @@ class SessionRepository {
      */
     public function save(Session $session): bool {
         if ($session->sessionId === null) {
-            // INSERT (New Session)
-            return true;
+            // INSERT (New Cinema)
+            $sql = "INSERT INTO sessions VAlUES (:id, :time, :cost, :cinema, :movie)";
+            $rowsAffected = $this->db->execute($sql, ["id" => $session->sessionId, "time" => $session->sessionTime->format("H:i:v"), "cost" => $session->sessionCost, "movie" => $session->movie->movieId, "cinema" => $session->cinema->cinemaId]);
+            return $rowsAffected > 0;
         }
         else {
-            // UPDATE (Existing Session)
-            return true;
+            // UPDATE (Existing Cinema)
+            $sql = "UPDATE sessions SET sessionTime = :time, sessionCost = :cost, cinemaId = :cinema, movieId = :movie WHERE sessionId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $session->sessionId, "time" => $session->sessionTime->format("H:i:v"), "cost" => $session->sessionCost, "movie" => $session->movie->movieId, "cinema" => $session->cinema->cinemaId]);
+            return $rowsAffected == 0;
         }
     }
 }
