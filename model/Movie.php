@@ -8,8 +8,8 @@ class Movie {
 
     private static string $posterPath = "posters/";
 
-    public ?int $movieId;
-    public string $movieName;
+    public int $movieId;
+    public ?string $movieName;
     public ?string $movieDescription;
     public ?string $trailerFileName;
     public ?string $posterFileName;

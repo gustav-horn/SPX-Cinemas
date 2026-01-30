@@ -6,9 +6,9 @@ class Session {
     // Note:
     //  ? at type indicates the property can be null
 
-    public ?int $sessionId;
-    public ?Movie $movie;
-    public ?Cinema $cinema;
+    public int $sessionId;
+    public Movie $movie;
+    public Cinema $cinema;
     public ?DateTime $sessionTime;
     public ?float $sessionCost;
 

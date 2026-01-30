@@ -8,7 +8,7 @@ class Cinema {
 
     public ?int $cinemaId;
     public string $cinemaName;
-    public ?Location $location;
+    public Location $location;
 
     public function __construct(
         ?int $id,
