@@ -81,7 +81,7 @@
                             <tr class = "session">
                                 <td class = "session-cinema"><?= htmlspecialchars($session->cinema->cinemaName) ?></td>
                                 <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td>
-                                <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:m")) ?></td>
+                                <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:i A")) ?></td>
                                 <td class = "session-cost">$<?= htmlspecialchars($session->sessionCost) ?></td>
                                 <td><button class = "session-book">Book Now!</button></td>
                             </tr>
