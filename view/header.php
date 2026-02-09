@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/img/favicon.png">
-    <meta http-equiv="content-security-policy" content="self www.youtube.com">
+    <meta http-equiv="content-security-policy" content="default-src 'self' www.youtube.com">
     <title>SPX Cinemas</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
