@@ -2,6 +2,7 @@
    SPX Cinemas MVC Prototype
    assets/css/style.css
    ========================================================= */
+/* ---------- Variables ----------- */
 /* ---------- Base Reset ---------- */
 * {
   box-sizing: border-box;
@@ -78,14 +79,13 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: #93c5fd;
+  color: #f9fafb;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: #ffffff;
+.nav-link:hover {
+  color: #2563eb;
 }
 
 /* ---------- Location Select ----- */
@@ -110,7 +110,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 220px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
@@ -147,7 +147,7 @@ body {
 
 .movie-desc {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: #111827;
   flex: 1;
 }
 

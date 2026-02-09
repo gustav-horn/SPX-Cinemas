@@ -3,6 +3,20 @@
    assets/css/style.css
    ========================================================= */
 
+/* ---------- Variables ----------- */
+    $primary-color: #f9fafb;
+    $secondary-color: #1f2937;
+    $tertiary-color: #dc2626;
+
+    $light-text-color: #ffffff;
+    $grey-text-color: #6b7280;
+    $dark-text-color: #111827;
+    $link-color: #2563eb;
+
+    @mixin shadow() {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
 /* ---------- Base Reset ---------- */
 * {
     box-sizing: border-box;
@@ -12,8 +26,8 @@
 }
 
 body {
-    background: #f9fafb;
-    color: #111827;
+    background: $primary-color;
+    color: $dark-text-color;
     line-height: 1.5;
 }
 
@@ -35,11 +49,11 @@ body {
 
 /* ---------- Banner ---------- */
 .banner {
-    background: #dc2626;             /* deep red banner */
-    color: #ffffff;
+    background: $tertiary-color;             /* deep red banner */
+    color: $light-text-color;
     padding: 14px 0;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    @include shadow();
 }
 
 .banner-title {
@@ -50,8 +64,8 @@ body {
 
 /* ---------- Site Header ---------- */
 .site-header {
-    background: #1f2937;             /* dark slate gray */
-    color: #ffffff;
+    background: $secondary-color;             /* dark slate gray */
+    color: $light-text-color;
     padding: 20px 0;
     margin-bottom: 20px;
 }
@@ -79,14 +93,14 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #93c5fd;
+    // color: #93c5fd;
+    color: $primary-color;
     font-weight: 500;
     transition: color 0.2s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-    color: #ffffff;
+.nav-link:hover {
+    color: $link-color;
 }
 
 /* ---------- Location Select ----- */
@@ -111,7 +125,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 220px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    @include shadow();
     transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
@@ -150,7 +164,8 @@ body {
 
 .movie-desc {
     font-size: 0.95rem;
-    color: #4b5563;
+    // color: #4b5563;
+    color: $dark-text-color;
     flex: 1;
 }
 
@@ -163,14 +178,15 @@ body {
 
 .movie-id {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: $grey-text-color;
 }
 
 .trailer-link {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
-    color: #2563eb;
+    // color: #2563eb;
+    color: $link-color;
 }
 
 .trailer-link:hover {
@@ -182,7 +198,7 @@ body {
     padding: 14px 0;
     border-top: 1px solid #e5e7eb;
     text-align: center;
-    color: #6b7280;
+    color: $grey-text-color;
     font-size: 0.9rem;
     margin-top: 20px;
 }
