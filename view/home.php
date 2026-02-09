@@ -14,7 +14,7 @@
             <article class="movie-card">
                 <img 
                     src = "/assets/img/<?= htmlspecialchars($movie->getPoster()); ?>"
-                    alt = "<?= htmlspecialchars($movie->movieName); ?>"
+                    alt = "The poster of <?= htmlspecialchars($movie->movieName); ?>"
                     class = "movie-poster"
                 >
                 <div class = "movie-body">

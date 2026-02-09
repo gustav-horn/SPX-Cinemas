@@ -52,7 +52,7 @@
                     <span class="details-close">&times;</span>
                     <div class="details-poster-container">
                         <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
-                            alt = "<?= htmlspecialchars($movie["movie"]->movieName); ?>"
+                            alt = "The poster of <?= htmlspecialchars($movie["movie"]->movieName); ?>"
                             class = "movie-poster" >
                     </div>
                     <span style="padding: 1%;"></span>
