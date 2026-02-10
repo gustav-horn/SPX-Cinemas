@@ -6,9 +6,9 @@
     include __DIR__ . "/../view/header.php"; //Include header and navigation bar
 ?>
 
-<!-- Needs filter form -->
+<!-- Filter Form -->
 <form class = "location-form" action="#" method="post" id="location-form">
-    <label class="location-label" for="location">Select your location</label>
+    <label class="location-label" for="location">Select your location: </label>
     <select class="location-select" name="location" id="location" onchange="document.getElementById('location-form').submit()">
             <option class="location-option" value="all" <?= (key_exists("location", $_POST) and ($_POST["location"] === "All" or $_POST["location"] === null)) ? "selected" : ""?>>All</option>
         <?php foreach ($locations as $location): ?>
@@ -71,7 +71,7 @@
                         <thead>
                             <tr>
                                 <th>Cinema</th>
-                                <th>Date</th>
+                                <!-- <th>Date</th> -->
                                 <th>Time</th>
                                 <th>Cost</th>
                                 <th></th>
@@ -80,7 +80,7 @@
                         <tbody><?php foreach ($movie["sessions"] as $session): ?>
                             <tr class = "session">
                                 <td class = "session-cinema"><?= htmlspecialchars($session->cinema->cinemaName) ?></td>
-                                <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td>
+                                <!-- <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td> -->
                                 <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:i A")) ?></td>
                                 <td class = "session-cost">$<?= htmlspecialchars($session->sessionCost) ?></td>
                                 <td><button class = "session-book">Book Now!</button></td>
