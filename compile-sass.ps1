@@ -1,1 +1,0 @@
-sass --no-source-map assets/css/style.scss assets/css/style.css
