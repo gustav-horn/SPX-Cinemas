@@ -7,15 +7,50 @@
 ?>
 
 <!-- Filter Form -->
-<form class = "location-form" action="#" method="post" id="location-form">
-    <label class="location-label" for="location">Select your location: </label>
-    <select class="location-select" name="location" id="location" onchange="document.getElementById('location-form').submit()">
-            <option class="location-option" value="all" <?= (key_exists("location", $_POST) and ($_POST["location"] === "All" or $_POST["location"] === null)) ? "selected" : ""?>>All</option>
+ <script>
+    async function submitLocation(location) {
+        let form = new FormData();
+        form.append("location", location)
+        let response = await fetch("index.php?page=listings", 
+            {
+                method: "POST",
+                mode: "same-origin",
+                credentials: "same-origin",
+                body: form
+            }
+        );
+        console.log(response)
+        if (response.redirected === false) {
+            var html = await response.text();
+            console.log(html);
+            document.open("index.php?page=listings", 'replace');
+            document.write(html);
+            document.close();
+        }
+        else {
+            window.location = response.url;
+        }
+    }
+</script>
+ <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
+<div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
+    <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
+    <div class="location-options" id="location-options" hidden="true">
+            <div class="location-option <?= ($findKey("All") or $findKey(null) or !key_exists("location", $_POST)) ? "active" : null ?>"
+                onclick = 'submitLocation("All")'
+            >
+                All
+            </div>
         <?php foreach ($locations as $location): ?>
-            <option class="location-option" value="<?= htmlspecialchars($location->locationName) ?>" <?=(key_exists("location", $_POST) and $_POST["location"] === $location->locationName) ? "selected" : ""?>><?=htmlspecialchars($location->locationName)?></option>
+            <div 
+                class="location-option <?= $findKey($location->locationName) ? "active" : null; ?>"
+                onclick='submitLocation("<?= htmlspecialchars($location->locationName); ?>")'
+            >
+                <?=htmlspecialchars($location->locationName)?>
+            </div>
         <?php endforeach ?>
-    </select>
-</form>
+    </div>
+</div>
 <section class = "movie-grid">
     <?php if (empty($movies)): ?>
     <?php else: ?>

@@ -2,7 +2,7 @@
    SPX Cinemas MVC Prototype
    assets/css/style.css
    ========================================================= */
-/* ---------- Variables ----------- */
+/* ---------- $variables ----------- */
 /* ---------- Base Reset ---------- */
 * {
   box-sizing: border-box;
@@ -90,7 +90,70 @@ body {
 
 /* ---------- Location Select ----- */
 .location-form {
-  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vh;
+  width: fit-content;
+}
+
+.location-select {
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0.5rem 0;
+  transform: translateY(-10px);
+  z-index: 1000;
+  border: 1px solid rgba(0, 0, 0, 0.95);
+  height: max-content;
+  padding: 0.8rem 1.5rem;
+  list-style: none;
+  margin-left: 0.5vw;
+  gap: 1.5rem;
+  color: #ffffff;
+  background-color: #dc2626;
+}
+
+.location-options {
+  position: absolute;
+  margin-top: 45px;
+  margin-left: 0.5vw;
+}
+
+.location-option {
+  background-color: #f9fafb;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0.5rem 0;
+  transform: translateY(-10px);
+  z-index: 1000;
+  border: 1px solid rgba(0, 0, 0, 0.95);
+  height: max-content;
+  padding: 0.8rem 1.5rem;
+  color: #111827;
+  text-decoration: none;
+  display: flex;
+  transition: color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+.location-option:hover {
+  background-color: #dc2626;
+  color: #f9fafb;
+  border-left-color: #1f2937;
+  padding-left: 1.8rem;
+}
+.location-option.active {
+  background-color: #dc2626;
+  color: #f9fafb;
+}
+.location-option:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.95);
 }
 
 /* ---------- Movie Grid ---------- */
@@ -313,3 +376,5 @@ body {
   background-color: #FFF;
   border: 1px solid rgb(140, 140, 140);
 }
+
+/*# sourceMappingURL=style.css.map */

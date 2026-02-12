@@ -3,7 +3,9 @@
    assets/css/style.css
    ========================================================= */
 
-/* ---------- Variables ----------- */
+   @use "sass:math";
+
+/* ---------- $variables ----------- */
     $primary-color: #f9fafb;
     $secondary-color: #1f2937;
     $tertiary-color: #dc2626;
@@ -12,6 +14,8 @@
     $grey-text-color: #6b7280;
     $dark-text-color: #111827;
     $link-color: #2563eb;
+
+    $light-border-color: #e5e7eb;
 
     @mixin shadow() {
         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -105,7 +109,68 @@ body {
 
 /* ---------- Location Select ----- */
 .location-form {
-    padding: 2vh
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vh;
+    width: fit-content;
+}
+
+@mixin nice-button {
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    border-radius: 6px;
+    @include shadow;
+    list-style: none;
+    padding: 0.5rem 0;
+    transform: translateY(-10px);
+    z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, 0.95);
+    height: max-content;
+    padding: 0.8rem 1.5rem;
+}
+
+.location-select {
+    @include nice-button();
+    list-style: none;
+    margin-left: 0.5vw;
+    gap: 1.5rem;
+    color: $light-text-color;
+    background-color: $tertiary-color;
+}
+
+.location-options {
+    position:absolute;
+    margin-top: 45px;
+    margin-left: 0.5vw;
+}
+
+.location-option {
+    background-color: $primary-color;
+    @include nice-button();
+
+    color: $dark-text-color;
+    text-decoration: none;
+    display: flex;
+    transition: color 0.2s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+        background-color: $tertiary-color;
+        color: $primary-color;
+        border-left-color: $secondary-color;
+        padding-left: 1.8rem;
+    }
+
+    &.active {
+        background-color: $tertiary-color;
+        color: $primary-color;
+    }
+
+    // Divider between items
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.95);
+    }
 }
 
 /* ---------- Movie Grid ---------- */
@@ -119,7 +184,7 @@ body {
 /* ---------- Movie Card ---------- */
 .movie-card {
     background: #ffffff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid $light-border-color;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -196,7 +261,7 @@ body {
 /* ---------- Footer ---------- */
 .site-footer {
     padding: 14px 0;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid $light-border-color;
     text-align: center;
     color: $grey-text-color;
     font-size: 0.9rem;
