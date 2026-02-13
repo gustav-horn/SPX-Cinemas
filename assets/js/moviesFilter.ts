@@ -1,3 +1,6 @@
+import { OptionalP } from "ts-pattern/dist/types/Pattern";
+import { isTemplateExpression } from "typescript";
+
 async function submitLocation(location: string) {
         let form = new FormData();
         form.append("location", location)
@@ -27,6 +30,11 @@ function onStart(document: Document) {
     document.querySelectorAll(".location-option").forEach(
         (item, _) => item.addEventListener("click", function a(_) { submitLocation(this.getAttribute("value"))})
     )
+
+    document.getElementById("location")!.innerHTML = `&nbsp; ${Array.from(document.getElementsByClassName("active")).filter((item) => item.classList.contains("location-option"))
+    .map((item) => item.getAttribute("value") != "All" ? item.getAttribute("value") : "Choose Your Location")} &nbsp; &nbsp;`
+
+    document.getElementById
 }
 
 onStart(window.document)
