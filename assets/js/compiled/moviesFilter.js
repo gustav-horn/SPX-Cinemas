@@ -31,3 +31,7 @@ function submitLocation(location) {
         }
     });
 }
+function onStart(document) {
+    document.querySelectorAll(".location-option").forEach((item, _) => item.addEventListener("click", function a(_) { submitLocation(this.getAttribute("value")); }));
+}
+onStart(window.document);

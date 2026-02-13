@@ -7,26 +7,26 @@
 ?>
 
 <!-- Filter Form -->
- <script src="assets/js/compiled/moviesFilter.js"></script>
  <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
 <div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
     <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
     <div class="location-options" id="location-options" hidden="true">
             <div class="location-option <?= ($findKey("All") or $findKey(null) or !key_exists("location", $_POST)) ? "active" : null ?>"
-                onclick = 'submitLocation("All")'
+                value = "All"
             >
                 All
             </div>
         <?php foreach ($locations as $location): ?>
             <div 
                 class="location-option <?= $findKey($location->locationName) ? "active" : null; ?>"
-                onclick='submitLocation("<?= htmlspecialchars($location->locationName); ?>")'
+                value = "<?= htmlspecialchars($location->locationName); ?>"
             >
                 <?=htmlspecialchars($location->locationName)?>
             </div>
         <?php endforeach ?>
     </div>
 </div>
+<script src="assets/js/compiled/moviesFilter.js"></script>
 <section class = "movie-grid">
     <?php if (empty($movies)): ?>
     <?php else: ?>

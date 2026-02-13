@@ -21,3 +21,12 @@ async function submitLocation(location: string) {
             window.location.href = response.url;
         }
     }
+
+
+function onStart(document: Document) {
+    document.querySelectorAll(".location-option").forEach(
+        (item, _) => item.addEventListener("click", function a(_) { submitLocation(this.getAttribute("value"))})
+    )
+}
+
+onStart(window.document)
