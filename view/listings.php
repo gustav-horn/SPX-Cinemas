@@ -93,7 +93,7 @@
         </div>
     <?php endforeach ?>
 <?php endif ?>
-<script src="assets/js/details.js"></script>
+<script src="assets/js/compiled/details.js"></script>
 
 <!-- Trailer Modal -->
 <div id="trailerModal" class="modal">
@@ -108,4 +108,4 @@
         </iframe>
     </div>
 </div>
-<script src="assets/js/modal.js"></script>
+<script src="assets/js/compiled/modal.js"></script>
