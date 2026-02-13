@@ -85,8 +85,10 @@ class ListingsService {
 function accumulate(array $array, string $key, string $value): array {
     $stack = [];
     foreach ($array as $item) {
-        if ($row = array_find($stack, fn($row) => $row[$key] == $item[$key])) {
-            array_push($row, $item[$value]);
+        if (($needle = array_find_key($stack, fn($row) => $row[$key] == $item[$key])) !== null) {
+            $row = $stack[$needle];
+            array_push($row[$value], $item[$value]);
+            $stack[$needle] = $row;
         }
         else {
             array_push($stack, [$key => $item[$key], $value => [$item[$value]]]);

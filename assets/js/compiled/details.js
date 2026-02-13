@@ -8,10 +8,10 @@ document.addEventListener("click", function (ev) {
     if (detail && detail.isActive) {
         let visible = detail.element.getElementsByClassName("details-content").item(0);
         let rect = visible.getBoundingClientRect();
-        console.log(rect.left, rect.right, rect.bottom, rect.top);
-        console.log(ev.clientX, ev.clientY);
+        // console.log(rect.left, rect.right, rect.bottom, rect.top);
+        // console.log(ev.clientX, ev.clientY)
         if ((ev.clientX < rect.left) || (ev.clientX > rect.right) || (ev.clientY > rect.bottom) || (ev.clientY < rect.top)) {
-            console.log("Closing");
+            // console.log("Closing")
             detail.element.style.display = "none";
         }
     }
