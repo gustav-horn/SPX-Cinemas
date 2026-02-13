@@ -7,15 +7,26 @@
 ?>
 
 <!-- Filter Form -->
-<form class = "location-form" action="#" method="post" id="location-form">
-    <label class="location-label" for="location">Select your location: </label>
-    <select class="location-select" name="location" id="location" onchange="document.getElementById('location-form').submit()">
-            <option class="location-option" value="all" <?= (key_exists("location", $_POST) and ($_POST["location"] === "All" or $_POST["location"] === null)) ? "selected" : ""?>>All</option>
+ <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
+<div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
+    <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
+    <div class="location-options" id="location-options" hidden="true">
+            <div class="location-option <?= ($findKey("All") or $findKey(null) or !key_exists("location", $_POST)) ? "active" : null ?>"
+                value = "All"
+            >
+                All
+            </div>
         <?php foreach ($locations as $location): ?>
-            <option class="location-option" value="<?= htmlspecialchars($location->locationName) ?>" <?=(key_exists("location", $_POST) and $_POST["location"] === $location->locationName) ? "selected" : ""?>><?=htmlspecialchars($location->locationName)?></option>
+            <div 
+                class="location-option <?= $findKey($location->locationName) ? "active" : null; ?>"
+                value = "<?= htmlspecialchars($location->locationName); ?>"
+            >
+                <?=htmlspecialchars($location->locationName)?>
+            </div>
         <?php endforeach ?>
-    </select>
-</form>
+    </div>
+</div>
+<script src="assets/js/compiled/moviesFilter.js"></script>
 <section class = "movie-grid">
     <?php if (empty($movies)): ?>
     <?php else: ?>
@@ -53,7 +64,7 @@
                     <div class="details-poster-container">
                         <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
                             alt = "The poster of <?= htmlspecialchars($movie["movie"]->movieName); ?>"
-                            class = "movie-poster" >
+                            class = "movie-poster big-poster" >
                     </div>
                     <span style="padding: 1%;"></span>
                     <div class = "col details-movie-info">
@@ -93,7 +104,7 @@
         </div>
     <?php endforeach ?>
 <?php endif ?>
-<script src="assets/js/details.js"></script>
+<script src="assets/js/compiled/details.js"></script>
 
 <!-- Trailer Modal -->
 <div id="trailerModal" class="modal">
@@ -108,4 +119,4 @@
         </iframe>
     </div>
 </div>
-<script src="assets/js/modal.js"></script>
+<script src="assets/js/compiled/modal.js"></script>
