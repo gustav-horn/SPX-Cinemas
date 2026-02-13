@@ -7,31 +7,7 @@
 ?>
 
 <!-- Filter Form -->
- <script>
-    async function submitLocation(location) {
-        let form = new FormData();
-        form.append("location", location)
-        let response = await fetch("index.php?page=listings", 
-            {
-                method: "POST",
-                mode: "same-origin",
-                credentials: "same-origin",
-                body: form
-            }
-        );
-        console.log(response)
-        if (response.redirected === false) {
-            var html = await response.text();
-            console.log(html);
-            document.open("index.php?page=listings", 'replace');
-            document.write(html);
-            document.close();
-        }
-        else {
-            window.location = response.url;
-        }
-    }
-</script>
+ <script src="assets/js/compiled/moviesFilter.js"></script>
  <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
 <div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
     <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
@@ -128,7 +104,7 @@
         </div>
     <?php endforeach ?>
 <?php endif ?>
-<script src="assets/js/details.js"></script>
+<script src="assets/js/compiled/details.js"></script>
 
 <!-- Trailer Modal -->
 <div id="trailerModal" class="modal">
@@ -143,4 +119,4 @@
         </iframe>
     </div>
 </div>
-<script src="assets/js/modal.js"></script>
+<script src="assets/js/compiled/modal.js"></script>
