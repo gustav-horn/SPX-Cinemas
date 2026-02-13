@@ -1,5 +1,3 @@
-import { OptionalP } from "ts-pattern/dist/types/Pattern";
-import { isTemplateExpression } from "typescript";
 
 async function submitLocation(location: string) {
         let form = new FormData();
@@ -15,7 +13,7 @@ async function submitLocation(location: string) {
         console.log(response)
         if (response.redirected === false) {
             var html = await response.text();
-            console.log(html);
+            // console.log(html);
             document.open("index.php?page=listings", 'replace');
             document.write(html);
             document.close();
@@ -34,7 +32,6 @@ function onStart(document: Document) {
     document.getElementById("location")!.innerHTML = `&nbsp; ${Array.from(document.getElementsByClassName("active")).filter((item) => item.classList.contains("location-option"))
     .map((item) => item.getAttribute("value") != "All" ? item.getAttribute("value") : "Choose Your Location")} &nbsp; &nbsp;`
 
-    document.getElementById
 }
 
 onStart(window.document)
