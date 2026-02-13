@@ -187,10 +187,14 @@ body {
    ================================ */
 .movie-poster {
   width: 100%;
-  /* min-height: 30vh; */
+  height: 400px;
   object-fit: cover;
   border-bottom: 1px solid #ddd;
   background-color: #ddd; /* fallback background */
+}
+
+.big-poster {
+  height: 100%;
 }
 
 /* ---------- Movie Body ---------- */

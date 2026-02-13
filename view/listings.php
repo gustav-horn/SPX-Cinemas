@@ -64,7 +64,7 @@
                     <div class="details-poster-container">
                         <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
                             alt = "The poster of <?= htmlspecialchars($movie["movie"]->movieName); ?>"
-                            class = "movie-poster" >
+                            class = "movie-poster big-poster" >
                     </div>
                     <span style="padding: 1%;"></span>
                     <div class = "col details-movie-info">
