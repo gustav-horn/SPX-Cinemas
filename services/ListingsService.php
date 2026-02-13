@@ -94,6 +94,5 @@ function accumulate(array $array, string $key, string $value): array {
             array_push($stack, [$key => $item[$key], $value => [$item[$value]]]);
         }
     }
-    echo var_export($stack);
     return $stack;
 }
