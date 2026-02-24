@@ -15,19 +15,21 @@
     </div>
 
     <!-- Site Header -->
-    <header class="site-header">
+    <header class="site-header row">
+        <img class="logo" src="assets/img/SPXCinemas_Logo.png">
         <div class="container">
-            <h2>Welcome to SPX Cinemas</h2>
-            <p class="subtitle">Your place for movie listings and trailers</p>
-
-            <!-- Navigation Bar -->
-            <nav class="navbar">
-                <ul class="nav-list">
-                    <li><a href="index.php?page=home" class="nav-link active">Home</a></li>
-                    <li><a href="index.php?page=listings" class="nav-link active">Movies</a></li>
-                    <li><a href="index.php?page=about" class="nav-link active">About Us</a></li>
-                </ul>
-            </nav>
+            <div class="col">
+                <h2>Welcome to SPX Cinemas</h2>
+                <p class="subtitle">Your place for movie listings and trailers</p>
+                <!-- Navigation Bar -->
+                <nav class="navbar">
+                    <ul class="nav-list">
+                        <li><a href="index.php?page=home" class="nav-link active">Home</a></li>
+                        <li><a href="index.php?page=listings" class="nav-link active">Movies</a></li>
+                        <li><a href="index.php?page=about" class="nav-link active">About Us</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 <main class="container">

@@ -21,6 +21,7 @@ body {
   width: 92%;
   max-width: 1100px;
   margin: 0 auto;
+  padding: 20px 0;
 }
 
 .row {
@@ -52,7 +53,6 @@ body {
 .site-header {
   background: #1f2937; /* dark slate gray */
   color: #ffffff;
-  padding: 20px 0;
   margin-bottom: 20px;
 }
 
@@ -63,6 +63,14 @@ body {
 .subtitle {
   font-size: 0.95rem;
   opacity: 0.85;
+}
+
+.logo {
+  height: 112.5px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
 }
 
 /* ---------- Navigation Bar ---------- */
