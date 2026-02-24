@@ -18,7 +18,7 @@ function submitLocation(location) {
             credentials: "same-origin",
             body: form
         });
-        console.log(response);
+        // console.log(response)
         if (response.redirected === false) {
             var html = yield response.text();
             // console.log(html);

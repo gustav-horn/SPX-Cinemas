@@ -7,7 +7,7 @@
 ?>
 
 <!-- Filter Form -->
- <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
+<?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
 <div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
     <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
     <div class="location-options" id="location-options" hidden="true">
@@ -54,6 +54,7 @@
 ?>
 
 <!-- Details Pages -->
+<div id="movieInit" key="<?= $activeMovie ?>" display="none"></div>
 <?php if (empty($movies)): ?>
 <?php else: ?>
     <?php foreach ($movies as $movie): ?>

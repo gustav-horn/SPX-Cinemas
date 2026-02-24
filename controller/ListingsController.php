@@ -25,6 +25,8 @@ class ListingsController {
         $locationRepository = new LocationRepository($db);
         $locations = $locationRepository->findAll();
 
+        $activeMovie = $_GET['movie'] ?? "None";
+
         // Views are included from the project root path (index.php runs from root)
         include __DIR__ . '/../view/listings.php';
     }

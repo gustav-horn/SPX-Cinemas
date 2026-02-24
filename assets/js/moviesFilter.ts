@@ -10,7 +10,7 @@ async function submitLocation(location: string) {
                 body: form
             }
         );
-        console.log(response)
+        // console.log(response)
         if (response.redirected === false) {
             var html = await response.text();
             // console.log(html);

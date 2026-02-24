@@ -11,7 +11,7 @@
     <?php if (empty($movies)): ?>
     <?php else: ?>
         <?php foreach ($movies as $movie): ?>
-            <article class="movie-card">
+            <article class="movie-card" id = <?= $movie->movieId ?>>
                 <img 
                     src = "/assets/img/<?= htmlspecialchars($movie->getPoster()); ?>"
                     alt = "The poster of <?= htmlspecialchars($movie->movieName); ?>"
@@ -33,6 +33,7 @@
         <?php endforeach ?>
     <?php endif ?>
 </section>
+<script src="assets/js/compiled/homeGrid.js"></script>
 
 <?php 
     include __DIR__."/../view/footer.php";

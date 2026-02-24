@@ -56,9 +56,22 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         );
     })
+
+    // Make sure the initial details card is opened
+    let id;
+    if ((id = document.getElementById("movieInit")!.getAttribute("key")!) != "None") {
+        openInit(id)
+    }
 })
 
 
 function assertHTMLElement(element: Element): asserts element is HTMLElement {
     console.assert(element instanceof HTMLElement, "Where are you using this? The only elements with className 'modal' should be HTMLElements.");
+}
+
+function openInit(initId: string) {
+    let item = document.getElementById("movieDetails"+initId)!; 
+    item.style.display = "flex"; 
+    context.activeDetail = {element: item, isActive: false}; 
+    setTimeout(() => context.activeDetail!.isActive = true, 1)
 }
