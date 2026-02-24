@@ -38,8 +38,8 @@ body {
 .container {
     width: 92%;
     max-width: 1100px;
-    margin: 0 auto;
     padding: 20px 0;
+    margin: auto;
 }
 
 .row {
@@ -72,6 +72,7 @@ body {
     background: $secondary-color;             /* dark slate gray */
     color: $light-text-color;
     margin-bottom: 20px;
+    margin: 0 auto;
 }
 
 .site-header h2 {
@@ -83,12 +84,10 @@ body {
     opacity: 0.85;
 }
 
-.logo {
+.header-logo {
     height: 112.5px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
+    max-width: 30vh;
+    padding: 20px;
 }
 
 /* ---------- Navigation Bar ---------- */

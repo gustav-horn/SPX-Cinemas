@@ -16,13 +16,13 @@
 
     <!-- Site Header -->
     <header class="site-header row">
-        <img class="logo" src="assets/img/SPXCinemas_Logo.png">
-        <div class="container">
+        <img class="header-logo" src="assets/img/SPXCinemas_Logo.png">
+        <div class="navbar">
             <div class="col">
                 <h2>Welcome to SPX Cinemas</h2>
                 <p class="subtitle">Your place for movie listings and trailers</p>
                 <!-- Navigation Bar -->
-                <nav class="navbar">
+                <nav>
                     <ul class="nav-list">
                         <li><a href="index.php?page=home" class="nav-link active">Home</a></li>
                         <li><a href="index.php?page=listings" class="nav-link active">Movies</a></li>
