@@ -263,6 +263,40 @@ body {
   max-width: 30vw;
 }
 
+/* ---------- Login --------------- */
+.login-form {
+  align-items: center;
+}
+.login-form label {
+  font-size: x-large;
+}
+.login-form input {
+  font-size: x-large;
+  margin: 20px;
+}
+.login-form button {
+  margin-top: 20px;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0.5rem 0;
+  transform: translateY(-10px);
+  z-index: 1000;
+  border: 1px solid rgba(0, 0, 0, 0.95);
+  height: max-content;
+  padding: 0.8rem 1.5rem;
+  background-color: #f9fafb;
+}
+.login-form button:hover {
+  background-color: #dc2626;
+  color: #f9fafb;
+  border-left-color: #1f2937;
+  padding-left: 1.8rem;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 420px) {
   .poster-placeholder {

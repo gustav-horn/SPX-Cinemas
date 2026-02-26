@@ -283,6 +283,32 @@ body {
     max-width: 30vw;
 }
 
+/* ---------- Login --------------- */
+.login-form {
+    align-items: center;
+
+    label {
+        font-size: x-large;
+    }
+    input {
+        font-size: x-large;
+        margin: 20px;
+    }
+    button {
+        margin-top: 20px;
+        @include nice-button();
+        background-color: $primary-color;
+        //  transition: color 0.2s ease;
+        &:hover {
+            background-color: $tertiary-color;
+            color: $primary-color;
+            border-left-color: $secondary-color;
+            padding-left: 1.8rem;
+        }
+    }
+    
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 420px) {
     .poster-placeholder {
