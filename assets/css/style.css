@@ -34,6 +34,10 @@ body {
   flex-direction: column;
 }
 
+.width-100 {
+  width: 100%;
+}
+
 /* ---------- Banner ---------- */
 .banner {
   background: #dc2626; /* deep red banner */
@@ -55,6 +59,7 @@ body {
   color: #ffffff;
   margin-bottom: 20px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .site-header h2 {
@@ -83,6 +88,9 @@ body {
   gap: 16px;
   padding: 0;
 }
+.nav-list li {
+  width: max-content;
+}
 
 .nav-link {
   text-decoration: none;
@@ -93,6 +101,14 @@ body {
 
 .nav-link:hover {
   color: #2563eb;
+}
+
+.login-status {
+  width: 100%;
+  justify-self: end;
+  justify-content: end;
+  flex-direction: row-reverse;
+  margin-right: 50px;
 }
 
 /* ---------- Location Select ----- */
