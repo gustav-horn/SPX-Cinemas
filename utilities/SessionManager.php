@@ -1,9 +1,11 @@
 <?php
 // utilities/SessionManager.php
 
+require_once __DIR__ . "/../model/Member.php";
+
 enum SessionStatus {
     case LoggedIn;
-    case NotLoggdIn;
+    case NotLoggedIn;
 }
 
 
@@ -11,26 +13,27 @@ class SessionManager {
     private static $SESSION_LENGTH = 5*60; //Session length defined as 5 minutes (5 x 60s)
 
     public function __construct(string $currPage) {
-        if (session_start()) {
-            if (!isset($_SESSION["CurrentStatus"])) {
-                $this->loggedOut($currPage);
-            }
-            else {
-                switch($_SESSION["CurrentStatus"]) {
-                    case SessionStatus::LoggedIn : 
-                        if ((time() - $_SESSION["CurrentInfo"]->lastTimeActed) > $this->SESSION_LENGTH) {
-                            $this->loggedOut($currPage);
-                        }
-                        else {
-                            $_SESSION["CurrentInfo"]->lastTimeActed = time();
-                        }
-                        break;
-                    case SessionStatus::NotLoggdIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
-                }
-            }
-        }
-        else {
+        // Try to initiate the session. If we can't; abort and run around like a headless chicken.
+        if (!session_start()) {
+            error_log("Session unable to be started");
             exit("Session unable to be started");
+        }
+        // Check to see if we've met this client. If we haven't default to logged out.
+        echo var_export($_SESSION);
+        if (!isset($_SESSION["CurrentStatus"])) {
+            $this->loggedOut($currPage); 
+            return; //Returning early for readability
+        }
+        // If we've met them, check to see if their session has expired.
+        switch ($_SESSION["CurrentStatus"]) {
+            case SessionStatus::LoggedIn: {
+                if ((time() - $_SESSION["CurrentInfo"]->lastTimeActed) > $this::$SESSION_LENGTH) {
+                    $this->loggedOut($currPage);
+                }
+                else {
+                    $_SESSION["CurrentInfo"]->lastTimeActed = time();
+                }
+            };
         }
     }
 
@@ -40,27 +43,27 @@ class SessionManager {
     }
 
     public function loggedOut(string $currPage) {
-        $_SESSION["CurrentStatus"] = SessionStatus::NotLoggdIn;
+        $_SESSION["CurrentStatus"] = SessionStatus::NotLoggedIn;
         $_SESSION["CurrentInfo"] = new NotLoggdIn($currPage);
     }
 
     public function checkLoggedIn(): bool {
         return match($_SESSION["CurrentStatus"]) {
             SessionStatus::LoggedIn => true,
-            SessionStatus::NotLoggdIn => false,
+            SessionStatus::NotLoggedIn => false,
         };
     }
 
     public function getLastPage(): ?string {
         return match($_SESSION["CurrentStatus"]) {
             SessionStatus::LoggedIn => null,
-            SessionStatus::NotLoggdIn => $_SESSION["CurrentInfo"]->lastPageUsed,
+            SessionStatus::NotLoggedIn => $_SESSION["CurrentInfo"]->lastPageUsed,
         };
     }
 
-    public function updatePage(string $currPage) {
+    public function updateCurrPage(string $currPage) {
         switch($_SESSION["CurrentStatus"]) {
-            case SessionStatus::NotLoggdIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
+            case SessionStatus::NotLoggedIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
             case SessionStatus::LoggedIn : break;
         }
     }
@@ -70,8 +73,8 @@ class LoggedInUser {
     public int $lastTimeActed;
 
     public function __construct(Member $user, int $time) {
-        $this->$user = $user;
-        $this->$lastTimeActed = $time;
+        $this->user = $user;
+        $this->lastTimeActed = $time;
     }
 }
 

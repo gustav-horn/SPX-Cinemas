@@ -12,11 +12,13 @@ $sessionManager = new SessionManager($page);
 switch ($page) {
     case "home":
         require_once __DIR__ . "/controller/HomeController.php";
+        $sessionManager->updateCurrPage($page);
         $controller = new HomeController();
         $controller->displayHome();
         break;
     case "listings":
         require_once __DIR__ . "/controller/ListingsController.php";
+        $sessionManager->updateCurrPage($page);
         $controller = new ListingsController();
         $controller->displayListings();
         break;
@@ -27,6 +29,7 @@ switch ($page) {
         break;
     case "about":
         require_once __DIR__ . "/controller/AboutUsController.php";
+        $sessionManager->updateCurrPage($page);
         $controller = new AboutUsController();
         $controller->displayAboutUs();
         break;

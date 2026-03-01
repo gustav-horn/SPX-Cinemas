@@ -26,7 +26,7 @@ class LoginController {
         if ($this->sessionManager->checkLoggedIn()) {
             $this->logout();
         }
-        // Step 2. Look for a $_POST request.
+        // Step 2. Look for a $_POST request. If there is one, verify the login request
         else if (count($_POST) != 0) {
             $this->login();
         }
@@ -46,11 +46,13 @@ class LoginController {
         require_once __DIR__ . "/../repository/MemberRepository.php";
         $repository = new MemberRepository(DatabaseSingleton::getInstance());
         
+        // 1. Find the requested Member object
         if ($member = $repository->findByUsername($username)) {
-            if (password_verify($member->password)) {
+            // 2. Verify the password
+            if (password_verify($password, $member->password)) {
                 $lastPage = $this->sessionManager->getLastPage();
                 $this->sessionManager->loggedIn($member);
-                header("Location: " . $lastPage);
+                header("Location: index.php?page=" . $lastPage);
             }
             else {
                 $status = "Incorrect Password";
@@ -64,7 +66,7 @@ class LoginController {
     }
 
     private function logout() {
-        $this->sessionManager->loggedOut("login");
+        $this->sessionManager->loggedOut("home");
         header("Location: index.php?page=login");
     }
 }
