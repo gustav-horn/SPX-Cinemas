@@ -6,12 +6,7 @@
 */
 
 //Include any models if needed
-require_once __DIR__ . '/../model/Movie.php';
-require_once __DIR__ . '/../model/Location.php';
-require_once __DIR__ . '/../repository/LocationRepository.php';
 
-//Include the Listings Service
-require_once __DIR__ . '/../services/ListingsService.php';
 
 class LoginController {
     private SessionManager $sessionManager;
