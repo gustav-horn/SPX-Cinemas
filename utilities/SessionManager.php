@@ -19,7 +19,6 @@ class SessionManager {
             exit("Session unable to be started");
         }
         // Check to see if we've met this client. If we haven't default to logged out.
-        echo var_export($_SESSION);
         if (!isset($_SESSION["CurrentStatus"])) {
             $this->loggedOut($currPage); 
             return; //Returning early for readability
@@ -34,6 +33,13 @@ class SessionManager {
                     $_SESSION["CurrentInfo"]->lastTimeActed = time();
                 }
             };
+        }
+    }
+
+    public function updateCurrPage(string $currPage) {
+        switch($_SESSION["CurrentStatus"]) {
+            case SessionStatus::NotLoggedIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
+            case SessionStatus::LoggedIn : break;
         }
     }
 
@@ -61,11 +67,11 @@ class SessionManager {
         };
     }
 
-    public function updateCurrPage(string $currPage) {
-        switch($_SESSION["CurrentStatus"]) {
-            case SessionStatus::NotLoggedIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
-            case SessionStatus::LoggedIn : break;
-        }
+    public function getActiveUser(): ?Member {
+        return match($_SESSION["CurrentStatus"]) {
+            SessionStatus::LoggedIn => $_SESSION["CurrentInfo"]->user,
+            SessionStatus::NotLoggedIn => null,
+        };
     }
 }
 class LoggedInUser {

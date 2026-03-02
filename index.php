@@ -27,6 +27,11 @@ switch ($page) {
         $controller = new LoginController($sessionManager);
         $controller->manageRequest();
         break;
+    case "account":
+        require_once __DIR__ . "/controller/AccountController.php";
+        $controller = new AccountController($sessionManager);
+        $controller->manageRequest();
+        break;
     case "about":
         require_once __DIR__ . "/controller/AboutUsController.php";
         $sessionManager->updateCurrPage($page);

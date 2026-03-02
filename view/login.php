@@ -15,8 +15,8 @@
     <input type="text" name="username" id="username" autocomplete="username" required>
     <label for="password">Password: </label>
     <input type="password" name="password" id="password" autocomplete="password" required>
-    <a href="index.php">Or register instead</a> <!-- Make sure to route it to the register page -->
-    <button type="submit">Login</button>
+    <a href="index.php?page=account">Or register instead</a> <!-- Make sure to route it to the register page -->
+    <button type="submit" class="form-submit-btn">Login</button>
 </form>
 
 <?php

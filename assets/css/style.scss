@@ -285,6 +285,19 @@ body {
     text-decoration: underline;
 }
 
+/* ----- Responsive Movies ---- */
+@media (max-width: 420px) {
+    .poster-placeholder {
+        height: 120px;
+    }
+    .movie-body {
+        padding: 10px;
+    }
+    .banner-title {
+        font-size: 1.4rem;
+    }
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
     padding: 14px 0;
@@ -310,8 +323,10 @@ body {
     input {
         font-size: x-large;
         margin: 20px;
-    }
-    button {
+    }    
+}
+
+.form-submit-btn {
         margin-top: 20px;
         @include nice-button();
         background-color: $primary-color;
@@ -323,19 +338,49 @@ body {
             padding-left: 1.8rem;
         }
     }
-    
+
+/* ---------- Account Details ----- */
+.account-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 420px) {
-    .poster-placeholder {
-        height: 120px;
+    .account-form {
+        display: flex;
+        flex-direction: column;
     }
-    .movie-body {
-        padding: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    border-style: none;
+
+    legend {
+        font-weight: 600;
+        color: $grey-text-color;
+        padding: 0 12px;
+        margin-left: -20px;
+        background: $primary-color;
+        border-radius: 20px;
+        border: 1px solid $light-border-color;
+        padding: 8px 16px;
+        font-size: 1rem;
     }
-    .banner-title {
-        font-size: 1.4rem;
+
+    label {
+        margin-left: 10px;
+    }
+
+    input {
+        width: 95%;
+        padding: 12px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        margin-left: 10px;
+        background: white;
     }
 }
 

@@ -11,6 +11,13 @@ enum Role {
             "Administrator" => Role::admin,
         };
     }
+
+    public function tostring(): string {
+        return match($this) {
+            self::user => "user",
+            self::admin => "admin",
+        };
+    }
 }
 
 class Member {
@@ -30,6 +37,8 @@ class Member {
         ?int $id,
         string $username,
         string $password,
+        string $firstName,
+        string $lastName,
         Role $role,
         ?string $street,
         ?string $town,
@@ -41,6 +50,8 @@ class Member {
         $this->memberId = $id;
         $this->username = $username;
         $this->password = $password;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->role = $role;
         $this->street = $street;
         $this->town = $town;
