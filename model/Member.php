@@ -1,6 +1,9 @@
 <?php
 // model/User.php
 
+// Grab our required type-defs
+require_once __DIR__ . "/../utilities/Encryption.php";
+
 enum Role {
     case user;
     case admin;
@@ -23,28 +26,28 @@ enum Role {
 class Member {
     public ?int $memberId;
     public string $username;
-    public string $password; //Note that the password is always hashed! We never store this in plaintext
+    public HashedData $password; //Note that the password is always hashed! We never store this in plaintext
     public Role $role;
-    public string $firstName;
-    public string $lastName;
-    public ?string $street;
-    public ?string $town;
-    public ?string $postcode;
-    public ?string $phone;
-    public ?string $email;
+    public EncryptedData $firstName;
+    public EncryptedData $lastName;
+    public OptionalEncryptedData $street;
+    public OptionalEncryptedData $town;
+    public OptionalEncryptedData $postcode;
+    public OptionalEncryptedData $phone;
+    public OptionalEncryptedData $email;
 
     public function __construct(
         ?int $id,
         string $username,
-        string $password,
-        string $firstName,
-        string $lastName,
+        HashedData $password,
+        EncryptedData $firstName,
+        EncryptedData $lastName,
         Role $role,
-        ?string $street,
-        ?string $town,
-        ?string $postcode,
-        ?string $phone,
-        ?string $email
+        OptionalEncryptedData $street,
+        OptionalEncryptedData $town,
+        OptionalEncryptedData $postcode,
+        OptionalEncryptedData $phone,
+        OptionalEncryptedData $email
     ) 
     {
         $this->memberId = $id;

@@ -7,6 +7,9 @@ require_once __DIR__ . '/../model/Member.php';
 // Load the DatabaseSingleton, as the Repository needs its generic query execution methods.
 require_once __DIR__ . '/../database/DatabaseSingleton.php';
 
+// Load the required utilities
+require_once __DIR__ . '/../utilities/Encryption.php';
+
 class MemberRepository {
 
     // Dependency Injection: The Repository requires the Database access object.
@@ -25,15 +28,15 @@ class MemberRepository {
         return new Member(
             (int)$row['memberId'],
             $row['username'],
-            $row['password'],
-            $row['firstName'],
-            $row['lastName'],
+            HashedData::fromHashed($row['password']),
+            EncryptedData::fromEncrypted($row['firstName']),
+            EncryptedData::fromEncrypted($row['lastName']),
             Role::from($row['role']),
-            $row['street'],
-            $row['town'],
-            $row['postcode'],
-            $row['phone'],
-            $row['email']
+            OptionalEncryptedData::fromEncrypted($row['street']),
+            OptionalEncryptedData::fromEncrypted($row['town']),
+            OptionalEncryptedData::fromEncrypted($row['postcode']),
+            OptionalEncryptedData::fromEncrypted($row['phone']),
+            OptionalEncryptedData::fromEncrypted($row['email'])
         );
     }
 

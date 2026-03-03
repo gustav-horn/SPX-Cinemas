@@ -14,7 +14,7 @@ class SessionManager {
 
     public function __construct(string $currPage) {
         // Try to initiate the session. If we can't; abort and run around like a headless chicken.
-        if (!session_start()) {
+        if (!session_start(["serialize_handler" => 'php_serialize'])) {
             error_log("Session unable to be started");
             exit("Session unable to be started");
         }

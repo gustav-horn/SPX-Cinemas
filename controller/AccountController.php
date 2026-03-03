@@ -28,10 +28,10 @@ class AccountController {
         // Step 1. Check to see if we have some changes to make
         if (count($_POST) > 0) {
             // Are we editing or creating?
-            switch ($this->sessionManager->checkLoggedIn()) {
-                case true: $status = $this->editUser(); break;
-                case false: $status = $this->createUser(); break;
-            }
+            match ($this->sessionManager->checkLoggedIn()) {
+                true => $status = $this->editUser(),
+                false => $status = $this->createUser(),
+            };
         }
         // Step 2. Serve the page
         return $this->servePage($status);
@@ -48,17 +48,19 @@ class AccountController {
         }
         
         $user->username = $_POST["username"];
-        $user->street = $_POST["street"];
-        $user->town = $_POST["town"];
-        $user->postcode = $_POST["postcode"];
-        $user->phone = $_POST["phone"];
-        $user->email = $_POST["email"];
+        $user->firstName = EncryptedData::from($_POST["firstName"]);
+        $user->lastName = EncryptedData::from($_POST["lastName"]);
+        $user->street = OptionalEncryptedData::from($_POST["street"]);
+        $user->town = OptionalEncryptedData::from($_POST["town"]);
+        $user->postcode = OptionalEncryptedData::from($_POST["postcode"]);
+        $user->phone = OptionalEncryptedData::from($_POST["phone"]);
+        $user->email = OptionalEncryptedData::from($_POST["email"]);
 
         // Check to see if we need to do anything to the password
         if ($_POST["password1"] != "") {
             // Check the passwords match
             if ($_POST["password1"] === $_POST["password2"]) {
-                $user->password = Encryptor::hash($_POST["password1"]);
+                $user->password = HashedData::from($_POST["password1"]);
             }
             else {
                 return "Password Update Failed, Passwords Do Not Match";
@@ -71,7 +73,7 @@ class AccountController {
     private function createUser(): string {
         // Check to make sure the passwords match
         if ($_POST["password1"] === $_POST["password2"] and $_POST["password1"] != "") {
-            $password = Encryptor::hash($_POST["password1"]);
+            $password = $_POST["password1"];
         }
         else {
             return "Member Creation Failed. Passwords Do Not Match";
@@ -81,7 +83,18 @@ class AccountController {
             return "Member Creation Failed. Username is not Unique";
         }
 
-        $newMember = new Member(null, $_POST["username"], $password, $_POST["firstName"], $_POST["lastName"], Role::user, $_POST["street"], $_POST["town"], $_POST["postcode"], $_POST["phone"], $_POST["email"]);
+        $newMember = new Member(
+            null, 
+            $_POST["username"], 
+            HashedData::from($password),
+            EncryptedData::from($_POST["firstName"]), 
+            EncryptedData::from($_POST["lastName"]), 
+            Role::user, 
+            OptionalEncryptedData::from($_POST["street"]), 
+            OptionalEncryptedData::from($_POST["town"]), 
+            OptionalEncryptedData::from($_POST["postcode"]), 
+            OptionalEncryptedData::from($_POST["phone"]), 
+            OptionalEncryptedData::from($_POST["email"]));
 
         return  $this->memberRepository->save($newMember) ? "Member Creation Successful. Please log in with your new username and password" : "Something Went Wrong, Please Try Again";
     }
@@ -91,13 +104,13 @@ class AccountController {
             $user = $this->sessionManager->getActiveUser();
 
             $username = $user->username;
-            $firstName = $user->firstName;
-            $lastName = $user->lastName;
-            $street = $user->street ?? "";
-            $town = $user->town ?? "";
-            $postcode = $user->postcode ?? "";
-            $phone = $user->phone ?? "";
-            $email = $user->email ?? "";
+            $firstName = $user->firstName->decrypt();
+            $lastName = $user->lastName->decrypt();
+            $street = $user->street->decrypt() ?? "";
+            $town = $user->town->decrypt() ?? "";
+            $postcode = $user->postcode->decrypt() ?? "";
+            $phone = $user->phone->decrypt() ?? "";
+            $email = $user->email->decrypt() ?? "";
         }
         else {
             $username = "";
