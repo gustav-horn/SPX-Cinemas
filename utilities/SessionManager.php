@@ -3,6 +3,9 @@
 
 require_once __DIR__ . "/../model/Member.php";
 
+require_once __DIR__ . "/../database/DatabaseSingleton.php";
+require_once __DIR__ . "/Auditer.php";
+
 enum SessionStatus {
     case LoggedIn;
     case NotLoggedIn;
@@ -11,8 +14,11 @@ enum SessionStatus {
 
 class SessionManager {
     private static $SESSION_LENGTH = 5*60; //Session length defined as 5 minutes (5 x 60s)
+    private Auditer $auditer;
 
     public function __construct(string $currPage) {
+        $this->auditer = new Auditer(DatabaseSingleton::getInstance());
+
         // Try to initiate the session. If we can't; abort and run around like a headless chicken.
         if (!session_start(["serialize_handler" => 'php_serialize'])) {
             error_log("Session unable to be started");
@@ -38,17 +44,21 @@ class SessionManager {
 
     public function updateCurrPage(string $currPage) {
         switch($_SESSION["CurrentStatus"]) {
-            case SessionStatus::NotLoggedIn : $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
-            case SessionStatus::LoggedIn : break;
-        }
+            case SessionStatus::NotLoggedIn: $_SESSION["CurrentInfo"]->lastPageUsed = $currPage; break;
+        };
     }
 
     public function loggedIn(Member $user) {
+        $this->auditer->logIn($user);
         $_SESSION["CurrentStatus"] = SessionStatus::LoggedIn;
         $_SESSION["CurrentInfo"] = new LoggedInUser($user, time());
     }
 
     public function loggedOut(string $currPage) {
+        // Check to see if we are currently logged in or not. If we are logged in, make the auditLog
+        match ($_SESSION["CurrentStatus"]) {
+            SessionStatus::LoggedIn => $this->auditer->logOut($_SESSION["CurrentInfo"]->user)
+        };
         $_SESSION["CurrentStatus"] = SessionStatus::NotLoggedIn;
         $_SESSION["CurrentInfo"] = new NotLoggdIn($currPage);
     }

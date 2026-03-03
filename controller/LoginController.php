@@ -39,7 +39,9 @@ class LoginController {
         // We grab our dependencies now. The laziness helps us avoid unnecessary work
         require_once __DIR__ . "/../database/DatabaseSingleton.php";
         require_once __DIR__ . "/../repository/MemberRepository.php";
-        $repository = new MemberRepository(DatabaseSingleton::getInstance());
+        require_once __DIR__ . "/../utilities/Auditer.php";
+        $db = DatabaseSingleton::getInstance();
+        $repository = new MemberRepository($db, new Auditer($db));
         
         // 1. Find the requested Member object
         if ($member = $repository->findByUsername($username)) {

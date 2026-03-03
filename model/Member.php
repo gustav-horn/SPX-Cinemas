@@ -63,4 +63,9 @@ class Member {
         $this->email = $email;
     }
 
+    public function __tostring() {
+        $role = $this->role->tostring();
+        return "Member(id: $this->memberId, username: $this->username, password: $this->password, firstName: $this->firstName, lastName: $this->lastName, role: $role, street: $this->street, town: $this->town, postcode: $this->postcode, email: $this->postcode, phone: $this->phone";
+    }
+
 }

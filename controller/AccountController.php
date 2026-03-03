@@ -10,8 +10,9 @@ require_once __DIR__ . "/../model/Member.php";
 require_once __DIR__ . "/../repository/MemberRepository.php";
 
 // Include the required utility modules
-require_once __DIR__ . "/../utilities/Encryption.php";
 require_once __DIR__ . "/../database/DatabaseSingleton.php";
+require_once __DIR__ . "/../utilities/Encryption.php";
+require_once __DIR__ . "/../utilities/Auditer.php";
 
 class AccountController {
     private MemberRepository $memberRepository;
@@ -19,7 +20,8 @@ class AccountController {
 
     public function __construct(SessionManager $sessionManager) {
         $this->sessionManager = $sessionManager;
-        $this->memberRepository = new MemberRepository(DatabaseSingleton::getInstance());
+        $db = DatabaseSingleton::getInstance();
+        $this->memberRepository = new MemberRepository($db, new Auditer($db));
     }
 
     public function manageRequest() {
