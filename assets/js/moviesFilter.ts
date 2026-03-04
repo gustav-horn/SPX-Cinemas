@@ -34,4 +34,4 @@ function onStart(document: Document) {
 
 }
 
-onStart(window.document)
+document.addEventListener("DOMContentLoaded", () => onStart(window.document))

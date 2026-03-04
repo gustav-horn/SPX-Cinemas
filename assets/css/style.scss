@@ -96,6 +96,11 @@ body {
 }
 
 /* ---------- Navigation Bar ---------- */
+nav {
+    display: flex;
+    flex-direction: row,
+}
+
 .navbar {
     margin-top: 10px;
 }
@@ -103,6 +108,7 @@ body {
 .nav-list {
     list-style: none;
     display: flex;
+    flex-direction: inherit;
     gap: 16px;
     padding: 0;
 
@@ -129,6 +135,33 @@ body {
     justify-content: end;
     flex-direction: row-reverse;
     margin-right: 50px;
+}
+
+.hamburger {
+    display: none;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+    .hamburger {
+        display: flex;
+        z-index: -10;
+    }
+
+    nav {
+        display: none
+    }
+
+    .login-status {
+        justify-content: start;
+        margin: 16px 0px;
+        flex-direction: column-reverse;
+    }
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
 }
 
 /* ---------- Location Select ----- */

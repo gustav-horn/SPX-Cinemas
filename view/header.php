@@ -22,13 +22,14 @@
             <p class="subtitle">Your place for movie listings and trailers</p>
             <div class="navbar width-100">
                 <!-- Navigation Bar -->
-                <nav class="row width-100">
+                <div id="hamburger" class="hamburger">☰</div>
+                <nav class="width-100">
                     <ul class="nav-list">
                         <li><a href="index.php?page=home" class="nav-link active">Home</a></li>
                         <li><a href="index.php?page=listings" class="nav-link active">Movies</a></li>
                         <li><a href="index.php?page=about" class="nav-link active">About Us</a></li>
                     </ul>
-                    <ul class="login-status nav-list row">
+                    <ul class="login-status nav-list">
                         <?php
                         // This is such a hack, but because of the structure of index.php we know that the sessionManager will always be defined
                         global $sessionManager;
@@ -43,5 +44,6 @@
                 </nav>
             </div>
         </div>
+    <script src="assets/js/compiled/navbar.js"></script>
     </header>
 <main class="container">

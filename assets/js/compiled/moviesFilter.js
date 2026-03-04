@@ -36,4 +36,4 @@ function onStart(document) {
     document.getElementById("location").innerHTML = `&nbsp; ${Array.from(document.getElementsByClassName("active")).filter((item) => item.classList.contains("location-option"))
         .map((item) => item.getAttribute("value") != "All" ? item.getAttribute("value") : "Choose Your Location")} &nbsp; &nbsp;`;
 }
-onStart(window.document);
+document.addEventListener("DOMContentLoaded", () => onStart(window.document));
