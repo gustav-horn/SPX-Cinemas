@@ -8,8 +8,8 @@
 
 <!-- Filter Form -->
 <?php $findKey = fn($key) => key_exists("location", $_POST) and ($_POST["location"] === $key) ?>
-<div class = "location-form" id="location-form" onmouseleave="document.getElementById('location-options').hidden = true">
-    <button class="location-select" id="location" onmouseover="document.getElementById('location-options').hidden = false">&nbsp; Select your location: &nbsp; &nbsp;</button>
+<div class = "location-form" id="location-form">
+    <button class="location-select" id="location">&nbsp; Select your location: &nbsp; &nbsp;</button>
     <div class="location-options" id="location-options" hidden="true">
             <div class="location-option <?= ($findKey("All") or $findKey(null) or !key_exists("location", $_POST)) ? "active" : null ?>"
                 value = "All"
@@ -67,7 +67,7 @@
                             alt = "The poster of <?= htmlspecialchars($movie["movie"]->movieName); ?>"
                             class = "movie-poster big-poster" >
                     </div>
-                    <span style="padding: 1%;"></span>
+                    <span class="padding-1"></span>
                     <div class = "col details-movie-info">
                         <h1 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName) ?></h1>
                         <p class = "movie-body"><?= htmlspecialchars($movie["movie"]->movieDescription) ?></p>
@@ -99,7 +99,7 @@
                             </tr>
                         <?php endforeach ?></tbody>
                     </table>
-                    <span style = "padding: 2%"></span>
+                    <span class="padding-2"></span>
                 <?php endif ?>
             </div>
         </div>

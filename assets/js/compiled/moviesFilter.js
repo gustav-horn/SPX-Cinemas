@@ -32,8 +32,14 @@ function submitLocation(location) {
     });
 }
 function onStart(document) {
+    // Plumb behaviour for each location option
     document.querySelectorAll(".location-option").forEach((item, _) => item.addEventListener("click", function a(_) { submitLocation(this.getAttribute("value")); }));
-    document.getElementById("location").innerHTML = `&nbsp; ${Array.from(document.getElementsByClassName("active")).filter((item) => item.classList.contains("location-option"))
+    // Set the behaviour for the location form to display when the button is moused over and vanish when the mouse leaves.
+    document.getElementById("location-form").addEventListener("mouseleave", () => document.getElementById('location-options').hidden = true);
+    document.getElementById("location").addEventListener("mouseover", () => document.getElementById('location-options').hidden = false);
+    // We set the active value. The location button's innerHTML is set to the only location-option with the active tag
+    document.getElementById("location").innerHTML = `&nbsp; ${Array.from(document.getElementsByClassName("active"))
+        .filter((item) => item.classList.contains("location-option"))
         .map((item) => item.getAttribute("value") != "All" ? item.getAttribute("value") : "Choose Your Location")} &nbsp; &nbsp;`;
 }
 document.addEventListener("DOMContentLoaded", () => onStart(window.document));
