@@ -97,7 +97,7 @@ class EncryptedData {
 class HashedData {
     private string $data;
 
-    private static string $algo = PASSWORD_BCRYPT;
+    private static string $algo = PASSWORD_DEFAULT;
 
     private function __construct($data) {
         $this->data = $data;
