@@ -16,30 +16,30 @@ class Auditer {
     public function logIn(Member $member) {
         $id = $member->memberId;
         $username = $member->username;
-        return $this->repository->save(new AuditLog(null, Action::Login, "Member (id = $id, username = $username)", null));
+        return $this->repository->save(new AuditLog(null, Action::Login, "Member (id = $id, username = $username)", "Member (username = $username) logged in"));
     }
 
     public function logOut(Member $member) {
-        
-    $id = $member->memberId;
+        $id = $member->memberId;
         $username = $member->username;
-        return $this->repository->save(new AuditLog(null, Action::Logout, "Member (id = $id, username = $username)", null));
+        return $this->repository->save(new AuditLog(null, Action::Logout, "Member (id = $id, username = $username)", "Member (username = $username) logged out"));
     }
 
     public function createUser(Member $member) {
-        return $this->repository->save(new AuditLog(null, Action::Insert, "members table", "new Member created: $member"));
+        $username = $member->username;
+        return $this->repository->save(new AuditLog(null, Action::Insert, "members table", "new Member created. Username: $username"));
     }
 
     public function updateUser(Member $member) {
         $id = $member->memberId;
         $username = $member->username;
-        return $this->repository->save(new AuditLog(null, Action::Update, "Member (id = $id, username = $username)", "member data updated to: $member"));
+        return $this->repository->save(new AuditLog(null, Action::Update, "Member (id = $id, username = $username)", "Member (id = $id, username = $username) updated their personal data"));
     }
 
     public function deleteUser(Member $member) {
         $id = $member->memberId;
         $username = $member->username;
-        return $this->repository->save(new AuditLog(null, Action::Delete, "Member (id = $id, username = $username)", "member deleted with data: $member"));
+        return $this->repository->save(new AuditLog(null, Action::Delete, "Member (id = $id, username = $username)", "Member (id = $id, username = $username) deleted their account"));
     }
 
 }
