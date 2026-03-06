@@ -1,7 +1,9 @@
 <?php
 // Model/Movie.php
 
-class Movie {
+require_once __DIR__ . "/../utilities/Auditer.php";
+
+class Movie implements Auditable {
     // Properties match the database columns for data storage
     // Note:
     //  ? at type indicates the property can be null
@@ -48,5 +50,13 @@ class Movie {
     // Example of a data validation method
     public function isValid(): bool {
         return !empty($this->movieName);
+    }
+
+    public function repr(): string {
+        return "Movie(id = $this->movieId, name = $this->movieName)";
+    }
+
+    public function name(): string {
+        return "Movie";
     }
 }

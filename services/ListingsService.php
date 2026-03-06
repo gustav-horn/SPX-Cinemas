@@ -26,12 +26,12 @@ class ListingsService {
     private CinemaRepository $cinemas;
     private LocationRepository $locations;
 
-    public function __construct(DatabaseSingleton $db) {
+    public function __construct(DatabaseSingleton $db, Auditer $auditer) {
         $this->db = $db;
-        $this->movies = new MovieRepository($db);
-        $this->sessions = new SessionRepository($db);
-        $this->cinemas = new CinemaRepository($db);
-        $this->locations = new LocationRepository($db);
+        $this->movies = new MovieRepository($db, $auditer);
+        $this->sessions = new SessionRepository($db, $auditer);
+        $this->cinemas = new CinemaRepository($db, $auditer);
+        $this->locations = new LocationRepository($db, $auditer);
     }
 
     

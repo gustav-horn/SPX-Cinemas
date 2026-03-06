@@ -3,6 +3,7 @@
 
 // Grab our required type-defs
 require_once __DIR__ . "/../utilities/Encryption.php";
+require_once __DIR__ . "/../utilities/Auditer.php";
 
 enum Role {
     case user;
@@ -23,7 +24,7 @@ enum Role {
     }
 }
 
-class Member {
+class Member implements Auditable {
     public ?int $memberId;
     public string $username;
     public HashedData $password; //Note that the password is always hashed! We never store this in plaintext
@@ -63,9 +64,12 @@ class Member {
         $this->email = $email;
     }
 
-    public function __tostring() {
-        $role = $this->role->tostring();
-        return "Member(id: $this->memberId, username: $this->username, password: $this->password, firstName: $this->firstName, lastName: $this->lastName, role: $role, street: $this->street, town: $this->town, postcode: $this->postcode, email: $this->postcode, phone: $this->phone";
+    public function repr(): string {
+        return "Member(id = $this->memberId, username = $this->username)";
+    }
+
+    public function name(): string {
+        return "Member";
     }
 
 }

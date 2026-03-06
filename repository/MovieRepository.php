@@ -11,9 +11,11 @@ class MovieRepository {
 
     // Dependency Injection: The Repository requires the Database access object.
     private DatabaseSingleton $db;
+    private Auditer $auditer;
 
-    public function __construct(DatabaseSingleton $db) {
+    public function __construct(DatabaseSingleton $db, Auditer $auditer) {
         $this->db = $db;
+        $this->auditer = $auditer;
     }
 
     /**
@@ -88,6 +90,7 @@ class MovieRepository {
     public function save(Movie $movie): bool {
         if ($movie->movieId === null) {
             // INSERT (New Movie)
+            if (!$this->auditer->create($movie)) {return false;};
             $sql = "INSERT INTO `movies` (`movieName`, `movieDescription`, `trailerFileName`, `postFileName`)
                     VALUES (:name, :desc, :trailer, :poster)";
             
@@ -104,6 +107,7 @@ class MovieRepository {
         }
         else {
             // UPDATE (Existing Movie)
+            if (!$this->auditer->update($movie)) {return false;}
             $sql = "UPDATE `movies` SET
                     `movieName` = :name,
                     `movieDescription = :desc,

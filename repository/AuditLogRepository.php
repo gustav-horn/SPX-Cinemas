@@ -79,7 +79,7 @@ class AuditLogRepository {
         }
         else {
             // UPDATE (Existing AuditLog)
-            $sql = "UPDATE auditLogs SET username = :username, password = :password, role = :role, firstName = :firstName, lastName = :lastName, street = :street, town = :town, postcode = :postcode, phone = :phone, email = :email WHERE AuditLogId = :id";
+            $sql = "UPDATE auditLogs SET timestamp = :timestamp, entity = :entity, action = :action, entry = :entry WHERE AuditLogId = :id";
             $rowsAffected = $this->db->execute($sql, ["id" => $AuditLog->id, "timestamp" => $AuditLog->time, "entity" => $AuditLog->target, "action" => $AuditLog->action->value, "entry" => $AuditLog->effect]);
             return $rowsAffected == 1;
         }

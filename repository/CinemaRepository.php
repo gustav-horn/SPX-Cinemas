@@ -15,10 +15,12 @@ class CinemaRepository {
     // Dependency Injection: The Repository requires the Database access object.
     private DatabaseSingleton $db;
     private LocationRepository $locations;
+    private Auditer $auditer;
 
-    public function __construct(DatabaseSingleton $db) {
+    public function __construct(DatabaseSingleton $db, Auditer $auditer) {
         $this->db = $db;
-        $this->locations = new LocationRepository($db);
+        $this->auditer = $auditer;
+        $this->locations = new LocationRepository($db, $auditer);
     }
 
     /**
@@ -89,12 +91,14 @@ class CinemaRepository {
     public function save(Cinema $cinema): bool {
         if ($cinema->cinemaId === null) {
             // INSERT (New Cinema)
+            if (!$this->auditer->create($cinema)) {return false;};
             $sql = "INSERT INTO cinemas VAlUES (:id, :name, :location)";
             $rowsAffected = $this->db->execute($sql, ["id" => $cinema->cinemaId, "name" => $cinema->cinemaName, "location" => $cinema->location->locationId]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Cinema)
+            if (!$this->auditer->update($cinema)) {return false;}
             $sql = "UPDATE cinemas SET cinemaName = :name, locationId = :location WHERE cinemaId = :id";
             $rowsAffected = $this->db->execute($sql, ["id" => $cinema->cinemaId, "name" => $cinema->cinemaName, "location" => $cinema->location->locationId]);
             return $rowsAffected == 1;

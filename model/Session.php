@@ -1,7 +1,9 @@
 <?php
 // Model/Session.php
 
-class Session {
+require_once __DIR__ . "/../utilities/Auditer.php";
+
+class Session implements Auditable {
     // Properties match the database columns for data storage
     // Note:
     //  ? at type indicates the property can be null
@@ -28,5 +30,15 @@ class Session {
 
     public function getCost(): float {
         return $this->sessionCost;
+    }
+
+    public function repr(): string {
+        $movie = $this->movie->movieName;
+        $cinema = $this->cinema->repr();
+        return "Session(id = $this->sessionId, movie = $movie, cinema = $cinema, time = $this->sessionTime, cost = $this->sessionCost)";
+    }
+
+    public function name(): string {
+        return "Session";
     }
 }

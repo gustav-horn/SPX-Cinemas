@@ -7,8 +7,10 @@
 
 //Include any models if needed
 require_once __DIR__ . '/../database/DatabaseSingleton.php';
+require_once __DIR__ . "/../utilities/Auditer.php";
 require_once __DIR__ . '/../model/Movie.php';
-require_once __DIR__ . '/../repository/MovieRepository.php';
+
+require_once __DIR__ . "/../repository/MovieRepository.php";
 
 class HomeController
 {
@@ -16,7 +18,7 @@ class HomeController
     {
         //retrieve any data if needed
         $db = DatabaseSingleton::getInstance();
-        $movieRepository = new MovieRepository($db);
+        $movieRepository = new MovieRepository($db, new Auditer($db));
         $movies = $movieRepository->findRandom(4);
 
         // Views are included from the project root path (index.php runs from root)

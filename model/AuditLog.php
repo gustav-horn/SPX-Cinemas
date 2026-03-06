@@ -1,6 +1,8 @@
 <?php
 // Model/AuditLog.php
 
+require_once __DIR__ . "/../utilities/Auditer.php";
+
 enum Action: string {
     case Login = "login";
     case Logout = "logout";
@@ -9,7 +11,7 @@ enum Action: string {
     case Update = "update";
 }
 
-class AuditLog {
+class AuditLog implements Auditable {
     public ?int $id; 
     public string $time;
     public Action $action;
@@ -22,5 +24,14 @@ class AuditLog {
         $this->action = $action;
         $this->target = $target;
         $this->effect = $effect;
+    }
+
+    public function repr(): string {
+        $action = $this->action->value;
+        return "AuditLog(id = $this->id, time = $this->time, action = $action, target = $this->target, effect = $this->effect)";
+    }
+
+    public function name(): string {
+        return "AuditLog";
     }
 }

@@ -115,14 +115,14 @@ class MemberRepository {
     public function save(Member $member): bool {
         if ($member->memberId === null) {
             // INSERT (New Member)
-            if (!$this->auditer->createUser($member)) {return false;};
+            if (!$this->auditer->create($member)) {return false;};
             $sql = "INSERT INTO members VAlUES (:id, :username, :password, :role, :firstName, :lastName, :street, :town, :postcode, :phone, :email)";
             $rowsAffected = $this->db->execute($sql, ["id" => $member->memberId, "username" => $member->username, "password" => $member->password, "role" => $member->role->tostring(), "firstName" => $member->firstName, "lastName" => $member->lastName, "street" => $member->street, "town" => $member->town, "postcode" => $member->postcode, "phone" => $member->phone, "email" => $member->email]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Member)
-            if (!$this->auditer->updateUser($member)) {return false;}
+            if (!$this->auditer->update($member)) {return false;}
             $sql = "UPDATE members SET username = :username, password = :password, role = :role, firstName = :firstName, lastName = :lastName, street = :street, town = :town, postcode = :postcode, phone = :phone, email = :email WHERE memberId = :id";
             $rowsAffected = $this->db->execute($sql, ["id" => $member->memberId, "username" => $member->username, "password" => $member->password, "role" => $member->role->tostring(), "firstName" => $member->firstName, "lastName" => $member->lastName, "street" => $member->street, "town" => $member->town, "postcode" => $member->postcode, "phone" => $member->phone, "email" => $member->email]);
             return $rowsAffected == 1;
@@ -134,7 +134,7 @@ class MemberRepository {
      * @return bool Success Did the DELETE succeed or fail?
      */
     public function delete(Member $member): bool {
-        if (!$this->auditer->deleteUser($member)) {return false;}
+        if (!$this->auditer->delete($member)) {return false;}
         $sql = "DELETE FROM members WHERE username = :username";
         $rowsAffected = $this->db->execute($sql, ["username" => $member->username]);
         return $rowsAffected == 1;

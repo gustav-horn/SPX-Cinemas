@@ -18,11 +18,13 @@ class SessionRepository {
     private DatabaseSingleton $db;
     private MovieRepository $movies;
     private CinemaRepository $cinemas;
+    private Auditer $auditer;
 
-    public function __construct(DatabaseSingleton $db) {
+    public function __construct(DatabaseSingleton $db, Auditer $auditer) {
         $this->db = $db;
-        $this->movies = new MovieRepository($db);
-        $this->cinemas = new CinemaRepository($db);
+        $this->auditer = $auditer;
+        $this->movies = new MovieRepository($db, $auditer);
+        $this->cinemas = new CinemaRepository($db, $auditer);
     }
 
     /**
@@ -108,12 +110,14 @@ class SessionRepository {
     public function save(Session $session): bool {
         if ($session->sessionId === null) {
             // INSERT (New Cinema)
+            if (!$this->auditer->create($session)) {return false;};
             $sql = "INSERT INTO sessions VAlUES (:id, :time, :cost, :cinema, :movie)";
             $rowsAffected = $this->db->execute($sql, ["id" => $session->sessionId, "time" => $session->sessionTime->format("H:i:v"), "cost" => $session->sessionCost, "movie" => $session->movie->movieId, "cinema" => $session->cinema->cinemaId]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Cinema)
+            if (!$this->auditer->update($session)) {return false;}
             $sql = "UPDATE sessions SET sessionTime = :time, sessionCost = :cost, cinemaId = :cinema, movieId = :movie WHERE sessionId = :id";
             $rowsAffected = $this->db->execute($sql, ["id" => $session->sessionId, "time" => $session->sessionTime->format("H:i:v"), "cost" => $session->sessionCost, "movie" => $session->movie->movieId, "cinema" => $session->cinema->cinemaId]);
             return $rowsAffected == 0;

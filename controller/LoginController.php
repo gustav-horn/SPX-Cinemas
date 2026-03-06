@@ -6,7 +6,11 @@
 */
 
 //Include any models if needed
+require_once __DIR__ . "/../repository/MemberRepository.php";
 
+//Include the required utilities
+require_once __DIR__ . '/../database/DatabaseSingleton.php';
+require_once __DIR__ . "/../utilities/Auditer.php";
 
 class LoginController {
     private SessionManager $sessionManager;
