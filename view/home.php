@@ -13,17 +13,17 @@
         <?php foreach ($movies as $movie): ?>
             <article class="movie-card" id = <?= $movie->movieId ?>>
                 <img 
-                    src = "/assets/img/<?= htmlspecialchars($movie->getPoster()); ?>"
-                    alt = "The poster of <?= htmlspecialchars($movie->movieName); ?>"
+                    src = "/assets/img/<?= $movie->getPoster(); ?>"
+                    alt = "The poster of <?= $movie->movieName; ?>"
                     class = "movie-poster"
                 >
                 <div class = "movie-body">
-                    <h2 class = "movie-title"><?= htmlspecialchars($movie->movieName); ?></h2>
-                    <p class = "movie-desc"><?= htmlspecialchars($movie->movieDescription); ?></p>
+                    <h2 class = "movie-title"><?= $movie->movieName; ?></h2>
+                    <p class = "movie-desc"><?= $movie->movieDescription; ?></p>
                     <div class="movie-meta">
                         <span class="movie-id">ID: <?= $movie->movieId; ?></span>
                         <!-- Use YouTube link from database -->
-                        <a href="#" class="trailer-link" data-trailer="<?= htmlspecialchars($movie->trailerFileName); ?>">
+                        <a href="#" class="trailer-link" data-trailer="<?= $movie->trailerFileName; ?>">
                             Watch Trailer
                         </a>
 

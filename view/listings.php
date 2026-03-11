@@ -19,9 +19,9 @@
         <?php foreach ($locations as $location): ?>
             <div 
                 class="location-option <?= $findKey($location->locationName) ? "active" : null; ?>"
-                value = "<?= htmlspecialchars($location->locationName); ?>"
+                value = "<?= $location->locationName; ?>"
             >
-                <?=htmlspecialchars($location->locationName)?>
+                <?=$location->locationName?>
             </div>
         <?php endforeach ?>
     </div>
@@ -33,13 +33,13 @@
         <?php foreach ($movies as $movie): ?>
             <article class="movie-card" id="<?= $movie["movie"]->movieId; ?>">
                 <img 
-                    src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
-                    alt = "<?= htmlspecialchars($movie["movie"]->movieName); ?>"
+                    src = "/assets/img/<?= $movie["movie"]->getPoster(); ?>"
+                    alt = "<?= $movie["movie"]->movieName; ?>"
                     class = "movie-poster"
                 >
                 <div class = "movie-body">
-                    <h2 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName); ?></h2>
-                    <p class = "movie-desc"><?= htmlspecialchars($movie["movie"]->movieDescription); ?></p>
+                    <h2 class = "movie-title"><?= $movie["movie"]->movieName; ?></h2>
+                    <p class = "movie-desc"><?= $movie["movie"]->movieDescription; ?></p>
                     <div class="movie-meta">
                         <span class="movie-id">ID: <?= $movie["movie"]->movieId; ?></span>
                     </div>
@@ -63,15 +63,15 @@
                 <div class="row">
                     <span class="details-close">&times;</span>
                     <div class="details-poster-container">
-                        <img src = "/assets/img/<?= htmlspecialchars($movie["movie"]->getPoster()); ?>"
-                            alt = "The poster of <?= htmlspecialchars($movie["movie"]->movieName); ?>"
+                        <img src = "/assets/img/<?= $movie["movie"]->getPoster(); ?>"
+                            alt = "The poster of <?= $movie["movie"]->movieName; ?>"
                             class = "movie-poster big-poster" >
                     </div>
                     <span class="padding-1"></span>
                     <div class = "col details-movie-info">
-                        <h1 class = "movie-title"><?= htmlspecialchars($movie["movie"]->movieName) ?></h1>
-                        <p class = "movie-body"><?= htmlspecialchars($movie["movie"]->movieDescription) ?></p>
-                        <a href="#" class="trailer-link" data-trailer="<?= htmlspecialchars($movie["movie"]->trailerFileName); ?>">
+                        <h1 class = "movie-title"><?= $movie["movie"]->movieName ?></h1>
+                        <p class = "movie-body"><?= $movie["movie"]->movieDescription ?></p>
+                        <a href="#" class="trailer-link" data-trailer="<?= $movie["movie"]->trailerFileName; ?>">
                             Watch Trailer
                         </a>
                     </div>
@@ -91,10 +91,10 @@
                         </thead>
                         <tbody><?php foreach ($movie["sessions"] as $session): ?>
                             <tr class = "session">
-                                <td class = "session-cinema"><?= htmlspecialchars($session->cinema->cinemaName) ?></td>
-                                <!-- <td class = "session-date"><?= htmlspecialchars($session->sessionTime->format("d-M")) ?></td> -->
-                                <td class = "session-time"><?= htmlspecialchars($session->sessionTime->format("h:i A")) ?></td>
-                                <td class = "session-cost">$<?= htmlspecialchars($session->sessionCost) ?></td>
+                                <td class = "session-cinema"><?= $session->cinema->cinemaName ?></td>
+                                <!-- <td class = "session-date"><?= $session->sessionTime->format("d-M") ?></td> -->
+                                <td class = "session-time"><?= $session->sessionTime->format("h:i A") ?></td>
+                                <td class = "session-cost">$<?= $session->sessionCost ?></td>
                                 <td><button class = "session-book">Book Now!</button></td>
                             </tr>
                         <?php endforeach ?></tbody>

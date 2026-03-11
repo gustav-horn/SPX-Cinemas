@@ -15,7 +15,7 @@
         <fieldset class="form-group">
             <legend>Login Information</legend>
             <label for="username">Username: </label>
-            <input type="text" name="username" id="username" autocomplete="username" value="<?= htmlspecialchars($username) ?>" required>
+            <input type="text" name="username" id="username" autocomplete="username" value="<?= $username ?>" required>
             <label for="password1">Password: </label>
             <input type="password" name="password1" id="password1" autocomplete="password" <?= $sessionManager->checkLoggedIn() ? "" : "required" ?>>
             <label for="password2">Confirm Password: </label>
@@ -24,22 +24,22 @@
         <fieldset class="form-group">
             <legend>Personal Information</legend>
             <label for="firstName">First Name: </label>
-            <input type="text" name="firstName" id="firstName" value="<?= htmlspecialchars($firstName) ?>" required>
+            <input type="text" name="firstName" id="firstName" value="<?= $firstName ?>" required>
             <label for="lastName">Last Name: </label>
-            <input type="text" name="lastName" id="lastName" value="<?= htmlspecialchars($lastName) ?>" required>
+            <input type="text" name="lastName" id="lastName" value="<?= $lastName ?>" required>
             <label for="email">Email Address: </label>
-            <input type="text" name="email" id="email" pattern="[\w]+[@][\w]+[.][\w]+.*" value="<?= htmlspecialchars($email) ?>" autocomplete="email">
+            <input type="text" name="email" id="email" pattern="[\w]+[@][\w]+[.][\w]+.*" value="<?= $email ?>" autocomplete="email">
             <lable for="phone">Phone Number: </lable>
-            <input type="text" name="phone" id="phone" value="<?= htmlspecialchars($phone) ?>" autocomplete="phone">
+            <input type="text" name="phone" id="phone" value="<?= $phone ?>" autocomplete="phone">
         </fieldset>
         <fieldset class="form-group">
             <legend>Address Information</legend>
             <label for="street">Street: </label>
-            <input type="text" name="street" id="street" value="<?= htmlspecialchars($street) ?>">
+            <input type="text" name="street" id="street" value="<?= $street ?>">
             <label for="town">Town: </label>
-            <input type="text" name="town" id="town" value="<?= htmlspecialchars($town) ?>">
+            <input type="text" name="town" id="town" value="<?= $town ?>">
             <lable for="postcode">Postcode: </lable>
-            <input type="text" name="postcode" id="postcode" pattern="[0-9]+" value="<?= htmlspecialchars($postcode) ?>">
+            <input type="text" name="postcode" id="postcode" pattern="[0-9]+" value="<?= $postcode ?>">
         </fieldset>
     </div>
     <?php if ($sessionManager->checkLoggedIn()): ?>
