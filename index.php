@@ -18,6 +18,9 @@ switch ($page) {
         break;
     case "listings":
         require_once __DIR__ . "/controller/ListingsController.php";
+        if (!$sessionManager->checkLoggedIn()) {
+            header("Location: index.php?page=login");
+        }
         $sessionManager->updateCurrPage($page);
         $controller = new ListingsController();
         $controller->displayListings();
@@ -34,6 +37,9 @@ switch ($page) {
         break;
     case "about":
         require_once __DIR__ . "/controller/AboutUsController.php";
+        if (!$sessionManager->checkLoggedIn()) {
+            header("Location: index.php?page=login");
+        }
         $sessionManager->updateCurrPage($page);
         $controller = new AboutUsController();
         $controller->displayAboutUs();

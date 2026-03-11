@@ -34,6 +34,7 @@ class SessionManager {
             case SessionStatus::LoggedIn: {
                 if ((time() - $_SESSION["CurrentInfo"]->lastTimeActed) > $this::$SESSION_LENGTH) {
                     $this->loggedOut($currPage);
+                    header("Location: index.php?page=login");
                 }
                 else {
                     $_SESSION["CurrentInfo"]->lastTimeActed = time();
