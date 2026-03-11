@@ -11,7 +11,7 @@ enum Action: string {
     case Update = "update";
 }
 
-class AuditLog implements Auditable {
+class AuditLog {
     public ?int $id; 
     public string $time;
     public Action $action;
@@ -24,14 +24,5 @@ class AuditLog implements Auditable {
         $this->action = $action;
         $this->target = $target;
         $this->effect = $effect;
-    }
-
-    public function repr(): string {
-        $action = $this->action->value;
-        return "AuditLog(id = $this->id, time = $this->time, action = $action, target = $this->target, effect = $this->effect)";
-    }
-
-    public function name(): string {
-        return "AuditLog";
     }
 }
