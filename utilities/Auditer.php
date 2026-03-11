@@ -36,12 +36,12 @@ class Auditer {
 
     public function update(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Update, $info, "$info updated their personal data"));
+        return $this->repository->save(new AuditLog(null, Action::Update, $info, "$info was updated"));
     }
 
     public function delete(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Delete, $info, "$info deleted their account"));
+        return $this->repository->save(new AuditLog(null, Action::Delete, $info, "$info was deleted"));
     }
 
 }
