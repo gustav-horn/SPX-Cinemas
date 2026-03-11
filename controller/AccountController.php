@@ -49,20 +49,20 @@ class AccountController {
             return $status;
         }
         
-        $user->username = $_POST["username"];
-        $user->firstName = EncryptedData::from($_POST["firstName"]);
-        $user->lastName = EncryptedData::from($_POST["lastName"]);
-        $user->street = OptionalEncryptedData::from($_POST["street"]);
-        $user->town = OptionalEncryptedData::from($_POST["town"]);
-        $user->postcode = OptionalEncryptedData::from($_POST["postcode"]);
-        $user->phone = OptionalEncryptedData::from($_POST["phone"]);
-        $user->email = OptionalEncryptedData::from($_POST["email"]);
+        $user->username = htmlspecialchars($_POST["username"]);
+        $user->firstName = EncryptedData::from(htmlspecialchars($_POST["firstName"]));
+        $user->lastName = EncryptedData::from(htmlspecialchars($_POST["lastName"]));
+        $user->street = OptionalEncryptedData::from(htmlspecialchars($_POST["street"]));
+        $user->town = OptionalEncryptedData::from(htmlspecialchars($_POST["town"]));
+        $user->postcode = OptionalEncryptedData::from(htmlspecialchars($_POST["postcode"]));
+        $user->phone = OptionalEncryptedData::from(htmlspecialchars($_POST["phone"]));
+        $user->email = OptionalEncryptedData::from(htmlspecialchars($_POST["email"]));
 
         // Check to see if we need to do anything to the password
         if ($_POST["password1"] != "") {
             // Check the passwords match
             if ($_POST["password1"] === $_POST["password2"]) {
-                $user->password = HashedData::from($_POST["password1"]);
+                $user->password = HashedData::from(htmlspecialchars($_POST["password1"]));
             }
             else {
                 return "Password Update Failed, Passwords Do Not Match";
@@ -87,16 +87,17 @@ class AccountController {
 
         $newMember = new Member(
             null, 
-            $_POST["username"], 
-            HashedData::from($password),
-            EncryptedData::from($_POST["firstName"]), 
-            EncryptedData::from($_POST["lastName"]), 
+            htmlspecialchars($_POST["username"]), 
+            HashedData::from(htmlspecialchars($password)),
+            EncryptedData::from(htmlspecialchars($_POST["firstName"])), 
+            EncryptedData::from(htmlspecialchars($_POST["lastName"])), 
             Role::user, 
-            OptionalEncryptedData::from($_POST["street"]), 
-            OptionalEncryptedData::from($_POST["town"]), 
-            OptionalEncryptedData::from($_POST["postcode"]), 
-            OptionalEncryptedData::from($_POST["phone"]), 
-            OptionalEncryptedData::from($_POST["email"]));
+            OptionalEncryptedData::from(htmlspecialchars($_POST["street"])), 
+            OptionalEncryptedData::from(htmlspecialchars($_POST["town"])), 
+            OptionalEncryptedData::from(htmlspecialchars($_POST["postcode"])), 
+            OptionalEncryptedData::from(htmlspecialchars($_POST["phone"])), 
+            OptionalEncryptedData::from(htmlspecialchars($_POST["email"]))
+        );
 
         return  $this->memberRepository->save($newMember) ? "Member Creation Successful. Please log in with your new username and password" : "Something Went Wrong, Please Try Again";
     }

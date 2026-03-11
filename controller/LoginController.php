@@ -37,8 +37,8 @@ class LoginController {
     }
 
     private function login() {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+        $username = htmlspecialchars($_POST["username"]);
+        $password = htmlspecialchars($_POST["password"]);
 
         // We grab our dependencies now. The laziness helps us avoid unnecessary work
         require_once __DIR__ . "/../database/DatabaseSingleton.php";
@@ -50,7 +50,7 @@ class LoginController {
         // 1. Find the requested Member object
         if ($member = $repository->findByUsername($username)) {
             // 2. Verify the password
-            if (password_verify($password, $member->password)) {
+            if ($member->password->verify($password)) {
                 $lastPage = $this->sessionManager->getLastPage();
                 $this->sessionManager->loggedIn($member);
                 header("Location: index.php?page=" . $lastPage);
