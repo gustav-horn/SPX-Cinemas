@@ -14,6 +14,84 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table spxcinemasdb.auditlogs
+CREATE TABLE IF NOT EXISTS `auditlogs` (
+  `auditLogId` int NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL,
+  `entity` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `action` enum('update','insert','delete','login','logout') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entry` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`auditLogId`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spxcinemasdb.auditlogs: ~48 rows (approximately)
+INSERT INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`) VALUES
+	(19, '2026-03-04 11:33:34', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
+	(20, '2026-03-04 11:33:48', 'Member (id = 8, username = jbloggs)', 'login', 'Member (username = jbloggs) logged in'),
+	(21, '2026-03-04 11:33:57', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
+	(22, '2026-03-04 11:34:11', 'Member (id = 8, username = jbloggs)', 'login', 'Member (username = jbloggs) logged in'),
+	(23, '2026-03-04 11:34:22', 'Member (id = 8, username = jbloggs)', 'update', 'Member (id = 8, username = jbloggs) updated their personal data'),
+	(24, '2026-03-04 11:34:43', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
+	(25, '2026-03-04 11:35:05', 'members table', 'insert', 'new Member created. Username: mcheah, Id: '),
+	(26, '2026-03-04 11:35:16', 'Member (id = 11, username = mcheah)', 'login', 'Member (username = mcheah) logged in'),
+	(27, '2026-03-04 11:36:10', 'Member (id = 11, username = mcheah)', 'delete', 'Member (id = 11, username = mcheah) deleted their account'),
+	(28, '2026-03-04 11:36:10', 'Member (id = 11, username = mcheah)', 'logout', 'Member (username = mcheah) logged out'),
+	(29, '2026-03-05 16:39:40', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(30, '2026-03-05 16:39:58', 'Member (id = 8, username = jbloggs)', 'update', 'Member (id = 8, username = jbloggs) updated their personal data'),
+	(31, '2026-03-05 16:51:11', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(32, '2026-03-05 16:51:33', 'Members table', 'insert', 'new Member(id = , username = mcheah) created'),
+	(33, '2026-03-05 16:51:41', 'Member(id = 12, username = mcheah)', 'login', 'Member(id = 12, username = mcheah) logged in'),
+	(34, '2026-03-05 17:01:31', 'Member(id = 12, username = mcheah)', 'logout', 'Member(id = 12, username = mcheah) logged out'),
+	(35, '2026-03-05 17:02:06', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(36, '2026-03-05 19:37:25', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(37, '2026-03-05 19:37:40', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(38, '2026-03-09 14:10:13', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(39, '2026-03-09 14:10:46', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(40, '2026-03-09 14:44:24', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(41, '2026-03-09 14:45:22', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(42, '2026-03-09 14:45:40', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(43, '2026-03-09 23:17:37', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(44, '2026-03-09 23:17:57', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(45, '2026-03-09 23:26:35', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(46, '2026-03-09 23:26:50', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(47, '2026-03-09 23:32:35', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(48, '2026-03-11 11:08:32', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(49, '2026-03-11 11:18:52', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(50, '2026-03-11 11:19:28', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(51, '2026-03-11 11:20:18', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(52, '2026-03-11 11:20:55', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(53, '2026-03-11 11:21:06', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(54, '2026-03-11 11:25:30', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(55, '2026-03-11 11:32:36', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(56, '2026-03-11 11:32:45', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(57, '2026-03-11 11:35:26', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(58, '2026-03-11 11:39:04', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(59, '2026-03-11 11:40:11', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(60, '2026-03-12 13:40:54', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(61, '2026-03-12 13:43:22', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(62, '2026-03-12 13:43:51', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(63, '2026-03-12 13:46:55', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(64, '2026-03-12 13:50:21', 'Members table', 'insert', 'new Member(id = , username = hello) created'),
+	(65, '2026-03-12 13:57:38', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(66, '2026-03-12 13:57:42', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(67, '2026-03-14 16:17:39', 'Members table', 'insert', 'new Member(id = , username = hello) created'),
+	(68, '2026-03-14 16:17:52', 'Member(id = 14, username = hello)', 'login', 'Member(id = 14, username = hello) logged in'),
+	(69, '2026-03-14 16:19:35', 'Member(id = 14, username = hello)', 'logout', 'Member(id = 14, username = hello) logged out'),
+	(70, '2026-03-14 16:20:35', 'Members table', 'insert', 'new Member(id = , username = mcheah) created'),
+	(71, '2026-03-14 16:22:32', 'Member(id = 15, username = mcheah)', 'login', 'Member(id = 15, username = mcheah) logged in'),
+	(72, '2026-03-14 16:28:00', 'Member(id = 15, username = mcheah)', 'logout', 'Member(id = 15, username = mcheah) logged out'),
+	(73, '2026-03-14 16:28:38', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(74, '2026-03-14 16:28:38', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(75, '2026-03-14 16:28:51', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(76, '2026-03-14 16:32:51', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(77, '2026-03-14 16:46:59', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(78, '2026-03-14 17:04:05', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(79, '2026-03-14 17:04:05', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(80, '2026-03-14 17:04:39', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(81, '2026-03-14 17:09:56', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(82, '2026-03-14 17:10:20', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(83, '2026-03-14 17:17:13', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out');
+
 -- Dumping structure for table spxcinemasdb.cinemas
 CREATE TABLE IF NOT EXISTS `cinemas` (
   `cinemaId` int NOT NULL AUTO_INCREMENT,
@@ -53,6 +131,29 @@ INSERT INTO `locations` (`locationId`, `locationName`) VALUES
 	(3, 'Eastwood'),
 	(2, 'Epping'),
 	(4, 'Macquarie Centre ');
+
+-- Dumping structure for table spxcinemasdb.members
+CREATE TABLE IF NOT EXISTS `members` (
+  `memberId` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('User','Administrator') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'User',
+  `firstName` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastName` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `street` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `town` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `postcode` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `phone` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`memberId`),
+  UNIQUE KEY `userName` (`username`(255)) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spxcinemasdb.members: ~2 rows (approximately)
+INSERT INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`, `lastName`, `street`, `town`, `postcode`, `phone`, `email`) VALUES
+	(8, 'jbloggs', '$2y$12$sS3Njmlm.Vn5QvqB/HsCbe1RedWloJkWIFqbD/Xb22P52nZO/7RGe', 'User', 'cXppNzJaPOGzBAqL4GKPu1E3MVFpbzQrZG9pblNQS1c2WEdZOGc9PQ==', '6k/aLIWtgPxwt2IkCXmAN2ZsQzJFWmlsVHRWMjI0VFlLQ3YwQ1E9PQ==', 'YyARdpSAxhEcjWq8g3eCwlRyTW5mcUNFUkE2NUZpNEtQRE0xazNRZUhqLzlRUklyL25GNW1kN05FS2hqa1lNdC9qdmdmOXc4Rmd3NWtuUjVNeG5DNGI5dlh6NWVhcnArdUZ0MWdzMThGYjNERjk1MHJVZVRDK3JTWFJNM1VqQmQ1Q2NRbXBSckhBRUFMem9K', 'Mrtj25tvGomfYvG+RgSmVkkzYUZ0WDlZZDNUL0xIbnhmbWR3bUZYT0oxSE8rN1dJYWRZcTYraHF1T3BKYWdPTno0d1lrK2c2WG5lUHlZblJiSTlia01kYTZPVis3c21hQlJJcUhONTJOeWJBY0I3RkQzTFJhTlovTHZFPQ==', '', 'QyS+AqRbZHECdFijbWS7KkFGbUpZSkVUSXc4WkU4R2F6SzZJTlE9PQ==', 'RpVmY+lEX5kONNRnJk2eXmQvL0dqVk1CNklmQWNkVHhwSllLaktXNHpNVndseTRUV3R1SVo3MGhOR1U9'),
+	(14, 'hello', '$2y$12$nRw2.FRaYuT3W/X8fUwP7uSDOEZ4ses7z.gp/cCqM0/Zg8fneY5Nq', 'User', 'XHD/+vCmfYD6u+j9qIUYInFpVTdOdjVTOFBsNXp2V1JtcmhxNkE9PQ==', 'oCr+O6+JSnuB2jHXF/UHbncrYXpBSGxJL2VQUFBtSWJ3TXNHT1E9PQ==', '', '', '', '', ''),
+	(15, 'mcheah', '$2y$12$gl1wguuOylAZ5dcS3k3InuvjGpnt9wwBLoqDtK4JlJ0rWkdLPDh4G', 'User', 'EmiReFiukSiAu1MTjuH6Yy9xRXJzeDlUbWdpV3Z6ZE43VGpCcFE9PQ==', '4HwXiJou0X0UuxBVT54caTBBQ1hkNkFXUjZMNUlEaDlBbnNZZUE9PQ==', '', '', '', '', '');
 
 -- Dumping structure for table spxcinemasdb.movies
 CREATE TABLE IF NOT EXISTS `movies` (
