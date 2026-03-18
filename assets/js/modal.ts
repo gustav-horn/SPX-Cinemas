@@ -1,3 +1,4 @@
+/// Establishes the behaviour of the trailer modal. 
 document.addEventListener("DOMContentLoaded", function () {
     var modal = document.getElementById("trailerModal")!;
     var trailerFrame = document.getElementById("trailerFrame")!;

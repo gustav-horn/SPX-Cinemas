@@ -34,23 +34,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Plumb the behaviour for the movie-cards
     document.querySelectorAll(".movie-card").forEach((card) => {
         card.addEventListener("click", () => {
-            let item = document.getElementById("movieDetails" + card.getAttribute("id"));
-            item.style.display = "flex";
-            context.activeDetail = { element: item, isActive: false };
-            setTimeout(() => context.activeDetail.isActive = true, 1);
+            open(card.getAttribute("id"));
         });
     });
     // Make sure the initial details card is opened
-    let id;
-    if ((id = document.getElementById("movieInit").getAttribute("key")) != "None") {
-        openInit(id);
+    let initId;
+    if ((initId = document.getElementById("movieInit").getAttribute("key")) != "None") {
+        open(initId);
     }
 });
 function assertHTMLElement(element) {
     console.assert(element instanceof HTMLElement, "Where are you using this? The only elements with className 'modal' should be HTMLElements.");
 }
-function openInit(initId) {
-    let item = document.getElementById("movieDetails" + initId);
+/// Opens the movieDetails modal associated with the provided id
+function open(id) {
+    let item = document.getElementById("movieDetails" + id);
     item.style.display = "flex";
     context.activeDetail = { element: item, isActive: false };
     setTimeout(() => context.activeDetail.isActive = true, 1);

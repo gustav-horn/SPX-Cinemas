@@ -1,4 +1,29 @@
 "use strict";
+/// Submits the location data as a form and overwrites the displayed webpage with the response. 
+/// Is probably due for a rewrite
+// async function submitLocation(location: string) {
+//     let form = new FormData();
+//     form.append("location", location)
+//     let response = await fetch("index.php?page=listings", 
+//         {
+//             method: "POST",
+//             mode: "same-origin",
+//             credentials: "same-origin",
+//             body: form
+//         }
+//     );
+//     // console.log(response)
+//     if (response.redirected === false) {
+//         var html = await response.text();
+//         // console.log(html);
+//         document.open("index.php?page=listings", 'replace');
+//         document.write(html);
+//         document.close();
+//     }
+//     else {
+//         window.location.href = response.url;
+//     }    
+// }
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -10,25 +35,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 function submitLocation(location) {
     return __awaiter(this, void 0, void 0, function* () {
-        let form = new FormData();
-        form.append("location", location);
-        let response = yield fetch("index.php?page=listings", {
-            method: "POST",
-            mode: "same-origin",
-            credentials: "same-origin",
-            body: form
-        });
-        // console.log(response)
-        if (response.redirected === false) {
-            var html = yield response.text();
-            // console.log(html);
-            document.open("index.php?page=listings", 'replace');
-            document.write(html);
-            document.close();
-        }
-        else {
-            window.location.href = response.url;
-        }
+        var form = document.getElementsByTagName("body")[0].appendChild(document.createElement("form"));
+        form.action = "";
+        form.method = "POST";
+        let addData = (name, value) => {
+            let input = form.appendChild(document.createElement("input"));
+            input.name = name;
+            input.value = value;
+            return input;
+        };
+        form.appendChild(addData("location", location));
+        form.submit();
     });
 }
 function onStart(document) {

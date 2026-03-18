@@ -1,5 +1,6 @@
 "use strict";
 var NavBarContext = { active: false };
+/// Displays the drop-down navbar
 function displayNavBar() {
     var navs = document.getElementsByTagName("nav");
     for (let index = 0; index < navs.length; index++) {
@@ -14,6 +15,7 @@ function displayNavBar() {
         }
     }
 }
+/// Removes from display all navbars that haven't been explicitly clicked on
 function navBarClickHandler(ev) {
     assertPointerEvent(ev);
     let navs = this.getElementsByTagName("nav");
@@ -31,6 +33,7 @@ function navBarClickHandler(ev) {
 }
 function assertPointerEvent(event) {
 }
+/// Initialises the behaviour of the navbar
 function establishNavbar() {
     document.addEventListener("click", navBarClickHandler);
     document.getElementById("hamburger").addEventListener("click", displayNavBar);
