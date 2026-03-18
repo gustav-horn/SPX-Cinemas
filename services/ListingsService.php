@@ -44,14 +44,17 @@ class ListingsService {
         $generateFromMovies = fn($movies) => array_map(
                 fn($movie) => ["movie" => $movie, "sessions" => $this->sessions->findByMovie($movie->movieId)], 
                 $movies);
+        // If we don't need to filter, just return them all
         if ($locationName === "all") {
             return $generateFromMovies($this->movies->findAll());
         }
         else {
             $location = $this->locations->findByName($locationName);
+            // Fallback guard condition
             if ($location === null) {
                 return $generateFromMovies($this->movies->findAll());
             }
+            // Grab all the Ids we need, sort out the relationships between them, and then fill the list of these Ids with the actual models
             else {
                 $sql = "SELECT movies.movieId, sessions.sessionId FROM movies 
                         INNER JOIN sessions ON movies.movieId = sessions.movieId 
