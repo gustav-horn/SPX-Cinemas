@@ -9,6 +9,7 @@ enum Role {
     case user;
     case admin;
 
+    // Utility constructor from a specific string
     public static function from(string $role): Role {
         return match($role) {
             "User" => Role::user,
@@ -16,6 +17,7 @@ enum Role {
         };
     }
 
+    // Utility serialisation function
     public function tostring(): string {
         return match($this) {
             self::user => "user",
@@ -25,6 +27,10 @@ enum Role {
 }
 
 class Member implements Auditable {
+    // Properties match the database columns for data storage
+    // Note:
+    //  ? at type indicates the property can be null
+
     public ?int $memberId;
     public string $username;
     public HashedData $password; //Note that the password is always hashed! We never store this in plaintext

@@ -12,6 +12,10 @@ enum Action: string {
 }
 
 class AuditLog {
+    // Properties match the database columns for data storage
+    // Note:
+    //  ? at type indicates the property can be null
+    
     public ?int $id; 
     public string $time;
     public Action $action;
