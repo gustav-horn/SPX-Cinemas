@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `auditlogs` (
   `action` enum('update','insert','delete','login','logout') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `entry` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`auditLogId`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.auditlogs: ~48 rows (approximately)
+-- Dumping data for table spxcinemasdb.auditlogs: ~80 rows (approximately)
 INSERT INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`) VALUES
 	(19, '2026-03-04 11:33:34', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
 	(20, '2026-03-04 11:33:48', 'Member (id = 8, username = jbloggs)', 'login', 'Member (username = jbloggs) logged in'),
@@ -90,7 +90,53 @@ INSERT INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`)
 	(80, '2026-03-14 17:04:39', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
 	(81, '2026-03-14 17:09:56', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
 	(82, '2026-03-14 17:10:20', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
-	(83, '2026-03-14 17:17:13', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out');
+	(83, '2026-03-14 17:17:13', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(84, '2026-03-15 14:51:25', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(85, '2026-03-16 16:10:56', 'Member(id = 15, username = mcheah)', 'logout', 'Member(id = 15, username = mcheah) logged out'),
+	(86, '2026-03-16 16:11:05', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(87, '2026-03-17 15:29:40', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(88, '2026-03-17 15:31:52', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(89, '2026-03-18 11:28:58', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(90, '2026-03-18 11:29:05', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(91, '2026-03-18 11:33:29', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(92, '2026-03-18 11:33:41', 'Member(id = 15, username = mcheah)', 'login', 'Member(id = 15, username = mcheah) logged in'),
+	(93, '2026-03-18 11:41:42', 'Member(id = 15, username = mcheah)', 'logout', 'Member(id = 15, username = mcheah) logged out'),
+	(94, '2026-03-18 11:41:56', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(95, '2026-03-18 11:48:59', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(96, '2026-03-18 11:52:52', 'Members table', 'insert', 'new Member(id = , username = XSS tester) created'),
+	(97, '2026-03-18 11:53:03', 'Member(id = 16, username = XSS tester)', 'login', 'Member(id = 16, username = XSS tester) logged in'),
+	(98, '2026-03-18 11:54:39', 'Member(id = 16, username = XSS tester)', 'delete', 'Member(id = 16, username = XSS tester) was deleted'),
+	(99, '2026-03-18 11:54:39', 'Member(id = 16, username = XSS tester)', 'logout', 'Member(id = 16, username = XSS tester) logged out'),
+	(100, '2026-03-18 11:55:19', 'Members table', 'insert', 'new Member(id = , username = XSS tester) created'),
+	(101, '2026-03-18 11:56:04', 'Member(id = 17, username = XSS tester)', 'login', 'Member(id = 17, username = XSS tester) logged in'),
+	(102, '2026-03-19 16:21:33', 'Member(id = 17, username = XSS tester)', 'logout', 'Member(id = 17, username = XSS tester) logged out'),
+	(103, '2026-03-19 16:31:40', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(104, '2026-03-19 16:31:40', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(105, '2026-03-19 16:31:53', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(106, '2026-03-19 16:51:01', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(107, '2026-03-19 16:51:09', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(108, '2026-03-19 17:00:25', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(109, '2026-03-19 17:00:34', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(110, '2026-03-19 17:02:23', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(111, '2026-03-26 11:41:35', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(112, '2026-04-01 11:32:18', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(113, '2026-04-23 15:30:43', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in');
+
+-- Dumping structure for table spxcinemasdb.bookings
+CREATE TABLE IF NOT EXISTS `bookings` (
+  `bookingId` int NOT NULL AUTO_INCREMENT,
+  `sessionId` int NOT NULL DEFAULT '0',
+  `memberId` int NOT NULL,
+  `seats` int NOT NULL DEFAULT '0',
+  `pricePerSeat` decimal(6,2) NOT NULL,
+  PRIMARY KEY (`bookingId`),
+  KEY `FK_bookings_members` (`memberId`),
+  KEY `FK_bookings_sessions` (`sessionId`),
+  CONSTRAINT `FK_bookings_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_bookings_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spxcinemasdb.bookings: ~0 rows (approximately)
 
 -- Dumping structure for table spxcinemasdb.cinemas
 CREATE TABLE IF NOT EXISTS `cinemas` (
@@ -147,13 +193,14 @@ CREATE TABLE IF NOT EXISTS `members` (
   `email` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`memberId`),
   UNIQUE KEY `userName` (`username`(255)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.members: ~2 rows (approximately)
+-- Dumping data for table spxcinemasdb.members: ~3 rows (approximately)
 INSERT INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`, `lastName`, `street`, `town`, `postcode`, `phone`, `email`) VALUES
 	(8, 'jbloggs', '$2y$12$sS3Njmlm.Vn5QvqB/HsCbe1RedWloJkWIFqbD/Xb22P52nZO/7RGe', 'User', 'cXppNzJaPOGzBAqL4GKPu1E3MVFpbzQrZG9pblNQS1c2WEdZOGc9PQ==', '6k/aLIWtgPxwt2IkCXmAN2ZsQzJFWmlsVHRWMjI0VFlLQ3YwQ1E9PQ==', 'YyARdpSAxhEcjWq8g3eCwlRyTW5mcUNFUkE2NUZpNEtQRE0xazNRZUhqLzlRUklyL25GNW1kN05FS2hqa1lNdC9qdmdmOXc4Rmd3NWtuUjVNeG5DNGI5dlh6NWVhcnArdUZ0MWdzMThGYjNERjk1MHJVZVRDK3JTWFJNM1VqQmQ1Q2NRbXBSckhBRUFMem9K', 'Mrtj25tvGomfYvG+RgSmVkkzYUZ0WDlZZDNUL0xIbnhmbWR3bUZYT0oxSE8rN1dJYWRZcTYraHF1T3BKYWdPTno0d1lrK2c2WG5lUHlZblJiSTlia01kYTZPVis3c21hQlJJcUhONTJOeWJBY0I3RkQzTFJhTlovTHZFPQ==', '', 'QyS+AqRbZHECdFijbWS7KkFGbUpZSkVUSXc4WkU4R2F6SzZJTlE9PQ==', 'RpVmY+lEX5kONNRnJk2eXmQvL0dqVk1CNklmQWNkVHhwSllLaktXNHpNVndseTRUV3R1SVo3MGhOR1U9'),
 	(14, 'hello', '$2y$12$nRw2.FRaYuT3W/X8fUwP7uSDOEZ4ses7z.gp/cCqM0/Zg8fneY5Nq', 'User', 'XHD/+vCmfYD6u+j9qIUYInFpVTdOdjVTOFBsNXp2V1JtcmhxNkE9PQ==', 'oCr+O6+JSnuB2jHXF/UHbncrYXpBSGxJL2VQUFBtSWJ3TXNHT1E9PQ==', '', '', '', '', ''),
-	(15, 'mcheah', '$2y$12$gl1wguuOylAZ5dcS3k3InuvjGpnt9wwBLoqDtK4JlJ0rWkdLPDh4G', 'User', 'EmiReFiukSiAu1MTjuH6Yy9xRXJzeDlUbWdpV3Z6ZE43VGpCcFE9PQ==', '4HwXiJou0X0UuxBVT54caTBBQ1hkNkFXUjZMNUlEaDlBbnNZZUE9PQ==', '', '', '', '', '');
+	(15, 'mcheah', '$2y$12$gl1wguuOylAZ5dcS3k3InuvjGpnt9wwBLoqDtK4JlJ0rWkdLPDh4G', 'User', 'EmiReFiukSiAu1MTjuH6Yy9xRXJzeDlUbWdpV3Z6ZE43VGpCcFE9PQ==', '4HwXiJou0X0UuxBVT54caTBBQ1hkNkFXUjZMNUlEaDlBbnNZZUE9PQ==', '', '', '', '', ''),
+	(17, 'XSS tester', '$2y$12$oAEMfePV5TH61Da8ysKdNONPSmwEnHlMwoLtweuteWWU8u0Zw3Xe.', 'User', 'zDuB1FqONSnE6iD3bq2be1F4ZjRIbXJFKzZYb3FaaDNtTkdjbVZwbk1qQnU2WEd1TzVRZzVXb2gxUE05bXRWaDlxMENxa1dwWWtkb01CeG1pdjZ6OXh0eitpVHpCN3puODRpQW1hTTF5Ny9XeHoyZ1UvRkttSUJjcE40PQ==', 'kOTPyRYiWDr8UvX+wdu3izQ0SjBUVmx6L05ocy9MOUsvbXYrZ1E9PQ==', '', '', '', '', '');
 
 -- Dumping structure for table spxcinemasdb.movies
 CREATE TABLE IF NOT EXISTS `movies` (
@@ -174,6 +221,34 @@ INSERT INTO `movies` (`movieId`, `movieName`, `movieDescription`, `posterFileNam
 	(5, 'Alita: Battle Angel', 'Alita, a battle cyborg, is revived by Ido, a doctor, who realises that she actually has the soul of a teenager. Alita then sets out to learn about her past and find her true identity.', 'AlitaBattleAngel.jpg', 'https://www.youtube.com/embed/w7pYhpJaJW8?si=-YgNdw3JhPCyYXkr'),
 	(6, 'House of Dynamite', 'Radars at Fort Greely, Alaska, detect a nuclear missile. The president and his entourage must use the limited time they have to try to shoot down the missile before it reaches Chicago.', 'HouseofDynamite.jpg', 'https://www.youtube.com/embed/bp1QjSGGW_M?si=s-6SHaa0fmhV6r6f');
 
+-- Dumping structure for table spxcinemasdb.orderitems
+CREATE TABLE IF NOT EXISTS `orderitems` (
+  `orderItemId` int NOT NULL AUTO_INCREMENT,
+  `orderId` int DEFAULT NULL,
+  `sessionId` int NOT NULL,
+  `memberId` int NOT NULL,
+  `seats` int NOT NULL,
+  `pricePerSeat` decimal(6,2) NOT NULL,
+  PRIMARY KEY (`orderItemId`) USING BTREE,
+  KEY `FK_orderitems_members` (`memberId`),
+  KEY `FK_orderitems_sessions` (`sessionId`),
+  KEY `FK_orderitems_orders` (`orderId`),
+  CONSTRAINT `FK_orderitems_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_orderitems_orders` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_orderitems_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spxcinemasdb.orderitems: ~0 rows (approximately)
+
+-- Dumping structure for table spxcinemasdb.orders
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderId` int NOT NULL AUTO_INCREMENT,
+  `orderDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`orderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spxcinemasdb.orders: ~0 rows (approximately)
+
 -- Dumping structure for table spxcinemasdb.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
   `sessionId` int NOT NULL AUTO_INCREMENT,
@@ -182,10 +257,10 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `cinemaId` int NOT NULL DEFAULT '0',
   `movieId` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`sessionId`),
-  KEY `cinemaId` (`cinemaId`),
-  KEY `movieId` (`movieId`),
-  CONSTRAINT `cinemaId` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`cinemaId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `movieId` FOREIGN KEY (`movieId`) REFERENCES `movies` (`movieId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `FK_sessions_cinemas` (`cinemaId`),
+  KEY `FK_sessions_members` (`movieId`),
+  CONSTRAINT `FK_sessions_cinemas` FOREIGN KEY (`cinemaId`) REFERENCES `cinemas` (`cinemaId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_sessions_members` FOREIGN KEY (`movieId`) REFERENCES `movies` (`movieId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.sessions: ~32 rows (approximately)
