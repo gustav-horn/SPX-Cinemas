@@ -43,7 +43,8 @@ class SessionManager {
         }
         // Check to see if we've met this client. If we haven't default to logged out.
         if (!isset($_SESSION["CurrentStatus"])) {
-            $this->loggedOut($currPage); 
+            $_SESSION["CurrentStatus"] = SessionStatus::NotLoggedIn;
+            $_SESSION["CurrentInfo"] = new NotLoggedIn($currPage);
             return; //Returning early for readability
         }
         // If we've met them, check to see if their session has expired.
