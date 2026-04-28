@@ -1,4 +1,4 @@
-export {submitData}
+import {submitData} from "./formSubmission.ts";
 
 /// Submits the location data as a form and overwrites the displayed webpage with the response. 
 /// Is probably due for a rewrite
@@ -26,29 +26,7 @@ export {submitData}
 //     }    
 // }
 
-interface keyValue {
-    key: string,
-    value: string
-}
-
-function submitData(data: Array<keyValue>) {
-    var form = document.getElementsByTagName("body")[0].appendChild(document.createElement("form"));
-    form.action = "";
-    form.method = "POST";
-
-    let addData = (name: string, value: string) => {
-        let input = form.appendChild(document.createElement("input"));
-        input.name = name;
-        input.value = value;
-        return input
-    };
-
-    data.map((item) => addData(item.key, item.value));
-
-    form.submit();
-}
-
-async function submitLocation(location: string) {
+function submitLocation(location: string) {
     submitData([{
         key: "location",
         value: location
