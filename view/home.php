@@ -52,4 +52,4 @@
         </iframe>
     </div>
 </div>
-<script src="assets/js/compiled/modal.js"></script>
+<script type="module" src="assets/js/compiled/modal.js"></script>

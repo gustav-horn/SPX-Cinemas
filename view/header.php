@@ -45,6 +45,6 @@
                 </nav>
             </div>
         </div>
-    <script src="assets/js/compiled/navbar.js"></script>
+    <script type="module" src="assets/js/compiled/navbar.js"></script>
     </header>
 <main class="container">
