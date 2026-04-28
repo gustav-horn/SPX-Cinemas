@@ -35,7 +35,8 @@ class Session implements Auditable {
     public function repr(): string {
         $movie = $this->movie->movieName;
         $cinema = $this->cinema->repr();
-        return "Session(id = $this->sessionId, movie = $movie, cinema = $cinema, time = $this->sessionTime, cost = $this->sessionCost)";
+        $time = $this->sessionTime->format("H:i:v");
+        return "Session(id = $this->sessionId, movie = $movie, cinema = $cinema, time = $time, cost = $this->sessionCost)";
     }
 
     public function name(): string {
