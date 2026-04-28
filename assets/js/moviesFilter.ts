@@ -1,3 +1,5 @@
+export {submitData}
+
 /// Submits the location data as a form and overwrites the displayed webpage with the response. 
 /// Is probably due for a rewrite
 // async function submitLocation(location: string) {
@@ -24,7 +26,12 @@
 //     }    
 // }
 
-async function submitLocation(location: string) {
+interface keyValue {
+    key: string,
+    value: string
+}
+
+function submitData(data: Array<keyValue>) {
     var form = document.getElementsByTagName("body")[0].appendChild(document.createElement("form"));
     form.action = "";
     form.method = "POST";
@@ -36,8 +43,16 @@ async function submitLocation(location: string) {
         return input
     };
 
-    form.appendChild(addData("location", location));
-    form.submit()
+    data.map((item) => addData(item.key, item.value));
+
+    form.submit();
+}
+
+async function submitLocation(location: string) {
+    submitData([{
+        key: "location",
+        value: location
+    }])
 }
 
 
