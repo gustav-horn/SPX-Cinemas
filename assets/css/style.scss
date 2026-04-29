@@ -52,6 +52,14 @@ body {
     flex-direction: column;
 }
 
+.justify-centre {
+    justify-content: center;
+}
+
+.align-centre {
+    align-items: center;
+}
+
 .width-100 {
     width: 100%;
 }
@@ -62,6 +70,10 @@ body {
 
 .padding-2 {
     padding: 2%;
+}
+
+.hidden {
+  display: hidden;
 }
 
 /* ---------- Banner ---------- */
@@ -425,6 +437,136 @@ nav {
     }
 }
 
+/* ---------- Booking Page ----- */
+
+/* Plus and Minus Button Styling */
+.operator {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: $primary-color;
+    color: $dark-text-color;
+
+    img {
+        width: inherit;
+        height: inherit;
+    }
+}
+
+.operator:hover {
+    @include shadow()
+}
+
+.operator:active {
+    @include shadow()
+}
+
+/* Display Field Styling */
+#seats-display {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 25px;
+    min-width: 100px;
+    background-color: $primary-color;
+    border-radius: 12px;
+    color: $dark-text-color;
+    letter-spacing: 2px;
+}
+
+/* Selected Session Details Styling */
+.booking-session-table {
+    width: max-content;
+    justify-self: center;
+}
+
+.session-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.cinema-cell {
+    padding: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.time-cell {
+    padding: 20px;
+    color: #555;
+    font-size: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cost-cell {
+    padding: 20px;
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+@media (max-width: 600px) {   
+    .session-title {
+        font-size: 22px;
+        padding: 18px;
+    }
+    
+    .cinema-cell,
+    .time-cell,
+    .cost-cell {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    .cost-cell {
+        font-size: 16px;
+    }
+    
+    .session-table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {    
+    .cinema-cell,
+    .time-cell,
+    .cost-cell {
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+    
+    .session-title {
+        font-size: 18px;
+    }
+}
+
+.big-message-display {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 42px;
+    font-weight: 300;
+    text-align: center;
+    color: $dark-text-color;
+    letter-spacing: 1px;
+    margin: 40px 0;
+    padding: 20px;
+    border-bottom: 3px solid $tertiary-color;
+    display: inline-block;
+    width: auto;
+}
 
 /* ================================
    Trailer Modal

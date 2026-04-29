@@ -31,6 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
         assertHTMLElement(modal);
         btns[i].addEventListener("click", closeBtn(modal));
     }
+    // Set up the booking buttons
+    document.querySelectorAll(".session-book").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            window.location.href = `index.php?page=booking&session=${btn.getAttribute("sessionId")}`;
+        });
+    });
     // Plumb the behaviour for the movie-cards
     document.querySelectorAll(".movie-card").forEach((card) => {
         card.addEventListener("click", () => {

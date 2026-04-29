@@ -26,7 +26,7 @@
         <?php endforeach ?>
     </div>
 </div>
-<script src="assets/js/compiled/moviesFilter.js"></script>
+<script type="module" src="assets/js/compiled/moviesFilter.js"></script>
 <section class = "movie-grid">
     <?php if (empty($movies)): ?>
     <?php else: ?>
@@ -95,7 +95,7 @@
                                 <!-- <td class = "session-date"><?= $session->sessionTime->format("d-M") ?></td> -->
                                 <td class = "session-time"><?= $session->sessionTime->format("h:i A") ?></td>
                                 <td class = "session-cost">$<?= $session->sessionCost ?></td>
-                                <td><button class = "session-book">Book Now!</button></td>
+                                <td><button class = "session-book" sessionId = "<?= $session->sessionId ?>">Book Now!</button></td>
                             </tr>
                         <?php endforeach ?></tbody>
                     </table>
@@ -105,7 +105,7 @@
         </div>
     <?php endforeach ?>
 <?php endif ?>
-<script src="assets/js/compiled/details.js"></script>
+<script type="module" src="assets/js/compiled/details.js"></script>
 
 <!-- Trailer Modal -->
 <div id="trailerModal" class="modal">
@@ -120,4 +120,4 @@
         </iframe>
     </div>
 </div>
-<script src="assets/js/compiled/modal.js"></script>
+<script type="module" src="assets/js/compiled/modal.js"></script>

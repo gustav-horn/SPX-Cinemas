@@ -25,6 +25,15 @@ switch ($page) {
         $controller = new ListingsController();
         $controller->displayListings();
         break;
+    case "booking":
+        require_once __DIR__ . "/controller/BookingController.php";
+        if (!$sessionManager->checkLoggedIn()) {
+            header("Location: index.php?page=login");
+        }
+        $sessionManager->updateCurrPage($page);
+        $controller = new BookingController($sessionManager);
+        $controller->manageRequest();
+        break;
     case "login":
         require_once __DIR__ . "/controller/LoginController.php";
         $controller = new LoginController($sessionManager);
