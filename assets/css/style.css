@@ -417,7 +417,16 @@ nav {
   background: white;
 }
 
-/* ---------- Booking Page ----- */
+/* ---------- Basket Page ----- */
+.bin-btn {
+  background-color: #f9fafb;
+  margin-left: 1vw;
+  border: none;
+}
+.bin-btn img {
+  width: 4.5vw;
+}
+
 /* Plus and Minus Button Styling */
 .operator {
   width: 48px;
@@ -461,32 +470,31 @@ nav {
 .booking-session-table {
   width: max-content;
   justify-self: center;
+  max-width: 100%;
+  overflow-x: scroll;
+  padding-top: 2%;
 }
 
-.session-title {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-align: center;
-  padding: 25px;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin: 0;
+.movie-cell {
+  padding: 20px;
+  color: #111827;
+  font-size: 15px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .cinema-cell {
   padding: 20px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #6b7280;
   font-size: 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .time-cell {
   padding: 20px;
-  color: #555;
+  color: #111827;
   font-size: 15px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .cost-cell {
@@ -498,10 +506,7 @@ nav {
 }
 
 @media (max-width: 600px) {
-  .session-title {
-    font-size: 22px;
-    padding: 18px;
-  }
+  .movie-cell,
   .cinema-cell,
   .time-cell,
   .cost-cell {
@@ -621,7 +626,7 @@ nav {
   padding: 2% 4%;
   font-size: 16px;
   font-weight: 600;
-  border: 2px solid #e74c3c;
+  border: 2px solid #dc2626;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -630,7 +635,7 @@ nav {
 }
 
 .session-book:hover {
-  background-color: #e74c3c;
+  background-color: #dc2626;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);

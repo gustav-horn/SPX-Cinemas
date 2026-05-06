@@ -33,26 +33,36 @@ class BookingController {
 
     public function manageRequest() {
         // Step 1. Check to see if we are pointed at a valid session
-        if ((!isset($_GET["session"]) || ($session = $this->sessionRepository->findById($_GET["session"])) === null)
-            && (true)) { // Will be: !isset($_GET["booking"]) || ($session = $this->bookingService->findSessionByBookingId($_GET["booking"]) === null)
+        if ((isset($_GET["session"]) && ($session = $this->sessionRepository->findById($_GET["session"])) !== null)) {
+            // Check to see if we have some changes to make
+            if ((count($_POST) > 0) && isset($_POST["noOfSeats"])) {
+                $this->createBooking($session);
+            }
+            // Serve the page
+            else {
+                $this->servePage($session, 0, "Please select the number of seats you want and confirm your booking");
+            }
+        }
+        // Step 2. Check to see if we are pointed at a valid pre-existing booking
+        else if (isset($_GET["booking"]) && ($booking = $this->bookingRepository->findById($_GET["booking"])) !== null) {
+            if ((count($_POST) > 0) && isset($_POST["noOfSeats"])) {
+                $this->editBooking($booking);
+            }
+            // Serve the page
+            else {
+                $this->servePage($booking->session, $booking->seats, "Edit your booking");
+            }
+        }
+        // Step 3. Fallback to 404
+        else {
             $this->serveNotification("404. The session you are looking for is either no longer available or does not exist.");
-            return;
-        }
-        // Step 2. Check to see if we have some changes to make
-        if ((count($_POST) > 0) && isset($_POST["noOfSeats"])) {
-            // Add the booking
-            $this->createBooking($session);
-            return;
-        }
-        // Step 3. Serve the page
-        $this->servePage($session, "Please select the number of seats you want and confirm your booking");
-        return;
+        };
     }
 
     private function createBooking(Session $session): void {
         $seats = (int)$_POST["noOfSeats"];
         if ($seats <= 0) {
-            $this->servePage($session, "Please select one or more seats");
+            $this->servePage($session, $seats, "Please select one or more seats");
             return;
         }
         $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), $seats, $session->getCost());
@@ -61,12 +71,29 @@ class BookingController {
             return;
         }
         else {
-            $this->servePage($session, "Booking Creation Failed. Please Try Again.");
+            $this->servePage($session, $seats, "Booking Creation Failed. Please Try Again.");
             return;
         }
     }
 
-    private function servePage(Session $session, string $status) {
+    private function editBooking(Booking $booking): void {
+        $seats = (int)$_POST["noOfSeats"];
+        if ($seats <= 0) {
+            $this->servePage($booking->session, $seats, "Please select one or more seats");
+            return;
+        }
+        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $seats, $booking->session->getCost());
+        if ($this->bookingRepository->save($booking)) {
+            $this->serveNotification("Booking Modification Succesful.");
+            return;
+        }
+        else {
+            $this->servePage($booking->session, $seats, "Booking Modification Failed. Please Try Again.");
+            return;
+        }
+    }
+
+    private function servePage(Session $session, int $startNo, string $status) {
         require_once __DIR__ . "/../view/booking/booking.php";
     }
 

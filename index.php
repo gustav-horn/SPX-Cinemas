@@ -12,7 +12,7 @@ $sessionManager = new SessionManager($page);
 switch ($page) {
     case "home":
         require_once __DIR__ . "/controller/HomeController.php";
-        $sessionManager->updateCurrPage($page);
+        // $sessionManager->updateCurrPage($page);
         $controller = new HomeController();
         $controller->displayHome();
         break;
@@ -21,7 +21,7 @@ switch ($page) {
         if (!$sessionManager->checkLoggedIn()) {
             header("Location: index.php?page=login");
         }
-        $sessionManager->updateCurrPage($page);
+        // $sessionManager->updateCurrPage($page);
         $controller = new ListingsController();
         $controller->displayListings();
         break;
@@ -30,8 +30,17 @@ switch ($page) {
         if (!$sessionManager->checkLoggedIn()) {
             header("Location: index.php?page=login");
         }
-        $sessionManager->updateCurrPage($page);
+        // $sessionManager->updateCurrPage($page);
         $controller = new BookingController($sessionManager);
+        $controller->manageRequest();
+        break;
+    case "basket":
+        require_once __DIR__ . "/controller/BasketController.php";
+        if (!$sessionManager->checkLoggedIn()) {
+            header("Location: index.php?page=login");
+        }
+        // $sessionManager->updateCurrPage($page);
+        $controller = new BasketController($sessionManager);
         $controller->manageRequest();
         break;
     case "login":
@@ -49,7 +58,7 @@ switch ($page) {
         if (!$sessionManager->checkLoggedIn()) {
             header("Location: index.php?page=login");
         }
-        $sessionManager->updateCurrPage($page);
+        // $sessionManager->updateCurrPage($page);
         $controller = new AboutUsController();
         $controller->displayAboutUs();
         break;

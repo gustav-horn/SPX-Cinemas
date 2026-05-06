@@ -39,13 +39,17 @@ class Booking implements Auditable {
         $this->pricePerSeat = $pricePerSeat;
     }
 
+    public function getCost(): float {
+        return $this->seats * $this->pricePerSeat;
+    }
+
     public function repr(): string {
         $member = $this->member->repr();
         $session = $this->session->repr();
-        return "booking(id = $this->bookingId, member = $member, session = $session, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
+        return "Booking(id = $this->bookingId, member = $member, session = $session, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
     }
 
     public function name(): string {
-        return "booking";
+        return "Booking";
     }
 }

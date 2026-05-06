@@ -49,7 +49,7 @@ class BookingRepository {
      * Finds a single Booking by its primary key ID.
      */
     public function findById(int $id): ?Booking {
-        $sql = "SELECT * FROM `Bookings` WHERE `bookingId` = :id";
+        $sql = "SELECT * FROM `bookings` WHERE `bookingId` = :id";
 
         $results = $this->db->query($sql, ['id' => $id]);
 
@@ -66,24 +66,24 @@ class BookingRepository {
      * @return Booking[] An array of Booking objects
      */
     public function findAll(): array {
-        $sql = "SELECT * FROM `Bookings` ORDER BY `bookingId` ASC";
+        $sql = "SELECT * FROM `bookings` ORDER BY `bookingId` ASC";
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Booking objects
         return array_map($this->createModelFromRow(...), $results);
     }
 
-    public function findByName(string $name): ?Booking {
-        $sql = "SELECT * FROM `Bookings` WHERE `bookingName` = :name";
+    /**
+     * Finds all Bookings in the database that have been made by a given member
+     * @param Member $member
+     * @return array[Booking]
+     */
+    public function findByMember(Member $member): array {
+        $sql = "SELECT * FROM `bookings` WHERE memberId = :id";
+        $results = $this->db->query($sql, ["id" => $member->memberId]);
 
-        $results = $this->db->query($sql, ['name' => $name]);
-
-        if (empty($results)) {
-            return null;
-        }
-
-        // Convert the raw data to a single Booking object
-        return $this->createModelFromRow($results[0]);
+        // Convert all raw results into an array of Booking objects
+        return array_map($this->createModelFromRow(...), $results);
     }
 
     // ----------------------------------------------------------------------
@@ -109,5 +109,17 @@ class BookingRepository {
             $rowsAffected = $this->db->execute($sql, ["id" => $booking->bookingId, "sessionId" => $booking->session->sessionId, "memberId" => $booking->member->memberId, "seats" => $booking->seats, "pricePerSeat" => $booking->pricePerSeat]);
             return $rowsAffected == 1;
         }
+    }
+
+    /**
+     * Deletes a Booking Model from the database
+     * @param Booking $booking
+     * @return bool Success. Did the DELETE succeed or fail
+     */
+    public function delete(Booking $booking): bool {
+        if (!$this->auditer->delete($booking)) {return false;}
+        $sql = "DELETE FROM bookings WHERE bookingId = :id";
+        $rowsAffected = $this->db->execute($sql, ["id" => $booking->bookingId]);
+        return $rowsAffected == 1;
     }
 }

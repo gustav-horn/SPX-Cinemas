@@ -38,6 +38,7 @@
                         ?>
                             <li><a href="index.php?page=login" class="nav-link active">Log Out</a></li>
                             <li><a href="index.php?page=account" class="nav-link active">Account Details</a></li>
+                            <li><a href="index.php?page=basket" class="nav-link active">Basket</a></li>
                         <?php else: ?>
                             <li><a href="index.php?page=login" class="nav-link active">Log In</a></li>
                         <?php endif ?>
