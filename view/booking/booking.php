@@ -8,19 +8,38 @@
     include __DIR__ . '/../../view/header.php';
 ?>
 
-<h1>Booking</h1>
-<p><?= $status ?></p>
-<div class="padding-2">
+<div class="row">
+    <div class="details-poster-container">
+        <img src = "/assets/img/<?= $session->movie->getPoster(); ?>"
+            alt = "The poster of <?= $session->movie->movieName; ?>"
+            class = "movie-poster big-poster" >
+    </div>
+    <span class="padding-1"></span>
+    <div class = "col details-movie-info">
+        <h1>Booking</h1>
+        <p><?= $status ?></p>
+        <div class="padding-2"></div>
 
-<h2>Select Your Seats</h2>
-<div class="padding-2"></div>
-<div class="row justify-centre align-centre">
-    <button id="plus" class="operator"><img src="assets/img/plus.png"></button>
-    <div id="seats-display"><?= $startNo ?></div>
-    <button id="minus" class="operator"><img src="assets/img/minus.png"></button>
-<script type="module" src="assets/js/compiled/booking.js"></script>
+        <h1 class = "movie-title"><?= $session->movie->movieName ?></h1>
+        <p class = "padding-2"><?= $session->movie->movieDescription ?></p>
+        <div class = "padding-2"></div>
+        <a href="#" class="trailer-link" data-trailer="<?= $session->movie->trailerFileName; ?>">
+            Watch Trailer
+        </a>
+        <div class="padding-2"></div>
+
+        <h2>Select Your Seats</h2>
+        <div class="padding-2"></div>
+        <div class="row justify-centre align-centre">
+            <button id="plus" class="operator"><img src="assets/img/plus.png"></button>
+            <div id="seats-display"><?= $startNo ?></div>
+            <button id="minus" class="operator"><img src="assets/img/minus.png"></button>
+        <script type="module" src="assets/js/compiled/booking.js"></script>
+        </div>
+        <div class="padding-2"></div>
+
+    </div>
 </div>
-<div class="padding-2"></div>
 
 <h2>Booking Details</h2>
 <table class="booking-session-table">

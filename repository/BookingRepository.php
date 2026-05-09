@@ -62,6 +62,21 @@ class BookingRepository {
     }
 
     /**
+     * Gets the latest (largest) bookingId in the database
+     */
+    public function findLatestId(): ?int {
+        $sql = "SELECT bookingId FROM bookings ORDER BY bookingId DESC";
+        
+        $results = $this->db->query($sql);
+        
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results[0]['bookingId'];
+    }
+
+    /**
      * Finds all Bookings in the database.
      * @return Booking[] An array of Booking objects
      */

@@ -67,7 +67,7 @@ class BookingController {
         }
         $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), $seats, $session->getCost());
         if ($this->bookingRepository->save($booking)) {
-            $this->serveNotification("Booking Creation Succesful.");
+            $this->serveNotification("Booking Creation Succesful. <br> Your booking number is #" . $this->bookingRepository->findLatestId());
             return;
         }
         else {
@@ -79,7 +79,7 @@ class BookingController {
     private function editBooking(Booking $booking): void {
         $seats = (int)$_POST["noOfSeats"];
         if ($seats <= 0) {
-            $this->servePage($booking->session, $seats, "Please select one or more seats");
+            $this->servePage($booking->session, $seats, "Please select either one or more seats. <br> If you wish to cancel, simply delete the booking from the previous page");
             return;
         }
         $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $seats, $booking->session->getCost());

@@ -61,7 +61,7 @@ class OrderRepository {
      * Gets the latest (largest) orderId in the database
      */
     public function findLatestId(): ?int {
-        $sql = "SELECT COUNT(1) FROM orders ORDER BY orderId";
+        $sql = "SELECT orderId FROM orders ORDER BY orderId DESC";
         
         $results = $this->db->query($sql);
         
@@ -69,7 +69,7 @@ class OrderRepository {
             return null;
         }
 
-        return $results[0];
+        return $results[0]['orderId'];
     }
 
     /**

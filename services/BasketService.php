@@ -63,6 +63,7 @@ class BasketService {
 
     public function deleteItem(int $bookingId): bool {
         $item = $this->basketItems->findById($bookingId);
+        if (is_null($item)) {return false;}
         return $this->basketItems->delete($item);
     }
     

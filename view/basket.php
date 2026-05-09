@@ -14,6 +14,7 @@
     <table class="booking-session-table" class="col">
         <thead>
             <tr class="table-header">
+                <th class="header-cell">Booking Number</th>
                 <th class="header-cell">Movie</th>
                 <th class="header-cell">Cinema</th>
                 <th class="header-cell">Time</th>
@@ -24,6 +25,7 @@
         <tbody>
             <?php foreach ($bookings as $booking): ?>
                 <tr class="session-row">
+                    <td class="bookingNo-cell">#<?= $booking->bookingId ?>
                     <td class="movie-cell"><?= $booking->session->movie->movieName ?></td>
                     <td class="cinema-cell">SPX Cinemas - <?= $booking->session->cinema->cinemaName ?></td>
                     <td class="time-cell"><?= $booking->session->sessionTime->format("h:i A") ?></td>
