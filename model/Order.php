@@ -10,21 +10,21 @@ class Order implements Auditable {
 
     public ?int $orderId;
     public Member $member;
-    public DateTime $orderTime;
+    public DateTime $orderDate;
 
     public function __construct(
         ?int $id,
         Member $member,
-        DateTime $time,
+        DateTime $dateTime,
     ) {
         $this->orderId = $id;
         $this->member = $member;
-        $this->orderTime = $time;
+        $this->orderDate = $dateTime;
     }
 
     public function repr(): string {
         $member = $this->member->repr();
-        $time = $this->orderTime->format("Y-m-d H:i:s");
+        $time = $this->orderDate->format("Y-m-d H:i:s");
         return "Order(id = $this->orderId, member = $member, time = $time)";
     }
 

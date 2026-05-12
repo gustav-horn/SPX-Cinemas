@@ -34,7 +34,7 @@ class OrderItemRepository {
     private function createModelFromRow(array $row): OrderItem {
         return new OrderItem(
             (int)$row["orderItemId"],
-            $this->orderRepository->findById($row["orderItemId"]),
+            $this->orderRepository->findById($row["orderId"]),
             $this->sessionRepository->findById($row["sessionId"]),
             (int)$row["seats"],
             (float)$row["pricePerSeat"]
@@ -78,7 +78,7 @@ class OrderItemRepository {
      * @param Order $order
      * @return array[OrderItem]
      */
-    public function findByMember(Order $order): array {
+    public function findByOrder(Order $order): array {
         $sql = "SELECT * FROM `orderItems` WHERE orderId = :id";
         $results = $this->db->query($sql, ["id" => $order->orderId]);
 

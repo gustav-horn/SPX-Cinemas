@@ -45,6 +45,7 @@
     <?php if ($sessionManager->checkLoggedIn()): ?>
         <button type="submit" name="action" value="delete" id="delete" class="form-submit-btn">Delete</button>
         <button type="submit" name="action" value="update" id="update" class="form-submit-btn">Update User Details</button>
+        <button type="submit" name="action" value="history" id="history" class="form-submit-btn">View Order History</button>
     <?php else: ?>
         <button type="submit" name="action" value="create" id="create" class="form-submit-btn">Create User</button>
     <?php endif ?>

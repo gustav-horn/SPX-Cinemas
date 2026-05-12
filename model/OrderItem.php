@@ -27,6 +27,10 @@ class OrderItem implements Auditable {
         $this->seats = $seats;
         $this->pricePerSeat = $pricePerSeat;
     }
+    
+    public function getCost(): float {
+        return $this->seats * $this->pricePerSeat;
+    }
 
     public function repr(): string {
         $order = $this->order->repr();

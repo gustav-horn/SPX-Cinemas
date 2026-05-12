@@ -73,7 +73,11 @@ body {
 }
 
 .hidden {
-  display: hidden;
+  display: none;
+}
+
+.flex {
+    display: flex
 }
 
 /* ---------- Banner ---------- */
@@ -573,6 +577,53 @@ nav {
     border-bottom: 3px solid $tertiary-color;
     display: inline-block;
     width: auto;
+}
+
+/* --------- Order History Page -------- */
+.card {
+    background: $primary-color;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    @include shadow();
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid $light-border-color;
+}
+
+.card-header {
+    background: $secondary-color;
+    color: $light-text-color;
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+    user-select: none;
+}
+
+.card-header:hover {
+    background: $tertiary-color;
+    color: $dark-text-color
+}
+
+.card-body {
+    padding: 0;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.3s ease;
+    background: #fafafa;
+    color: #333;
+}
+
+.order-item-content {
+    padding: 10px;
+    background-color: $light-border-color;
+    margin: 10px;
+    margin-top: 0px;
+    @include shadow();
+    border-radius: 20px;
 }
 
 /* ================================

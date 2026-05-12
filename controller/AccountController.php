@@ -29,6 +29,10 @@ class AccountController {
 
         // Step 1. Check to see if we have some changes to make
         if (count($_POST) > 0) {
+            // Can we just redirect this away?
+            if ($_POST["action"] === "history") {
+                header("Location: index.php?page=orderHistory");
+            }
             // Are we editing or creating?
             match ($this->sessionManager->checkLoggedIn()) {
                 true => $status = $this->editUser(),

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var _a;
     // Plumb the edit buttons
     document.getElementsByName("edit-booking").forEach((item) => item.addEventListener("click", () => window.location.href = `index.php?page=booking&booking=${item.getAttribute("booking-id")}`));
-    // Plub the delete buttons
+    // Plumb the delete buttons
     document.getElementsByName("delete-booking").forEach((item) => item.addEventListener("click", () => submitData([
         { key: "action", value: "delete" },
         { key: "item", value: item.getAttribute("booking-id") }

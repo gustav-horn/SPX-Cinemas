@@ -53,6 +53,15 @@ switch ($page) {
         $controller = new AccountController($sessionManager);
         $controller->manageRequest();
         break;
+    case "orderHistory":
+        require_once __DIR__ . "/controller/OrderHistoryController.php";
+        if (!$sessionManager->checkLoggedIn()) {
+            header("Location: index.php?page=login");
+        }
+        // $sessionManager->updateCurrPage($page);
+        $controller = new OrderHistoryController();
+        $controller->displayOrderHistory($sessionManager);
+        break;
     case "about":
         require_once __DIR__ . "/controller/AboutUsController.php";
         if (!$sessionManager->checkLoggedIn()) {

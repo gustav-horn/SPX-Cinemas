@@ -23,10 +23,6 @@
         <h1 class = "movie-title"><?= $session->movie->movieName ?></h1>
         <p class = "padding-2"><?= $session->movie->movieDescription ?></p>
         <div class = "padding-2"></div>
-        <a href="#" class="trailer-link" data-trailer="<?= $session->movie->trailerFileName; ?>">
-            Watch Trailer
-        </a>
-        <div class="padding-2"></div>
 
         <h2>Select Your Seats</h2>
         <div class="padding-2"></div>
