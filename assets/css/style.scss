@@ -166,7 +166,7 @@ nav {
     margin-bottom: 16px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
     .hamburger {
         display: flex;
         z-index: -10;
@@ -619,7 +619,7 @@ nav {
 
 .order-item-content {
     padding: 10px;
-    background-color: $light-border-color;
+    background-color: $primary-color;
     margin: 10px;
     margin-top: 0px;
     @include shadow();
