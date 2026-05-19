@@ -67,7 +67,7 @@ class BookingController {
         }
         $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), $seats, $session->getCost());
         if ($this->bookingRepository->save($booking)) {
-            $this->serveNotification("Booking Creation Succesful. <br> Your booking number is #" . $this->bookingRepository->findLatestId());
+            $this->serveNotification("Booking Creation Successful. <br> Your booking number is #" . $this->bookingRepository->findLatestId());
             return;
         }
         else {

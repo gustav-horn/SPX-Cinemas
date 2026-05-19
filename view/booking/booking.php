@@ -63,6 +63,7 @@
     <div class="padding-1"></div>
     <strong id="total-cost-display" class="price-display col justify-centre">$0</strong>
 </div>
+<div class="padding-1"></div>
 <div class="row justify-centre"><button id="booking-submit" class="session-book">Confirm Booking</button></div>
 <div class="padding-2"></div>
 
