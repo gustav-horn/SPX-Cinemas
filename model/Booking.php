@@ -48,7 +48,6 @@ class Booking implements Auditable {
         $session = $this->session->repr();
         return "Booking(id = $this->bookingId, member = $member, session = $session, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
     }
-
     public function name(): string {
         return "Booking";
     }

@@ -1,0 +1,7 @@
+Add orderStatus field to orderStatus
+Do the required documentation:
+    - update the class diagram
+    - update the database 
+    - may as well do the other stuff as well
+    - do the test plans
+JUST MAKE A WHOLE PORTFOLIO WITH THE NEW REQUIREMENTS - only talk about the stuff that has been newly implemented
