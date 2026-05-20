@@ -47,18 +47,6 @@ class Auditer {
     }
 
     /**
-     * Makes the BasketConfirmed entry for when an order has been placed.
-     * @param Member $customer
-     * @param Booking[] $bookings
-     * @return bool Successful database insertion
-     */
-    public function orderPlaced(Member $customer, array $bookings) {
-        $customer = $customer->repr();
-        $items = array_reduce($bookings, fn($carr, $item) => "$carr, " . $item->repr());
-        return $this->repository->save(new AuditLog(null, Action::Order, "Orders", "$customer placed a new order with items: $items"));
-    }
-
-    /**
      * Makes the create entry for the creation of the provided model. Call whenever an INSERT statement is run
      * @param Auditable $model
      * @return bool Successful database insertion

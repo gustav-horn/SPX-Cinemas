@@ -23,14 +23,12 @@ class BasketService {
     private OrderRepository $orders;
     private OrderItemRepository $orderItems;
     private BookingRepository $basketItems;
-    private Auditer $auditer;
 
     public function __construct(DatabaseSingleton $db, Auditer $auditer) {
         $this->db = $db;
         $this->orders = new OrderRepository($db, $auditer);
         $this->orderItems = new OrderItemRepository($db, $auditer);
         $this->basketItems = new BookingRepository($db, $auditer);
-        $this->auditer = $auditer;
     }
 
     public function confirmBasket(Member $member): bool {
@@ -60,11 +58,6 @@ class BasketService {
         if (array_any($basketDeletionSuccesses, fn($succ) => $succ === false)) { // I.e. if any of our basketDeletions have failed
             return false;
         }
-
-        if (!$this->auditer->orderPlaced($member, $items)) { // Make the auditLog
-            return false;
-        }
-
         return true;
     }
 

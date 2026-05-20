@@ -6,7 +6,6 @@ require_once __DIR__ . "/../utilities/Auditer.php";
 enum Action: string {
     case Login = "login";
     case Logout = "logout";
-    case Order = "order";
     case Insert = "insert";
     case Delete = "delete";
     case Update = "update";
