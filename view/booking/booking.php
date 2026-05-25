@@ -43,6 +43,7 @@
         <tr class="table-header">
             <th class="header-cell">Movie</th>
             <th class="header-cell">Cinema</th>
+            <th class="header-cell">Location</th>
             <th class="header-cell">Session Time</th>
             <th class="header-cell">Cost</th>
         </tr>
@@ -51,6 +52,7 @@
         <tr class="session-row">
             <td class="movie-cell"><?= $session->movie->movieName ?></td>
             <td class="cinema-cell">SPX Cinemas - <?= $session->cinema->cinemaName ?></td>
+            <td class="location-cell"><?= $session->cinema->location->locationName ?></td>
             <td class="time-cell"><?= $session->sessionTime->format("h:i A") ?></td>
             <td id="cost-cell" cost="<?= $session->sessionCost ?>" class="cost-cell">$<?= $session->sessionCost ?></td>
         </tr>
