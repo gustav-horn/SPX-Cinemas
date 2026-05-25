@@ -33,10 +33,14 @@ class BasketService {
         $this->auditer = $auditer;
     }
 
+    public function hasItems(Member $member): bool {
+        return count($this->basketItems->findByMember($member)) > 0;
+    }
+
     public function confirmBasket(Member $member): bool {
         $items = $this->basketItems->findByMember($member);
 
-        $order = new Order(null, $member, new DateTime());
+        $order = new Order(null, $member, new DateTime(), OrderStatus::Booked);
         if (!$this->orders->save($order)) { // Save the new order
             return false;
         };

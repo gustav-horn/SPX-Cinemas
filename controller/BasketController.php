@@ -63,7 +63,11 @@ class BasketController {
     public function confirmBasket() {
         //Check to make sure that somewone is logged in
         if ($this->sessionManager->checkLoggedIn()) {
-            if ($this->basketService->confirmBasket($this->sessionManager->getActiveUser())) { // Convert the basket into an order item.
+            $user = $this->sessionManager->getActiveUser();
+            if (!$this->basketService->hasItems($user)) { // Check that we actually do have a basket
+                $this->displayBasket("Have at least one item in your basket.");
+            }
+            else if ($this->basketService->confirmBasket($user)) { // Convert the basket into an order item.
                 $this->displayBasket("Basket Confirmed.");
             }
             else {
