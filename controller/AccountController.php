@@ -33,10 +33,12 @@ class AccountController {
             if ($_POST["action"] === "history") {
                 header("Location: index.php?page=orderHistory");
             }
-            // Are we editing or creating?
-            match ($this->sessionManager->checkLoggedIn()) {
-                true => $status = $this->editUser(),
-                false => $status = $this->createUser(),
+            else {
+                // Are we editing or creating?
+                match ($this->sessionManager->checkLoggedIn()) {
+                    true => $status = $this->editUser(),
+                    false => $status = $this->createUser(),
+                };
             };
         }
         // Step 2. Serve the page
