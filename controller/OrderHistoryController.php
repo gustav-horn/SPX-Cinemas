@@ -24,7 +24,7 @@ class OrderHistoryController
         $orderRepository = new OrderRepository($db, $auditer);
         $orderItemRepository = new OrderItemRepository($db, $auditer);
 
-        $orders = $orderRepository->findByMember($sessionManager->getActiveUser());
+        $orders = array_reverse($orderRepository->findByMember($sessionManager->getActiveUser())); // Have the latest items first
 
         $orders = array_map(
             fn($order) => ["order" => $order, "items" => $orderItemRepository->findByOrder($order)], 
