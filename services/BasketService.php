@@ -49,7 +49,7 @@ class BasketService {
 
         $orderItemSuccesses = array_map(
                 fn($item) => $this->orderItems->save(
-                    new OrderItem(null, $order, $item->session, $item->seats, $item->pricePerSeat)
+                    new OrderItem(null, $order, $item->session, $item->date, $item->seats, $item->pricePerSeat)
                     ),
                 $items
         );

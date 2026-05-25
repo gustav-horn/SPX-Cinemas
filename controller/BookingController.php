@@ -65,7 +65,7 @@ class BookingController {
             $this->servePage($session, $seats, "Please select one or more seats");
             return;
         }
-        $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), $seats, $session->getCost());
+        $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), new DateTime(), $seats, $session->getCost());
         if ($this->bookingRepository->save($booking)) {
             $this->serveNotification("Booking Creation Successful. <br> Your booking number is #" . $this->bookingRepository->findLatestId());
             return;
@@ -82,7 +82,7 @@ class BookingController {
             $this->servePage($booking->session, $seats, "Please select either one or more seats. <br> If you wish to cancel, simply delete the booking from the previous page");
             return;
         }
-        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $seats, $booking->session->getCost());
+        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), new DateTime(), $seats, $booking->session->getCost());
         if ($this->bookingRepository->save($booking)) {
             $this->serveNotification("Booking Modification Succesful.");
             return;

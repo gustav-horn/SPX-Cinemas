@@ -11,6 +11,7 @@ class OrderItem implements Auditable {
     public ?int $orderItemId;
     public Order $order;
     public Session $session;
+    public DateTime $date;
     public int $seats;
     public float $pricePerSeat;
 
@@ -18,12 +19,14 @@ class OrderItem implements Auditable {
         ?int $id,
         Order $order,
         Session $session,
+        DateTime $date,
         int $seats,
         float $pricePerSeat,
     ) {
         $this->orderItemId = $id;
         $this->order = $order;
         $this->session = $session;
+        $this->date = $date;
         $this->seats = $seats;
         $this->pricePerSeat = $pricePerSeat;
     }
@@ -35,7 +38,8 @@ class OrderItem implements Auditable {
     public function repr(): string {
         $order = $this->order->repr();
         $session = $this->session->repr();
-        return "OrderItem(id = $this->orderItemId, order = $order, session = $session, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
+        $date = $this->date->format("Y-m-d");
+        return "OrderItem(id = $this->orderItemId, order = $order, session = $session, date = $date, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
     }
 
     public function name(): string {

@@ -19,15 +19,16 @@ class Booking implements Auditable {
     public ?int $bookingId;
     public Session $session;
     public Member $member;
+    public DateTime $date;
 
     public int $seats;
-
     public float $pricePerSeat;
 
     public function __construct(
         ?int $id,
         Session $session,
         Member $member,
+        DateTime $date,
         int $seats,
         float $pricePerSeat
         
@@ -35,6 +36,7 @@ class Booking implements Auditable {
         $this->bookingId = $id;
         $this->session = $session;
         $this->member = $member;
+        $this->date = $date;
         $this->seats = $seats;
         $this->pricePerSeat = $pricePerSeat;
     }
@@ -46,7 +48,8 @@ class Booking implements Auditable {
     public function repr(): string {
         $member = $this->member->repr();
         $session = $this->session->repr();
-        return "Booking(id = $this->bookingId, member = $member, session = $session, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
+        $date = $this->date->format("Y-m-d");
+        return "Booking(id = $this->bookingId, member = $member, session = $session, date = $date, seats = $this->seats, pricePerSeat = $this->pricePerSeat)";
     }
     public function name(): string {
         return "Booking";

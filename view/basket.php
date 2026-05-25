@@ -17,6 +17,7 @@
                 <th class="header-cell">Booking Number</th>
                 <th class="header-cell">Movie</th>
                 <th class="header-cell">Cinema</th>
+                <th class="header-cell">Date</th>
                 <th class="header-cell">Time</th>
                 <th class="header-cell">Quantity</th>
                 <th class="header-cell">Cost</th>
@@ -28,6 +29,7 @@
                     <td class="bookingNo-cell">#<?= $booking->bookingId ?>
                     <td class="movie-cell"><?= $booking->session->movie->movieName ?></td>
                     <td class="cinema-cell">SPX Cinemas - <?= $booking->session->cinema->cinemaName ?></td>
+                    <td class="date-cell"><?= $booking->date->format("D d \of M Y") ?></td>
                     <td class="time-cell"><?= $booking->session->sessionTime->format("h:i A") ?></td>
                     <td class="quantity-cell"><?= $booking->seats ?></td>
                     <td name="booking-cost" cost="<?= $booking->getCost() ?>" class="cost-cell">$<?= $booking->getCost() ?></td>

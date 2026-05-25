@@ -36,6 +36,7 @@ class OrderItemRepository {
             (int)$row["orderItemId"],
             $this->orderRepository->findById($row["orderId"]),
             $this->sessionRepository->findById($row["sessionId"]),
+            DateTime::createFromFormat("Y-m-d", $row["date"]),
             (int)$row["seats"],
             (float)$row["pricePerSeat"]
         );
@@ -98,15 +99,15 @@ class OrderItemRepository {
         if ($orderItem->orderItemId === null) {
             // INSERT (New OrderItem)
             if (!$this->auditer->create($orderItem)) {return false;};
-            $sql = "INSERT INTO orderItems VAlUES (NULL, :orderId, :sessionId, :seats, :pricePerSeat)";
-            $rowsAffected = $this->db->execute($sql, ["orderId" => $orderItem->order->orderId, "sessionId" => $orderItem->session->sessionId, "seats" => $orderItem->seats, "pricePerSeat" => $orderItem->pricePerSeat]);
+            $sql = "INSERT INTO orderItems VAlUES (NULL, :orderId, :sessionId, :seats, :pricePerSeat, :date)";
+            $rowsAffected = $this->db->execute($sql, ["orderId" => $orderItem->order->orderId, "sessionId" => $orderItem->session->sessionId, "seats" => $orderItem->seats, "pricePerSeat" => $orderItem->pricePerSeat, "date" => $orderItem->date->format("Y-m-d")]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing OrderItem)
             if (!$this->auditer->update($orderItem)) {return false;}
-            $sql = "UPDATE orderItems SET orderId = :orderId, sessionId = :sessionId, seats = :seats, pricePerSeat = :pricePerSeat WHERE orderItemId = :id";
-            $rowsAffected = $this->db->execute($sql, ["id" => $orderItem->orderItemId, "orderId" => $orderItem->order->orderId, "sessionId" => $orderItem->session->sessionId, "seats" => $orderItem->seats, "pricePerSeat" => $orderItem->pricePerSeat]);
+            $sql = "UPDATE orderItems SET orderId = :orderId, sessionId = :sessionId, seats = :seats, pricePerSeat = :pricePerSeat, date = :date WHERE orderItemId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $orderItem->orderItemId, "orderId" => $orderItem->order->orderId, "sessionId" => $orderItem->session->sessionId, "seats" => $orderItem->seats, "pricePerSeat" => $orderItem->pricePerSeat, "date" => $orderItem->date->format("Y-m-d")]);
             return $rowsAffected == 1;
         }
     }

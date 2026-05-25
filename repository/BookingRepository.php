@@ -36,6 +36,7 @@ class BookingRepository {
             (int)$row["bookingId"],
             $this->sessionRepository->findById($row["sessionId"]),
             $this->memberRepository->findById($row["memberId"]),
+            DateTime::createFromFormat("Y-m-d", $row["date"]),
             (int)$row["seats"],
             (float)$row["pricePerSeat"]
         );
@@ -113,15 +114,15 @@ class BookingRepository {
         if ($booking->bookingId === null) {
             // INSERT (New Booking)
             if (!$this->auditer->create($booking)) {return false;};
-            $sql = "INSERT INTO bookings VAlUES (NULL, :sessionId, :memberId, :seats, :pricePerSeat)";
-            $rowsAffected = $this->db->execute($sql, ["sessionId" => $booking->session->sessionId, "memberId" => $booking->member->memberId, "seats" => $booking->seats, "pricePerSeat" => $booking->pricePerSeat]);
+            $sql = "INSERT INTO bookings VAlUES (NULL, :sessionId, :memberId, :seats, :pricePerSeat, :date)";
+            $rowsAffected = $this->db->execute($sql, ["sessionId" => $booking->session->sessionId, "memberId" => $booking->member->memberId, "seats" => $booking->seats, "pricePerSeat" => $booking->pricePerSeat, "date" => $booking->date->format("Y-m-d")]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Booking)
             if (!$this->auditer->update($booking)) {return false;}
-            $sql = "UPDATE bookings SET sessionId = :sessionId, memberId = :memberId, seats = :seats, pricePerSeat = :pricePerSeat WHERE bookingId = :id";
-            $rowsAffected = $this->db->execute($sql, ["id" => $booking->bookingId, "sessionId" => $booking->session->sessionId, "memberId" => $booking->member->memberId, "seats" => $booking->seats, "pricePerSeat" => $booking->pricePerSeat]);
+            $sql = "UPDATE bookings SET sessionId = :sessionId, memberId = :memberId, seats = :seats, pricePerSeat = :pricePerSeat, date = :date WHERE bookingId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $booking->bookingId, "sessionId" => $booking->session->sessionId, "memberId" => $booking->member->memberId, "seats" => $booking->seats, "pricePerSeat" => $booking->pricePerSeat, "date" => $booking->date->format("Y-m-d")]);
             return $rowsAffected == 1;
         }
     }
