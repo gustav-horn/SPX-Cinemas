@@ -34,6 +34,7 @@ class OrderRepository {
             (int)$row['orderId'],
             $this->memberRepository->findById($row['memberId']),
             new DateTime($row['orderDate']),
+            OrderStatus::from($row["orderStatus"])
         );
     }
 
@@ -109,15 +110,15 @@ class OrderRepository {
         if ($order->orderId === null) {
             // INSERT (New Order)
             if (!$this->auditer->create($order)) {return false;};
-            $sql = "INSERT INTO orders VAlUES (:id, :memberId, :time)";
-            $rowsAffected = $this->db->execute($sql, ["id" => $order->orderId, "memberId" => $order->member->memberId, "time" => $order->orderDate->format("Y-m-d H:i:s")]);
+            $sql = "INSERT INTO orders VAlUES (:id, :memberId, :time, :status)";
+            $rowsAffected = $this->db->execute($sql, ["id" => $order->orderId, "memberId" => $order->member->memberId, "time" => $order->orderDate->format("Y-m-d H:i:s"), "status" => $order->orderStatus->value]);
             return $rowsAffected > 0;
         }
         else {
             // UPDATE (Existing Order). Note: No one is changing the member an order is assigned to. Therefore such a change will simply not be written to the database.
             if (!$this->auditer->update($order)) {return false;}
-            $sql = "UPDATE orders SET orderDate = :time, WHERE orderId = :id";
-            $rowsAffected = $this->db->execute($sql, ["id" => $order->orderId, "time" => $order->orderDate->format("Y-m-d H:i:s")]);
+            $sql = "UPDATE orders SET orderDate = :time, orderStatus = :status, WHERE orderId = :id";
+            $rowsAffected = $this->db->execute($sql, ["id" => $order->orderId, "time" => $order->orderDate->format("Y-m-d H:i:s"), "status" => $order->orderStatus->value]);
             return $rowsAffected == 1;
         }
     }
