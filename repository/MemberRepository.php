@@ -89,7 +89,7 @@ class MemberRepository {
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Movie objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
     
     /**

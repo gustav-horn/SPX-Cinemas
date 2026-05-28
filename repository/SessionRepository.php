@@ -71,7 +71,7 @@ class SessionRepository {
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Session objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     /**
@@ -84,7 +84,7 @@ class SessionRepository {
         $results = $this->db->query($sql, ["id" => $cinemaId]);
 
         // Convert all raw results into an array of Session objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     /**
@@ -96,7 +96,7 @@ class SessionRepository {
         $sql = "SELECT * FROM `sessions` WHERE `movieId` = :id ORDER BY `sessionId` ASC";
         $results = $this->db->query($sql, ["id" => $movieId]);
 
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     // ----------------------------------------------------------------------

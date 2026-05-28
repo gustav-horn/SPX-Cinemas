@@ -33,7 +33,7 @@ class Auditer {
      */
     public function logIn(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Login, $info, "$info logged in"));
+        return $this->repository->save(new AuditLog(null, Action::Login(), $info, "$info logged in"));
     }
 
     /**
@@ -43,7 +43,7 @@ class Auditer {
      */
     public function logOut(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Logout, $info, "$info logged out"));
+        return $this->repository->save(new AuditLog(null, Action::Logout(), $info, "$info logged out"));
     }
 
     /**
@@ -55,7 +55,7 @@ class Auditer {
     public function orderPlaced(Member $customer, array $bookings) {
         $customer = $customer->repr();
         $items = array_reduce($bookings, fn($carr, $item) => "$carr, " . $item->repr());
-        return $this->repository->save(new AuditLog(null, Action::Order, "Orders", "$customer placed a new order with items: $items"));
+        return $this->repository->save(new AuditLog(null, Action::Order(), "Orders", "$customer placed a new order with items: $items"));
     }
 
     /**
@@ -66,7 +66,7 @@ class Auditer {
     public function create(Auditable $model) {
         $info = $model->repr();
         $name = $model->name();
-        return $this->repository->save(new AuditLog(null, Action::Insert, $name."s table", "new $info created"));
+        return $this->repository->save(new AuditLog(null, Action::Insert(), $name."s table", "new $info created"));
     }
 
     /**
@@ -76,7 +76,7 @@ class Auditer {
      */
     public function update(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Update, $info, "$info was updated"));
+        return $this->repository->save(new AuditLog(null, Action::Update(), $info, "$info was updated"));
     }
 
     /**
@@ -86,7 +86,7 @@ class Auditer {
      */
     public function delete(Auditable $model) {
         $info = $model->repr();
-        return $this->repository->save(new AuditLog(null, Action::Delete, $info, "$info was deleted"));
+        return $this->repository->save(new AuditLog(null, Action::Delete(), $info, "$info was deleted"));
     }
 
 }

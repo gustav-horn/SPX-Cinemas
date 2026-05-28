@@ -3,8 +3,23 @@
 
 require_once __DIR__ . "/../utilities/Auditer.php";
 
-enum OrderStatus: string {
-    case Booked = "Booked";
+class OrderStatus {
+    public string $value;
+
+    private function __construct(string $value) {
+        $this->value = $value;
+    }
+
+    public static function Booked() {
+        return new OrderStatus("Booked");
+    }
+
+    public static function from(string $val) {
+        return match($val) {
+            "Booked" => new OrderStatus("Booked"),
+            default => throw new ValueError("Unexpected Value")
+        };
+    }
 }
 
 class Order implements Auditable {

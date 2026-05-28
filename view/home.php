@@ -13,7 +13,7 @@
         <?php foreach ($movies as $movie): ?>
             <article class="movie-card" id = <?= $movie->movieId ?>>
                 <img 
-                    src = "/assets/img/<?= $movie->getPoster(); ?>"
+                    src = "assets/img/<?= $movie->getPoster(); ?>"
                     alt = "The poster of <?= $movie->movieName; ?>"
                     class = "movie-poster"
                 >

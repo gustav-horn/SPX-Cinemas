@@ -28,8 +28,8 @@ class Encryptor {
 
     /**
      * decrypt decrypts a $ciphertext and returns it as plaintext
-     * @param string $plaintext
-     * @return string
+     * @param string $ciphertext
+     * @return string $plaintext
      */
     public static function decrypt(string $ciphertext) {
         // Separate the iv from the data

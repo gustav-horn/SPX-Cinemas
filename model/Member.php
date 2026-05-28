@@ -5,24 +5,24 @@
 require_once __DIR__ . "/../utilities/Encryption.php";
 require_once __DIR__ . "/../utilities/Auditer.php";
 
-enum Role {
-    case user;
-    case admin;
+class Role {
+    public string $value;
+
+    public function __construct($value) {
+        $this->value = $value;
+    }
 
     // Utility constructor from a specific string
     public static function from(string $role): Role {
         return match($role) {
-            "User" => Role::user,
-            "Administrator" => Role::admin,
+            "User" => new Role("user"),
+            "Administrator" => new Role("admin"),
         };
     }
 
     // Utility serialisation function
     public function tostring(): string {
-        return match($this) {
-            self::user => "user",
-            self::admin => "admin",
-        };
+        return $this->value;
     }
 }
 

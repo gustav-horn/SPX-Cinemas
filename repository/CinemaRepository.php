@@ -65,7 +65,7 @@ class CinemaRepository {
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of Movie objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     /**
@@ -77,7 +77,7 @@ class CinemaRepository {
         $sql = "SELECT * FROM `cinemas` WHERE locationId = :id ORDER BY `cinemaId` ASC";
         $results = $this->db->query($sql, ["id" => $locationId]);
 
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     // ----------------------------------------------------------------------

@@ -68,7 +68,7 @@ class ListingsService {
                 $results = array_map(
                     fn($row) => [
                             "movie" => $this->movies->findById($row["movieId"]), 
-                            "sessions" => array_map($this->sessions->findById(...), $row["sessionId"])
+                            "sessions" => array_map(fn($id) => $this->sessions->findById($id), $row["sessionId"])
                         ],
                     $results
                     );
