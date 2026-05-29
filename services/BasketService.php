@@ -33,6 +33,15 @@ class BasketService {
         $this->auditer = $auditer;
     }
 
+    private static function array_any(array $array, callable $callable): bool {
+        foreach ($array as $item) {
+            if ($callable($item) === true) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function hasItems(Member $member): bool {
         return count($this->basketItems->findByMember($member)) > 0;
     }
@@ -40,7 +49,7 @@ class BasketService {
     public function confirmBasket(Member $member): bool {
         $items = $this->basketItems->findByMember($member);
 
-        $order = new Order(null, $member, new DateTime(), OrderStatus::Booked);
+        $order = new Order(null, $member, new DateTime(), OrderStatus::Booked());
         if (!$this->orders->save($order)) { // Save the new order
             return false;
         };
@@ -53,15 +62,15 @@ class BasketService {
                     ),
                 $items
         );
-        if (array_any($orderItemSuccesses, fn($succ) => $succ === false)) { // I.e. if any of our orderItem insertions have failed
+        if ($this::array_any($orderItemSuccesses, fn($succ) => $succ === false)) { // I.e. if any of our orderItem insertions have failed
             return false;
         };
 
         $basketDeletionSuccesses = array_map(
-            $this->basketItems->delete(...),
+            fn($item) => $this->basketItems->delete($item),
             $items
         );
-        if (array_any($basketDeletionSuccesses, fn($succ) => $succ === false)) { // I.e. if any of our basketDeletions have failed
+        if ($this::array_any($basketDeletionSuccesses, fn($succ) => $succ === false)) { // I.e. if any of our basketDeletions have failed
             return false;
         }
 

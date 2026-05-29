@@ -71,7 +71,7 @@ class OrderItemRepository {
         $results = $this->db->query($sql);
 
         // Convert all raw results into an array of OrderItem objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     /**
@@ -84,7 +84,7 @@ class OrderItemRepository {
         $results = $this->db->query($sql, ["id" => $order->orderId]);
 
         // Convert all raw results into an array of OrderItem objects
-        return array_map($this->createModelFromRow(...), $results);
+        return array_map(fn($row) => $this->createModelFromRow($row), $results);
     }
 
     // ----------------------------------------------------------------------
