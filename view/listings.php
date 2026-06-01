@@ -33,7 +33,7 @@
         <?php foreach ($movies as $movie): ?>
             <article class="movie-card" id="<?= $movie["movie"]->movieId; ?>">
                 <img 
-                    src = "/assets/img/<?= $movie["movie"]->getPoster(); ?>"
+                    src = "assets/img/<?= $movie["movie"]->getPoster(); ?>"
                     alt = "<?= $movie["movie"]->movieName; ?>"
                     class = "movie-poster"
                 >
@@ -63,7 +63,7 @@
                 <div class="row">
                     <span class="details-close">&times;</span>
                     <div class="details-poster-container">
-                        <img src = "/assets/img/<?= $movie["movie"]->getPoster(); ?>"
+                        <img src = "assets/img/<?= $movie["movie"]->getPoster(); ?>"
                             alt = "The poster of <?= $movie["movie"]->movieName; ?>"
                             class = "movie-poster big-poster" >
                     </div>
