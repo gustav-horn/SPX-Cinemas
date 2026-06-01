@@ -37,7 +37,7 @@ class SessionManager {
         $this->auditer = new Auditer(DatabaseSingleton::getInstance());
 
         // Try to initiate the session. If we can't; abort and panic!
-        if (!session_start(["serialize_handler" => 'php_serialize'])) {
+        if (!session_start(["serialize_handler" => 'php_serialize']) && !session_start(["serialize_handley" => 'php_serialize'])) { // For some reason trying it twice seems to help
             error_log("Session unable to be started");
             exit("Session unable to be started");
         }
