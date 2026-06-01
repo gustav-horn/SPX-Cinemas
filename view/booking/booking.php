@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="details-poster-container">
-        <img src = "/assets/img/<?= $session->movie->getPoster(); ?>"
+        <img src = "assets/img/<?= $session->movie->getPoster(); ?>"
             alt = "The poster of <?= $session->movie->movieName; ?>"
             class = "movie-poster big-poster" >
     </div>
