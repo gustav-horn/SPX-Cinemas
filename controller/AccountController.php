@@ -97,7 +97,7 @@ class AccountController {
             HashedData::from(htmlspecialchars($password)),
             EncryptedData::from(htmlspecialchars($_POST["firstName"])), 
             EncryptedData::from(htmlspecialchars($_POST["lastName"])), 
-            Role::user, 
+            Role::user(), 
             OptionalEncryptedData::from(htmlspecialchars($_POST["street"])), 
             OptionalEncryptedData::from(htmlspecialchars($_POST["town"])), 
             OptionalEncryptedData::from(htmlspecialchars($_POST["postcode"])), 

@@ -12,6 +12,10 @@ class Role {
         $this->value = $value;
     }
 
+    public static function User() {
+        return new Role("user");
+    }
+
     // Utility constructor from a specific string
     public static function from(string $role): Role {
         return match($role) {
