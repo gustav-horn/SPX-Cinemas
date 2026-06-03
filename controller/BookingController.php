@@ -40,7 +40,7 @@ class BookingController {
             }
             // Serve the page
             else {
-                $this->servePage($session, 0, new DateTime(), "Please select the number of seats you want and confirm your booking");
+                $this->servePage($session, 0, new DateTimeImmutable(), "Please select the number of seats you want and confirm your booking");
             }
         }
         // Step 2. Check to see if we are pointed at a valid pre-existing booking
