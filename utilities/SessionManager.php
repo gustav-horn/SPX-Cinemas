@@ -37,9 +37,14 @@ class SessionManager {
         $this->auditer = new Auditer(DatabaseSingleton::getInstance());
 
         // Try to initiate the session. If we can't; abort and panic!
-        if (!session_start(["serialize_handler" => 'php_serialize']) && !session_start(["serialize_handler" => 'php_serialize'])) { // For some reason trying it twice seems to help
-            error_log("Session unable to be started");
-            exit("Session unable to be started");
+        try {
+            if (!session_start(["serialize_handler" => 'php_serialize']) && !session_start(["serialize_handler" => 'php_serialize'])) { // For some reason trying it twice seems to help
+                error_log("Session unable to be started");
+                exit("Session unable to be started");
+            }
+        }
+        catch (Exception $e) {
+            throw $e;
         }
         // Check to see if we've met this client. If we haven't default to logged out.
         if (!isset($_SESSION["CurrentStatus"])) {
