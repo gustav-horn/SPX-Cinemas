@@ -15,17 +15,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Dumping structure for table spxcinemasdb.auditlogs
+DROP TABLE IF EXISTS `auditlogs`;
 CREATE TABLE IF NOT EXISTS `auditlogs` (
   `auditLogId` int NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NOT NULL,
-  `entity` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `action` enum('update','insert','delete','login','logout') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entity` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `action` enum('update','insert','delete','login','logout','order') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `entry` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`auditLogId`)
-) ENGINE=InnoDB AUTO_INCREMENT=286 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.auditlogs: ~245 rows (approximately)
-INSERT INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`) VALUES
+-- Dumping data for table spxcinemasdb.auditlogs: ~448 rows (approximately)
+REPLACE INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`) VALUES
 	(19, '2026-03-04 11:33:34', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
 	(20, '2026-03-04 11:33:48', 'Member (id = 8, username = jbloggs)', 'login', 'Member (username = jbloggs) logged in'),
 	(21, '2026-03-04 11:33:57', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
@@ -292,27 +293,209 @@ INSERT INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`)
 	(282, '2026-05-14 18:15:02', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
 	(283, '2026-05-14 18:15:09', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
 	(284, '2026-05-14 18:15:15', 'Member(id = 15, username = mcheah)', 'login', 'Member(id = 15, username = mcheah) logged in'),
-	(285, '2026-05-14 18:15:25', 'Member(id = 15, username = mcheah)', 'update', 'Member(id = 15, username = mcheah) was updated');
+	(285, '2026-05-14 18:15:25', 'Member(id = 15, username = mcheah)', 'update', 'Member(id = 15, username = mcheah) was updated'),
+	(286, '2026-05-17 10:32:17', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(287, '2026-05-17 10:34:33', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(288, '2026-05-17 10:34:51', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(289, '2026-05-17 10:35:01', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(290, '2026-05-17 10:35:07', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(291, '2026-05-17 10:35:15', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(292, '2026-05-17 10:35:18', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(293, '2026-05-17 10:36:43', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(294, '2026-05-17 10:36:52', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(295, '2026-05-17 10:37:02', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(296, '2026-05-17 10:37:06', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(297, '2026-05-17 10:37:18', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(298, '2026-05-17 10:53:03', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(299, '2026-05-17 10:53:19', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(300, '2026-05-17 10:55:18', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 10, pricePerSeat = 20) created'),
+	(301, '2026-05-17 15:15:35', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(302, '2026-05-17 15:15:47', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(303, '2026-05-17 15:27:56', 'Booking(id = 31, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20)', 'update', 'Booking(id = 31, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20) was updated'),
+	(304, '2026-05-17 15:30:30', 'Booking(id = 30, member = Member(id = 8, username = jbloggs), session = Session(id = 25, movie = Minority Report, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30)', 'delete', 'Booking(id = 30, member = Member(id = 8, username = jbloggs), session = Session(id = 25, movie = Minority Report, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30) was deleted'),
+	(305, '2026-05-17 15:40:01', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(306, '2026-05-17 15:40:08', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(307, '2026-05-17 15:40:16', 'Booking(id = 31, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20)', 'delete', 'Booking(id = 31, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20) was deleted'),
+	(308, '2026-05-17 15:42:18', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30) created'),
+	(309, '2026-05-17 15:42:25', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 19, movie = The Godfather, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) created'),
+	(310, '2026-05-17 15:42:39', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), seats = 10, pricePerSeat = 30) created'),
+	(311, '2026-05-17 15:44:07', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) created'),
+	(312, '2026-05-17 15:44:40', 'Booking(id = 33, member = Member(id = 8, username = jbloggs), session = Session(id = 19, movie = The Godfather, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20)', 'delete', 'Booking(id = 33, member = Member(id = 8, username = jbloggs), session = Session(id = 19, movie = The Godfather, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) was deleted'),
+	(313, '2026-05-17 15:44:50', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50) created'),
+	(314, '2026-05-17 15:44:50', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30) created'),
+	(315, '2026-05-17 15:44:50', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), seats = 10, pricePerSeat = 30) created'),
+	(316, '2026-05-17 15:44:50', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) created'),
+	(317, '2026-05-17 15:44:50', 'Booking(id = 32, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30)', 'delete', 'Booking(id = 32, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), seats = 2, pricePerSeat = 30) was deleted'),
+	(318, '2026-05-17 15:44:50', 'Booking(id = 34, member = Member(id = 8, username = jbloggs), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), seats = 10, pricePerSeat = 30)', 'delete', 'Booking(id = 34, member = Member(id = 8, username = jbloggs), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), seats = 10, pricePerSeat = 30) was deleted'),
+	(319, '2026-05-17 15:44:50', 'Booking(id = 35, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20)', 'delete', 'Booking(id = 35, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) was deleted'),
+	(320, '2026-05-18 15:11:11', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(321, '2026-05-18 15:11:18', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(322, '2026-05-18 15:18:51', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(323, '2026-05-18 15:18:59', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(324, '2026-05-18 15:21:30', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(325, '2026-05-18 15:27:21', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(326, '2026-05-18 15:29:14', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(327, '2026-05-18 15:36:33', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(328, '2026-05-18 15:37:02', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(329, '2026-05-19 13:40:59', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(330, '2026-05-19 13:47:58', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(331, '2026-05-19 13:48:14', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) created'),
+	(332, '2026-05-19 13:54:34', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 36, member = Member(id = 8, username = jbloggs), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20)'),
+	(333, '2026-05-19 13:54:34', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:54:34) created'),
+	(334, '2026-05-19 13:54:34', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 19, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:54:34), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) created'),
+	(335, '2026-05-19 13:54:34', 'Booking(id = 36, member = Member(id = 8, username = jbloggs), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20)', 'delete', 'Booking(id = 36, member = Member(id = 8, username = jbloggs), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), seats = 2, pricePerSeat = 20) was deleted'),
+	(336, '2026-05-19 13:55:51', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:55:51) created'),
+	(337, '2026-05-19 13:56:00', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:56:00) created'),
+	(338, '2026-05-19 13:56:12', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), seats = 1, pricePerSeat = 40) created'),
+	(339, '2026-05-19 13:56:17', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:56:17) created'),
+	(340, '2026-05-19 13:56:17', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 22, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:56:17), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), seats = 1, pricePerSeat = 40) created'),
+	(341, '2026-05-19 13:56:17', 'Booking(id = 37, member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), seats = 1, pricePerSeat = 40)', 'delete', 'Booking(id = 37, member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), seats = 1, pricePerSeat = 40) was deleted'),
+	(342, '2026-05-19 13:58:44', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:58:44) created'),
+	(343, '2026-05-19 13:58:44', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: '),
+	(344, '2026-05-19 13:59:32', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), seats = 2, pricePerSeat = 35) created'),
+	(345, '2026-05-19 13:59:36', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:59:36) created'),
+	(346, '2026-05-19 13:59:36', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 24, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:59:36), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), seats = 2, pricePerSeat = 35) created'),
+	(347, '2026-05-19 13:59:36', 'Booking(id = 38, member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), seats = 2, pricePerSeat = 35)', 'delete', 'Booking(id = 38, member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), seats = 2, pricePerSeat = 35) was deleted'),
+	(348, '2026-05-19 13:59:36', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 38, member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), seats = 2, pricePerSeat = 35)'),
+	(349, '2026-05-24 16:29:38', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(350, '2026-05-24 16:29:52', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(351, '2026-05-24 16:31:09', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20) created'),
+	(352, '2026-05-24 16:38:41', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(353, '2026-05-24 16:38:48', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(354, '2026-05-24 16:39:19', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-25 02:39:19, status = Booked) created'),
+	(355, '2026-05-24 16:39:19', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 25, member = Member(id = 8, username = jbloggs), time = 2026-05-25 02:39:19, status = Booked), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20) created'),
+	(356, '2026-05-24 16:39:19', 'Booking(id = 39, member = Member(id = 8, username = jbloggs), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20)', 'delete', 'Booking(id = 39, member = Member(id = 8, username = jbloggs), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20) was deleted'),
+	(357, '2026-05-24 16:39:19', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 39, member = Member(id = 8, username = jbloggs), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), seats = 1, pricePerSeat = 20)'),
+	(358, '2026-05-24 16:39:38', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(359, '2026-05-24 16:42:42', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-25 02:42:42, status = Booked) created'),
+	(360, '2026-05-24 16:42:42', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: '),
+	(361, '2026-05-24 16:42:51', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(362, '2026-05-24 16:48:18', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(363, '2026-05-24 16:48:24', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(364, '2026-05-24 17:30:07', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(365, '2026-05-24 17:30:43', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(366, '2026-05-24 17:36:32', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(367, '2026-05-24 17:36:53', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(368, '2026-05-24 17:39:01', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40) created'),
+	(369, '2026-05-24 17:43:44', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(370, '2026-05-24 17:49:34', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) created'),
+	(371, '2026-05-24 17:49:37', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked) created'),
+	(372, '2026-05-24 17:49:37', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40) created'),
+	(373, '2026-05-24 17:49:37', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) created'),
+	(374, '2026-05-24 17:51:03', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(375, '2026-05-24 17:55:24', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(376, '2026-05-24 17:56:13', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(377, '2026-05-24 18:00:07', 'OrderItem(id = 12, order = Order(id = 15, member = Member(id = 8, username = jbloggs), time = 2026-05-09 09:03:59, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 3, pricePerSeat = 35)', 'update', 'OrderItem(id = 12, order = Order(id = 15, member = Member(id = 8, username = jbloggs), time = 2026-05-09 09:03:59, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 3, pricePerSeat = 35) was updated'),
+	(378, '2026-05-24 18:00:41', 'OrderItem(id = 12, order = Order(id = 15, member = Member(id = 8, username = jbloggs), time = 2026-05-09 09:03:59, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 3, pricePerSeat = 35)', 'update', 'OrderItem(id = 12, order = Order(id = 15, member = Member(id = 8, username = jbloggs), time = 2026-05-09 09:03:59, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 3, pricePerSeat = 35) was updated'),
+	(379, '2026-05-24 18:00:41', 'OrderItem(id = 13, order = Order(id = 16, member = Member(id = 15, username = mcheah), time = 2026-05-09 09:14:32, status = Booked), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-05-09, seats = 2, pricePerSeat = 30)', 'update', 'OrderItem(id = 13, order = Order(id = 16, member = Member(id = 15, username = mcheah), time = 2026-05-09 09:14:32, status = Booked), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-05-09, seats = 2, pricePerSeat = 30) was updated'),
+	(380, '2026-05-24 18:00:41', 'OrderItem(id = 14, order = Order(id = 16, member = Member(id = 15, username = mcheah), time = 2026-05-09 09:14:32, status = Booked), session = Session(id = 44, movie = Minority Report, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 1, pricePerSeat = 35)', 'update', 'OrderItem(id = 14, order = Order(id = 16, member = Member(id = 15, username = mcheah), time = 2026-05-09 09:14:32, status = Booked), session = Session(id = 44, movie = Minority Report, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 20:00:000, cost = 35), date = 2026-05-09, seats = 1, pricePerSeat = 35) was updated'),
+	(381, '2026-05-24 18:00:41', 'OrderItem(id = 15, order = Order(id = 17, member = Member(id = 15, username = mcheah), time = 2026-05-12 02:43:32, status = Booked), session = Session(id = 27, movie = Minority Report, cinema = Cinema(id = 6, name = Epping 3, location = Epping), time = 10:00:000, cost = 20), date = 2026-05-12, seats = 2, pricePerSeat = 20)', 'update', 'OrderItem(id = 15, order = Order(id = 17, member = Member(id = 15, username = mcheah), time = 2026-05-12 02:43:32, status = Booked), session = Session(id = 27, movie = Minority Report, cinema = Cinema(id = 6, name = Epping 3, location = Epping), time = 10:00:000, cost = 20), date = 2026-05-12, seats = 2, pricePerSeat = 20) was updated'),
+	(382, '2026-05-24 18:00:41', 'OrderItem(id = 16, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-05-18, seats = 2, pricePerSeat = 30)', 'update', 'OrderItem(id = 16, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-05-18, seats = 2, pricePerSeat = 30) was updated'),
+	(383, '2026-05-24 18:00:41', 'OrderItem(id = 17, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), date = 2026-05-18, seats = 10, pricePerSeat = 30)', 'update', 'OrderItem(id = 17, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 47, movie = The Godfather, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 20:00:000, cost = 30), date = 2026-05-18, seats = 10, pricePerSeat = 30) was updated'),
+	(384, '2026-05-24 18:00:41', 'OrderItem(id = 18, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-05-18, seats = 2, pricePerSeat = 20)', 'update', 'OrderItem(id = 18, order = Order(id = 18, member = Member(id = 8, username = jbloggs), time = 2026-05-18 01:44:50, status = Booked), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-05-18, seats = 2, pricePerSeat = 20) was updated'),
+	(385, '2026-05-24 18:00:41', 'OrderItem(id = 19, order = Order(id = 19, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:54:34, status = Booked), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), date = 2026-05-19, seats = 2, pricePerSeat = 20)', 'update', 'OrderItem(id = 19, order = Order(id = 19, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:54:34, status = Booked), session = Session(id = 41, movie = Edge of Tomorrow, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 10:00:000, cost = 20), date = 2026-05-19, seats = 2, pricePerSeat = 20) was updated'),
+	(386, '2026-05-24 18:00:41', 'OrderItem(id = 20, order = Order(id = 22, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:56:17, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-19, seats = 1, pricePerSeat = 40)', 'update', 'OrderItem(id = 20, order = Order(id = 22, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:56:17, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-19, seats = 1, pricePerSeat = 40) was updated'),
+	(387, '2026-05-24 18:00:41', 'OrderItem(id = 21, order = Order(id = 24, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:59:36, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-19, seats = 2, pricePerSeat = 35)', 'update', 'OrderItem(id = 21, order = Order(id = 24, member = Member(id = 8, username = jbloggs), time = 2026-05-19 23:59:36, status = Booked), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-19, seats = 2, pricePerSeat = 35) was updated'),
+	(388, '2026-05-24 18:00:41', 'OrderItem(id = 22, order = Order(id = 25, member = Member(id = 8, username = jbloggs), time = 2026-05-25 02:39:19, status = Booked), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-25, seats = 1, pricePerSeat = 20)', 'update', 'OrderItem(id = 22, order = Order(id = 25, member = Member(id = 8, username = jbloggs), time = 2026-05-25 02:39:19, status = Booked), session = Session(id = 15, movie = Edge of Tomorrow, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-25, seats = 1, pricePerSeat = 20) was updated'),
+	(389, '2026-05-24 18:00:41', 'OrderItem(id = 23, order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40)', 'update', 'OrderItem(id = 23, order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40) was updated'),
+	(390, '2026-05-24 18:00:41', 'OrderItem(id = 24, order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35)', 'update', 'OrderItem(id = 24, order = Order(id = 27, member = Member(id = 8, username = jbloggs), time = 2026-05-25 03:49:37, status = Booked), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) was updated'),
+	(391, '2026-05-24 18:06:52', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(392, '2026-05-24 18:06:58', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(393, '2026-05-24 18:07:08', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-25 04:07:08, status = Booked) created'),
+	(394, '2026-05-24 18:07:08', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 28, member = Member(id = 8, username = jbloggs), time = 2026-05-25 04:07:08, status = Booked), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40) created'),
+	(395, '2026-05-24 18:07:08', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 28, member = Member(id = 8, username = jbloggs), time = 2026-05-25 04:07:08, status = Booked), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) created'),
+	(396, '2026-05-24 18:07:08', 'Booking(id = 40, member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40)', 'delete', 'Booking(id = 40, member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40) was deleted'),
+	(397, '2026-05-24 18:07:08', 'Booking(id = 41, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35)', 'delete', 'Booking(id = 41, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) was deleted'),
+	(398, '2026-05-24 18:07:08', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 40, member = Member(id = 8, username = jbloggs), session = Session(id = 40, movie = House of Dynamite, cinema = Cinema(id = 9, name = Eastwood 3, location = Eastwood), time = 20:00:000, cost = 40), date = 2026-05-25, seats = 2, pricePerSeat = 40), Booking(id = 41, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35)'),
+	(399, '2026-05-24 18:07:28', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) created'),
+	(400, '2026-05-25 18:07:14', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(401, '2026-05-26 18:14:18', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(402, '2026-05-26 18:14:26', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(403, '2026-05-27 14:01:00', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(404, '2026-05-27 14:15:05', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(405, '2026-05-27 14:27:03', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(406, '2026-05-27 14:27:04', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(407, '2026-05-27 14:27:11', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(408, '2026-05-28 13:47:29', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(409, '2026-05-28 13:49:08', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(410, '2026-05-28 13:51:19', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 42, movie = Alita: Battle Angel, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 130, pricePerSeat = 30) created'),
+	(411, '2026-05-28 13:52:07', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 3, pricePerSeat = 20) created'),
+	(412, '2026-05-28 13:53:28', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 2, pricePerSeat = 20) created'),
+	(413, '2026-05-28 13:55:21', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 2, pricePerSeat = 20) created'),
+	(414, '2026-05-28 13:55:34', 'Booking(id = 43, member = Member(id = 8, username = jbloggs), session = Session(id = 42, movie = Alita: Battle Angel, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 130, pricePerSeat = 30)', 'delete', 'Booking(id = 43, member = Member(id = 8, username = jbloggs), session = Session(id = 42, movie = Alita: Battle Angel, cinema = Cinema(id = 10, name = Macquarie 1, location = Macquarie Centre ), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 130, pricePerSeat = 30) was deleted'),
+	(415, '2026-05-28 13:55:43', 'Booking(id = 42, member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35)', 'delete', 'Booking(id = 42, member = Member(id = 8, username = jbloggs), session = Session(id = 23, movie = Edge of Tomorrow, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 20:00:000, cost = 35), date = 2026-05-25, seats = 1, pricePerSeat = 35) was deleted'),
+	(416, '2026-05-28 13:55:44', 'Booking(id = 44, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 3, pricePerSeat = 20)', 'delete', 'Booking(id = 44, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 3, pricePerSeat = 20) was deleted'),
+	(417, '2026-05-28 13:55:48', 'Booking(id = 45, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 2, pricePerSeat = 20)', 'delete', 'Booking(id = 45, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 2, pricePerSeat = 20) was deleted'),
+	(418, '2026-05-28 13:57:06', 'Booking(id = 46, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 1, pricePerSeat = 20)', 'update', 'Booking(id = 46, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 1, pricePerSeat = 20) was updated'),
+	(419, '2026-05-28 13:58:25', 'Booking(id = 46, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 1, pricePerSeat = 20)', 'delete', 'Booking(id = 46, member = Member(id = 8, username = jbloggs), session = Session(id = 2, movie = Alita: Battle Angel, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-28, seats = 1, pricePerSeat = 20) was deleted'),
+	(420, '2026-05-28 13:58:40', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(421, '2026-05-28 13:58:49', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(422, '2026-05-28 13:59:15', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(423, '2026-05-28 14:00:02', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:00:02, status = Booked) created'),
+	(424, '2026-05-28 14:00:02', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 29, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:00:02, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(425, '2026-05-28 14:00:02', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 29, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:00:02, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(426, '2026-05-28 14:00:02', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 29, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:00:02, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(427, '2026-05-28 14:01:48', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:01:48, status = Booked) created'),
+	(428, '2026-05-28 14:01:48', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 30, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:01:48, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(429, '2026-05-28 14:01:48', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 30, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:01:48, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(430, '2026-05-28 14:01:48', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 30, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:01:48, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(431, '2026-05-28 14:02:28', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:28, status = Booked) created'),
+	(432, '2026-05-28 14:02:28', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 31, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:28, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(433, '2026-05-28 14:02:28', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 31, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:28, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(434, '2026-05-28 14:02:28', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 31, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:28, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(435, '2026-05-28 14:02:39', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:39, status = Booked) created'),
+	(436, '2026-05-28 14:02:39', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 32, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:39, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(437, '2026-05-28 14:02:39', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 32, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:39, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(438, '2026-05-28 14:02:39', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 32, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:39, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(439, '2026-05-28 14:02:42', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:42, status = Booked) created'),
+	(440, '2026-05-28 14:02:42', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 33, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:42, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(441, '2026-05-28 14:02:42', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 33, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:42, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(442, '2026-05-28 14:02:42', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 33, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:02:42, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(443, '2026-05-28 14:06:12', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(444, '2026-05-28 14:06:18', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(445, '2026-05-28 14:06:21', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(446, '2026-05-28 14:06:27', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(447, '2026-05-28 14:06:32', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:06:32, status = Booked) created'),
+	(448, '2026-05-28 14:06:32', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 34, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:06:32, status = Booked), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) created'),
+	(449, '2026-05-28 14:06:32', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 34, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:06:32, status = Booked), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) created'),
+	(450, '2026-05-28 14:06:32', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 34, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:06:32, status = Booked), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) created'),
+	(451, '2026-05-28 14:06:32', 'Booking(id = 47, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30)', 'delete', 'Booking(id = 47, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30) was deleted'),
+	(452, '2026-05-28 14:06:32', 'Booking(id = 48, member = Member(id = 8, username = jbloggs), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30)', 'delete', 'Booking(id = 48, member = Member(id = 8, username = jbloggs), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30) was deleted'),
+	(453, '2026-05-28 14:06:32', 'Booking(id = 49, member = Member(id = 8, username = jbloggs), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35)', 'delete', 'Booking(id = 49, member = Member(id = 8, username = jbloggs), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35) was deleted'),
+	(454, '2026-05-28 14:06:32', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 47, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 4, pricePerSeat = 30), Booking(id = 48, member = Member(id = 8, username = jbloggs), session = Session(id = 6, movie = Inception, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-05-28, seats = 5, pricePerSeat = 30), Booking(id = 49, member = Member(id = 8, username = jbloggs), session = Session(id = 7, movie = The Godfather, cinema = Cinema(id = 1, name = Chatswood 1, location = Chatswood), time = 20:00:000, cost = 35), date = 2026-05-28, seats = 81, pricePerSeat = 35)'),
+	(455, '2026-05-28 14:08:30', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20) created'),
+	(456, '2026-05-28 14:08:47', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25) created'),
+	(457, '2026-05-28 14:08:58', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35) created'),
+	(458, '2026-05-28 14:09:11', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:09:11, status = Booked) created'),
+	(459, '2026-05-28 14:09:11', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 35, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:09:11, status = Booked), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20) created'),
+	(460, '2026-05-28 14:09:11', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 35, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:09:11, status = Booked), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25) created'),
+	(461, '2026-05-28 14:09:11', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 35, member = Member(id = 8, username = jbloggs), time = 2026-05-29 00:09:11, status = Booked), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35) created'),
+	(462, '2026-05-28 14:09:11', 'Booking(id = 50, member = Member(id = 8, username = jbloggs), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20)', 'delete', 'Booking(id = 50, member = Member(id = 8, username = jbloggs), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20) was deleted'),
+	(463, '2026-05-28 14:09:11', 'Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25)', 'delete', 'Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25) was deleted'),
+	(464, '2026-05-28 14:09:11', 'Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35)', 'delete', 'Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35) was deleted'),
+	(465, '2026-05-28 14:09:11', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 50, member = Member(id = 8, username = jbloggs), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20), Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25), Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35)'),
+	(466, '2026-05-28 14:10:18', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated');
 
 -- Dumping structure for table spxcinemasdb.bookings
+DROP TABLE IF EXISTS `bookings`;
 CREATE TABLE IF NOT EXISTS `bookings` (
   `bookingId` int NOT NULL AUTO_INCREMENT,
   `sessionId` int NOT NULL DEFAULT '0',
   `memberId` int NOT NULL,
   `seats` int NOT NULL DEFAULT '0',
   `pricePerSeat` decimal(6,2) NOT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`bookingId`),
   KEY `FK_bookings_members` (`memberId`),
   KEY `FK_bookings_sessions` (`sessionId`),
   CONSTRAINT `FK_bookings_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_bookings_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.bookings: ~0 rows (approximately)
-INSERT INTO `bookings` (`bookingId`, `sessionId`, `memberId`, `seats`, `pricePerSeat`) VALUES
-	(30, 25, 8, 2, 30.00);
 
 -- Dumping structure for table spxcinemasdb.cinemas
+DROP TABLE IF EXISTS `cinemas`;
 CREATE TABLE IF NOT EXISTS `cinemas` (
   `cinemaId` int NOT NULL AUTO_INCREMENT,
   `cinemaName` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -323,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `cinemas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.cinemas: ~12 rows (approximately)
-INSERT INTO `cinemas` (`cinemaId`, `cinemaName`, `locationId`) VALUES
+REPLACE INTO `cinemas` (`cinemaId`, `cinemaName`, `locationId`) VALUES
 	(1, 'Chatswood 1', 1),
 	(2, 'Chatswood 2', 1),
 	(3, 'Chatswood 3', 1),
@@ -338,6 +521,7 @@ INSERT INTO `cinemas` (`cinemaId`, `cinemaName`, `locationId`) VALUES
 	(12, 'Macquarie 3', 4);
 
 -- Dumping structure for table spxcinemasdb.locations
+DROP TABLE IF EXISTS `locations`;
 CREATE TABLE IF NOT EXISTS `locations` (
   `locationId` int NOT NULL AUTO_INCREMENT,
   `locationName` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -345,14 +529,15 @@ CREATE TABLE IF NOT EXISTS `locations` (
   UNIQUE KEY `locationName` (`locationName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.locations: ~5 rows (approximately)
-INSERT INTO `locations` (`locationId`, `locationName`) VALUES
+-- Dumping data for table spxcinemasdb.locations: ~4 rows (approximately)
+REPLACE INTO `locations` (`locationId`, `locationName`) VALUES
 	(1, 'Chatswood'),
 	(3, 'Eastwood'),
 	(2, 'Epping'),
 	(4, 'Macquarie Centre ');
 
 -- Dumping structure for table spxcinemasdb.members
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `memberId` int NOT NULL AUTO_INCREMENT,
   `username` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -369,14 +554,15 @@ CREATE TABLE IF NOT EXISTS `members` (
   UNIQUE KEY `userName` (`username`(255)) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.members: ~3 rows (approximately)
-INSERT INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`, `lastName`, `street`, `town`, `postcode`, `phone`, `email`) VALUES
-	(8, 'jbloggs', '$2y$12$sS3Njmlm.Vn5QvqB/HsCbe1RedWloJkWIFqbD/Xb22P52nZO/7RGe', 'User', 'Sd8D3ytGUFp7DG1GXrF8dkxNTmlqWEJocjQ4cTRNLzI0QldTeHc9PQ==', 'ij3WsqxWwTYE0nxcm+f6ZStYMDJZV0lmaHEwUm56VFp6K2k3amc9PQ==', 'qqCoaPzXnaKdrlucFSDRYlYwM3RSV1V5VTY3UXkzMGZOZWwrZHIwaFhkeVE2U1NzakpvQ0ViSUdEVG96NXhhMFJvL2NvNlN3RW5wNkdqYTZFSzU5UDdUa0laQmFpTWRuSERSVnF3aW1HMUlmUUdaT3JnOVNrWGJtanhJd2RzejhyeTJ0RHpEM2cxYXVTbDNQ', 'Caped2q7LFfyNlCIyRYeEFBZOEk3aGFvbEhHaXJzZXVIVHNRRTlsR0dBblF0b3hhK0RzcG9oZDRGRkZudE5ZNkRGVm9xeTRhczhpTTZRQXcvOWNNSDdDWGhqaTFLeDUySFBOVTIxYVVOak1Ybjk3K005VTRKNElYZXJBPQ==', '', 'xJ0WxEI+6hWAK6Xa4U40TDFvL2lOTEtma3hOcU9CU1J6K05lelE9PQ==', 'NqxWkh/0q91rRsDCD6r7EkVxazRhdjNHS2VOYXFkVklDditXWFNHbXhuUmgwTTFxeDJBN1dySnRVN0E9'),
+-- Dumping data for table spxcinemasdb.members: ~4 rows (approximately)
+REPLACE INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`, `lastName`, `street`, `town`, `postcode`, `phone`, `email`) VALUES
+	(8, 'jbloggs', '$2y$12$sS3Njmlm.Vn5QvqB/HsCbe1RedWloJkWIFqbD/Xb22P52nZO/7RGe', 'User', 'vbM3TY4b/VcbXjSsZ8bNCkphK1pxUUpNZjdjeGIvRlkyb0NkdXc9PQ==', '+m3WdYSgVuSAmvsZm+OucENKRzQzN2o4U0U1dmFsdDJvK2tGSUE9PQ==', 'HTB6Ip1fjkshreaoYZrMV3ZuVmpySWdrWkgvQ0tTcHdNRE81UFo1dmNkZEViSTdBZExqbXFXR25UNDQ9', '1tmyO9ExHHd6gu4DviVkPmFIcjVPR3FLVnMyRlRPdFBMODBaNmc9PQ==', 'PuRhq6OqXg28Wxd18zPcg2RtZC9RVkM3eVF3NDljZ0ttbGI1cUE9PQ==', 'n7fFL37zcYbE++36WngwNEJsajd3KzZCc3FLQUJ0elF2a1E0Y1E9PQ==', 'c/Vw4yZIv6Wq9reUSL7cDHJIRFA4dWxmR1ZReEZWSEh0azVkYUpxVi9GSU0yLzZqUVBaRTlheGo5SGs9'),
 	(14, 'hello', '$2y$12$nRw2.FRaYuT3W/X8fUwP7uSDOEZ4ses7z.gp/cCqM0/Zg8fneY5Nq', 'User', 'XHD/+vCmfYD6u+j9qIUYInFpVTdOdjVTOFBsNXp2V1JtcmhxNkE9PQ==', 'oCr+O6+JSnuB2jHXF/UHbncrYXpBSGxJL2VQUFBtSWJ3TXNHT1E9PQ==', '', '', '', '', ''),
 	(15, 'mcheah', '$2y$12$gl1wguuOylAZ5dcS3k3InuvjGpnt9wwBLoqDtK4JlJ0rWkdLPDh4G', 'User', 'K58k7/NM4wP8egafaNGsZE9FYlExakNwb0lGM2ZmUlJ6NzJBaHc9PQ==', 'NPkwfFt2wz6MPxcycKsKEnBadFdyOGFiVlR4a2o3TjZQTlp4M2c9PQ==', '', '', '', '', ''),
 	(17, 'XSS tester', '$2y$12$oAEMfePV5TH61Da8ysKdNONPSmwEnHlMwoLtweuteWWU8u0Zw3Xe.', 'User', 'zDuB1FqONSnE6iD3bq2be1F4ZjRIbXJFKzZYb3FaaDNtTkdjbVZwbk1qQnU2WEd1TzVRZzVXb2gxUE05bXRWaDlxMENxa1dwWWtkb01CeG1pdjZ6OXh0eitpVHpCN3puODRpQW1hTTF5Ny9XeHoyZ1UvRkttSUJjcE40PQ==', 'kOTPyRYiWDr8UvX+wdu3izQ0SjBUVmx6L05ocy9MOUsvbXYrZ1E9PQ==', '', '', '', '', '');
 
 -- Dumping structure for table spxcinemasdb.movies
+DROP TABLE IF EXISTS `movies`;
 CREATE TABLE IF NOT EXISTS `movies` (
   `movieId` int NOT NULL AUTO_INCREMENT,
   `movieName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -387,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `movies` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.movies: ~6 rows (approximately)
-INSERT INTO `movies` (`movieId`, `movieName`, `movieDescription`, `posterFileName`, `trailerFileName`) VALUES
+REPLACE INTO `movies` (`movieId`, `movieName`, `movieDescription`, `posterFileName`, `trailerFileName`) VALUES
 	(1, 'The Godfather', 'Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son, Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.', 'Godfather.png', 'https://www.youtube.com/embed/UaVTIH8mujA?si=CkZSHWy2JHsH1kG2'),
 	(2, 'Edge of Tomorrow', 'With the help of warrior Rita Vrataski, Major William Cage has to save Earth from an alien species, after being caught in a time loop. He must face deadly challenges in order to accomplish his task.', 'EdgeofTomorrow.jpg', 'https://www.youtube.com/embed/yUmSVcttXnI?si=q6KNLccMGx0akwLz'),
 	(3, 'Inception', 'Cobb steals information from his targets by entering their dreams. He is wanted for his alleged role in his wife\'s murder and his only chance at redemption is to perform a nearly impossible task.', 'Inception.jpg', 'https://www.youtube.com/embed/B4IXWfyrrhc?si=LOQBnmDwXPCU9Gtr'),
@@ -396,43 +582,94 @@ INSERT INTO `movies` (`movieId`, `movieName`, `movieDescription`, `posterFileNam
 	(6, 'House of Dynamite', 'Radars at Fort Greely, Alaska, detect a nuclear missile. The president and his entourage must use the limited time they have to try to shoot down the missile before it reaches Chicago.', 'HouseofDynamite.jpg', 'https://www.youtube.com/embed/bp1QjSGGW_M?si=s-6SHaa0fmhV6r6f');
 
 -- Dumping structure for table spxcinemasdb.orderitems
+DROP TABLE IF EXISTS `orderitems`;
 CREATE TABLE IF NOT EXISTS `orderitems` (
   `orderItemId` int NOT NULL AUTO_INCREMENT,
   `orderId` int DEFAULT NULL,
   `sessionId` int NOT NULL,
   `seats` int NOT NULL,
   `pricePerSeat` decimal(6,2) NOT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`orderItemId`) USING BTREE,
   KEY `FK_orderitems_sessions` (`sessionId`),
   KEY `FK_orderitems_orders` (`orderId`),
   CONSTRAINT `FK_orderitems_orders` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_orderitems_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.orderitems: ~2 rows (approximately)
-INSERT INTO `orderitems` (`orderItemId`, `orderId`, `sessionId`, `seats`, `pricePerSeat`) VALUES
-	(12, 15, 23, 3, 35.00),
-	(13, 16, 20, 2, 30.00),
-	(14, 16, 44, 1, 35.00),
-	(15, 17, 27, 2, 20.00);
+-- Dumping data for table spxcinemasdb.orderitems: ~36 rows (approximately)
+REPLACE INTO `orderitems` (`orderItemId`, `orderId`, `sessionId`, `seats`, `pricePerSeat`, `date`) VALUES
+	(12, 15, 23, 3, 35.00, '2026-05-09'),
+	(13, 16, 20, 2, 30.00, '2026-05-09'),
+	(14, 16, 44, 1, 35.00, '2026-05-09'),
+	(15, 17, 27, 2, 20.00, '2026-05-12'),
+	(16, 18, 20, 2, 30.00, '2026-05-18'),
+	(17, 18, 47, 10, 30.00, '2026-05-18'),
+	(18, 18, 30, 2, 20.00, '2026-05-18'),
+	(19, 19, 41, 2, 20.00, '2026-05-19'),
+	(20, 22, 40, 1, 40.00, '2026-05-19'),
+	(21, 24, 23, 2, 35.00, '2026-05-19'),
+	(22, 25, 15, 1, 20.00, '2026-05-25'),
+	(23, 27, 40, 2, 40.00, '2026-05-25'),
+	(24, 27, 32, 1, 35.00, '2026-05-25'),
+	(25, 28, 40, 2, 40.00, '2026-05-25'),
+	(26, 28, 32, 1, 35.00, '2026-05-25'),
+	(27, 29, 13, 4, 30.00, '2026-05-28'),
+	(28, 29, 6, 5, 30.00, '2026-05-28'),
+	(29, 29, 7, 81, 35.00, '2026-05-28'),
+	(30, 30, 13, 4, 30.00, '2026-05-28'),
+	(31, 30, 6, 5, 30.00, '2026-05-28'),
+	(32, 30, 7, 81, 35.00, '2026-05-28'),
+	(33, 31, 13, 4, 30.00, '2026-05-28'),
+	(34, 31, 6, 5, 30.00, '2026-05-28'),
+	(35, 31, 7, 81, 35.00, '2026-05-28'),
+	(36, 32, 13, 4, 30.00, '2026-05-28'),
+	(37, 32, 6, 5, 30.00, '2026-05-28'),
+	(38, 32, 7, 81, 35.00, '2026-05-28'),
+	(39, 33, 13, 4, 30.00, '2026-05-28'),
+	(40, 33, 6, 5, 30.00, '2026-05-28'),
+	(41, 33, 7, 81, 35.00, '2026-05-28'),
+	(42, 34, 13, 4, 30.00, '2026-05-28'),
+	(43, 34, 6, 5, 30.00, '2026-05-28'),
+	(44, 34, 7, 81, 35.00, '2026-05-28'),
+	(45, 35, 9, 103, 20.00, '2026-05-29'),
+	(46, 35, 34, 3, 25.00, '2026-05-29'),
+	(47, 35, 32, 6, 35.00, '2026-05-29');
 
 -- Dumping structure for table spxcinemasdb.orders
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderId` int NOT NULL AUTO_INCREMENT,
   `memberId` int DEFAULT NULL,
   `orderDate` datetime DEFAULT NULL,
+  `orderStatus` enum('Booked') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`orderId`),
   KEY `FK_orders_members` (`memberId`),
   CONSTRAINT `FK_orders_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.orders: ~2 rows (approximately)
-INSERT INTO `orders` (`orderId`, `memberId`, `orderDate`) VALUES
-	(15, 8, '2026-05-09 09:03:59'),
-	(16, 15, '2026-05-09 09:14:32'),
-	(17, 15, '2026-05-12 02:43:32');
+-- Dumping data for table spxcinemasdb.orders: ~17 rows (approximately)
+REPLACE INTO `orders` (`orderId`, `memberId`, `orderDate`, `orderStatus`) VALUES
+	(15, 8, '2026-05-09 09:03:59', 'Booked'),
+	(16, 15, '2026-05-09 09:14:32', 'Booked'),
+	(17, 15, '2026-05-12 02:43:32', 'Booked'),
+	(18, 8, '2026-05-18 01:44:50', 'Booked'),
+	(19, 8, '2026-05-19 23:54:34', 'Booked'),
+	(22, 8, '2026-05-19 23:56:17', 'Booked'),
+	(24, 8, '2026-05-19 23:59:36', 'Booked'),
+	(25, 8, '2026-05-25 02:39:19', 'Booked'),
+	(27, 8, '2026-05-25 03:49:37', 'Booked'),
+	(28, 8, '2026-05-25 04:07:08', 'Booked'),
+	(29, 8, '2026-05-29 00:00:02', 'Booked'),
+	(30, 8, '2026-05-29 00:01:48', 'Booked'),
+	(31, 8, '2026-05-29 00:02:28', 'Booked'),
+	(32, 8, '2026-05-29 00:02:39', 'Booked'),
+	(33, 8, '2026-05-29 00:02:42', 'Booked'),
+	(34, 8, '2026-05-29 00:06:32', 'Booked'),
+	(35, 8, '2026-05-29 00:09:11', 'Booked');
 
 -- Dumping structure for table spxcinemasdb.sessions
+DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `sessionId` int NOT NULL AUTO_INCREMENT,
   `sessionTime` time NOT NULL,
@@ -447,7 +684,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.sessions: ~36 rows (approximately)
-INSERT INTO `sessions` (`sessionId`, `sessionTime`, `sessionCost`, `cinemaId`, `movieId`) VALUES
+REPLACE INTO `sessions` (`sessionId`, `sessionTime`, `sessionCost`, `cinemaId`, `movieId`) VALUES
 	(2, '10:00:00', 20.00, 1, 5),
 	(6, '15:00:00', 30.00, 1, 3),
 	(7, '20:00:00', 35.00, 1, 1),
