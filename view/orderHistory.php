@@ -30,6 +30,7 @@
                             </div>
                             <div class="">
                                 <div class="col">Session Time: <?= $item->session->sessionTime->format("h:i A") ?></div>
+                                <div class="col">Booking Date: <?= $item->date->format("d/m/Y") ?> </div>
                                 <div class="col">Seats: <?= $item->seats ?></div>
                             </div>
                         </div>

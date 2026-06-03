@@ -17,8 +17,8 @@ function changeOpen(accordians, openCode) {
 }
 function establishAccordian(element) {
     let header = element.getElementsByClassName("card-header")[0];
-    let body = element.getElementsByClassName("collapse")[0];
-    header.addEventListener("click", () => changeOpen(Array.from(document.getElementsByClassName("collapse")), header.getAttribute("order-id")));
+    let id = header.getAttribute("order-id");
+    header.addEventListener("click", () => changeOpen(Array.from(document.getElementsByClassName("collapse")), id));
 }
 document.addEventListener("DOMContentLoaded", () => {
     // Plumb the behaviour for the accordian cards

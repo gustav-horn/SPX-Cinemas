@@ -2,7 +2,7 @@
 /*
     Controller for the booking page
     // view/booking/booking.php
-    Expects a $session, a $startNo and a $status from the controller
+    Expects a $session, a $startNo, a $date and a $status from the controller
 
 */
     include __DIR__ . '/../../view/header.php';
@@ -33,6 +33,11 @@
         <script type="module" src="assets/js/compiled/booking.js"></script>
         </div>
         <div class="padding-2"></div>
+        <h2>Select Your Date</h2>
+        <div class="padding-2"></div>
+        <div class="row justify-centre align-centre">
+            <input class="date-selector" type="date" id="booking-date" value="<?= $date->format("Y-m-d") ?>">
+        </div>
 
     </div>
 </div>

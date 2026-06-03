@@ -480,6 +480,15 @@ nav {
     @include shadow()
 }
 
+.date-selector {
+    @include shadow();
+    background-color: $primary-color;
+    border-radius: 20px;
+    width: 50%;
+    font-size: 2vw;
+    text-align: center;
+}
+
 /* Display Field Styling */
 #seats-display {
     font-size: 36px;

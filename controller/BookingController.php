@@ -35,22 +35,22 @@ class BookingController {
         // Step 1. Check to see if we are pointed at a valid session
         if ((isset($_GET["session"]) && ($session = $this->sessionRepository->findById($_GET["session"])) !== null)) {
             // Check to see if we have some changes to make
-            if ((count($_POST) > 0) && isset($_POST["noOfSeats"])) {
+            if ((count($_POST) > 0) && isset($_POST["noOfSeats"]) && isset($_POST["date"])) {
                 $this->createBooking($session);
             }
             // Serve the page
             else {
-                $this->servePage($session, 0, "Please select the number of seats you want and confirm your booking");
+                $this->servePage($session, 0, new DateTime(), "Please select the number of seats you want and confirm your booking");
             }
         }
         // Step 2. Check to see if we are pointed at a valid pre-existing booking
         else if (isset($_GET["booking"]) && ($booking = $this->bookingRepository->findById($_GET["booking"])) !== null) {
-            if ((count($_POST) > 0) && isset($_POST["noOfSeats"])) {
+            if ((count($_POST) > 0) && isset($_POST["noOfSeats"]) && isset($_POST["date"])) {
                 $this->editBooking($booking);
             }
             // Serve the page
             else {
-                $this->servePage($booking->session, $booking->seats, "Edit your booking");
+                $this->servePage($booking->session, $booking->seats, $booking->date, "Edit your booking");
             }
         }
         // Step 3. Fallback to 404
@@ -61,39 +61,49 @@ class BookingController {
 
     private function createBooking(Session $session): void {
         $seats = (int)$_POST["noOfSeats"];
+        $date = DateTime::createFromFormat("Y-m-d", $_POST["date"]);
         if ($seats <= 0) {
-            $this->servePage($session, $seats, "Please select one or more seats");
+            $this->servePage($session, $seats, $date, "Please select one or more seats");
             return;
         }
-        $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), new DateTime(), $seats, $session->getCost());
+        if ($date < new DateTime()) {
+            $this->servePage($session, $seats, $date, "Please have a date that is not from the past.");
+            return;
+        }
+        $booking = new Booking(null, $session, $this->sessionManager->getActiveUser(), $date, $seats, $session->getCost());
         if ($this->bookingRepository->save($booking)) {
             $this->serveNotification("Booking Creation Successful. <br> Your booking number is #" . $this->bookingRepository->findLatestId());
             return;
         }
         else {
-            $this->servePage($session, $seats, "Booking Creation Failed. Please Try Again.");
+            $this->servePage($session, $seats, $date, "Booking Creation Failed. Please Try Again.");
             return;
         }
     }
 
     private function editBooking(Booking $booking): void {
         $seats = (int)$_POST["noOfSeats"];
+        $date = DateTime::createFromFormat("Y-m-d", $_POST["date"]);
         if ($seats <= 0) {
-            $this->servePage($booking->session, $seats, "Please select either one or more seats. <br> If you wish to cancel, simply delete the booking from the previous page");
+            $this->servePage($booking->session, $seats, $date, "Please select either one or more seats. <br> If you wish to cancel, simply delete the booking from the previous page");
             return;
         }
-        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), new DateTime(), $seats, $booking->session->getCost());
+        if ($date < new DateTime()) {
+            $this->servePage($booking->session, $seats, $date, "Please have a date that is not from the past.");
+            return;
+        }
+        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $date, $seats, $booking->session->getCost());
         if ($this->bookingRepository->save($booking)) {
             $this->serveNotification("Booking Modification Succesful.");
             return;
         }
         else {
-            $this->servePage($booking->session, $seats, "Booking Modification Failed. Please Try Again.");
+            $this->servePage($booking->session, $seats, $date, "Booking Modification Failed. Please Try Again.");
             return;
         }
     }
 
-    private function servePage(Session $session, int $startNo, string $status) {
+    private function servePage(Session $session, int $startNo, DateTime $date, string $status) {
         require_once __DIR__ . "/../view/booking/booking.php";
     }
 

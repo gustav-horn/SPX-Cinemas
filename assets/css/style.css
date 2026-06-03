@@ -457,6 +457,15 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.date-selector {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f9fafb;
+  border-radius: 20px;
+  width: 50%;
+  font-size: 2vw;
+  text-align: center;
+}
+
 /* Display Field Styling */
 #seats-display {
   font-size: 36px;
