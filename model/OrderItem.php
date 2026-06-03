@@ -11,7 +11,7 @@ class OrderItem implements Auditable {
     public ?int $orderItemId;
     public Order $order;
     public Session $session;
-    public DateTime $date;
+    public DateTimeImmutable $date;
     public int $seats;
     public float $pricePerSeat;
 
@@ -19,7 +19,7 @@ class OrderItem implements Auditable {
         ?int $id,
         Order $order,
         Session $session,
-        DateTime $date,
+        DateTimeImmutable $date,
         int $seats,
         float $pricePerSeat,
     ) {

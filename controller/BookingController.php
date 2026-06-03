@@ -61,12 +61,12 @@ class BookingController {
 
     private function createBooking(Session $session): void {
         $seats = (int)$_POST["noOfSeats"];
-        $date = DateTime::createFromFormat("Y-m-d", $_POST["date"]);
+        $date = DateTimeImmutable::createFromFormat("Y-m-d", $_POST["date"]);
         if ($seats <= 0) {
             $this->servePage($session, $seats, $date, "Please select one or more seats");
             return;
         }
-        if ($date < new DateTime()) {
+        if ($date->add(new DateInterval("P1D")) < new DateTime("now")) {
             $this->servePage($session, $seats, $date, "Please have a date that is not from the past.");
             return;
         }
@@ -83,12 +83,12 @@ class BookingController {
 
     private function editBooking(Booking $booking): void {
         $seats = (int)$_POST["noOfSeats"];
-        $date = DateTime::createFromFormat("Y-m-d", $_POST["date"]);
+        $date = DateTimeImmutable::createFromFormat("Y-m-d", $_POST["date"]);
         if ($seats <= 0) {
             $this->servePage($booking->session, $seats, $date, "Please select either one or more seats. <br> If you wish to cancel, simply delete the booking from the previous page");
             return;
         }
-        if ($date < new DateTime()) {
+        if ($date->add(new DateInterval("P1D")) < new DateTime("now")) {
             $this->servePage($booking->session, $seats, $date, "Please have a date that is not from the past.");
             return;
         }
@@ -103,7 +103,7 @@ class BookingController {
         }
     }
 
-    private function servePage(Session $session, int $startNo, DateTime $date, string $status) {
+    private function servePage(Session $session, int $startNo, DateTimeImmutable $date, string $status) {
         require_once __DIR__ . "/../view/booking/booking.php";
     }
 

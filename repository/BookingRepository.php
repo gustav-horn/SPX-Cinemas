@@ -36,7 +36,7 @@ class BookingRepository {
             (int)$row["bookingId"],
             $this->sessionRepository->findById($row["sessionId"]),
             $this->memberRepository->findById($row["memberId"]),
-            DateTime::createFromFormat("Y-m-d", $row["date"]),
+            DateTimeImmutable::createFromFormat("Y-m-d", $row["date"]),
             (int)$row["seats"],
             (float)$row["pricePerSeat"]
         );

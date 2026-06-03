@@ -36,7 +36,7 @@ class OrderItemRepository {
             (int)$row["orderItemId"],
             $this->orderRepository->findById($row["orderId"]),
             $this->sessionRepository->findById($row["sessionId"]),
-            DateTime::createFromFormat("Y-m-d", $row["date"]),
+            DateTimeImmutable::createFromFormat("Y-m-d", $row["date"]),
             (int)$row["seats"],
             (float)$row["pricePerSeat"]
         );

@@ -19,7 +19,7 @@ class Booking implements Auditable {
     public ?int $bookingId;
     public Session $session;
     public Member $member;
-    public DateTime $date;
+    public DateTimeImmutable $date;
 
     public int $seats;
     public float $pricePerSeat;
@@ -28,7 +28,7 @@ class Booking implements Auditable {
         ?int $id,
         Session $session,
         Member $member,
-        DateTime $date,
+        DateTimeImmutable $date,
         int $seats,
         float $pricePerSeat
         
