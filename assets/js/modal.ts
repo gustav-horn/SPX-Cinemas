@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".trailer-link").forEach(function (link) {
         link.addEventListener("click", function (e) {
             e.preventDefault();
+            e.stopPropagation();
             assertHTMLAnchorElement(this);
             assertIFrame(trailerFrame);
             var trailerURL = this.getAttribute("data-trailer") + "?autoplay=1";
