@@ -9,6 +9,10 @@ require_once __DIR__ . "/Auditer.php";
 enum SessionStatus {
     case LoggedIn;
     case NotLoggedIn;
+
+    public static function isSessionStatus(mixed $value): bool {
+        return (gettype($value) === "object" && get_class($value) == "SessionStatus");
+    }
 }
 
 
@@ -37,17 +41,14 @@ class SessionManager {
         $this->auditer = new Auditer(DatabaseSingleton::getInstance());
 
         // Try to initiate the session. If we can't; abort and panic!
-        try {
-            if (!session_start(["serialize_handler" => 'php_serialize']) && !session_start(["serialize_handler" => 'php_serialize'])) { // For some reason trying it twice seems to help
-                error_log("Session unable to be started");
-                exit("Session unable to be started");
-            }
+        if (!@session_start(["serialize_handler" => 'php_serialize']) && !session_start(["serialize_handler" => 'php_serialize'])) { // For some reason trying it twice seems to help. The @ suppresses the warning of the first failure
+            error_log("Session unable to be started");
+            exit("Session unable to be started");
         }
-        catch (Exception $e) {
-            throw $e;
-        }
+
+
         // Check to see if we've met this client. If we haven't default to logged out.
-        if (!isset($_SESSION["CurrentStatus"])) {
+        if (!isset($_SESSION["CurrentStatus"]) || !SessionStatus::isSessionStatus($_SESSION["CurrentStatus"])) {
             $_SESSION["CurrentStatus"] = SessionStatus::NotLoggedIn;
             $_SESSION["CurrentInfo"] = new NotLoggedIn($currPage);
             return; //Returning early for readability
@@ -97,7 +98,8 @@ class SessionManager {
     public function loggedOut(string $currPage) {
         // Check to see if we are currently logged in or not. If we are logged in, make the auditLog
         match ($_SESSION["CurrentStatus"]) {
-            SessionStatus::LoggedIn => $this->auditer->logOut($_SESSION["CurrentInfo"]->user)
+            SessionStatus::LoggedIn => $this->auditer->logOut($_SESSION["CurrentInfo"]->user),
+            default => null,
         };
         $_SESSION["CurrentStatus"] = SessionStatus::NotLoggedIn;
         $_SESSION["CurrentInfo"] = new NotLoggedIn($currPage);
@@ -111,6 +113,7 @@ class SessionManager {
         return match($_SESSION["CurrentStatus"]) {
             SessionStatus::LoggedIn => true,
             SessionStatus::NotLoggedIn => false,
+            // default => (bool)$this->loggedOut("home"),
         };
     }
 
@@ -153,6 +156,10 @@ class LoggedInUser {
         $this->user = $user;
         $this->lastTimeActed = $time;
     }
+
+    public static function isLoggedInUser(mixed $value): bool {
+        return (gettype($value) === "object" && get_class($value) == "LoggedInUser");
+    }
 }
 
 /**
@@ -164,5 +171,9 @@ class NotLoggedIn {
 
     public function __construct(string $currPage) {
         $this->lastPageUsed = $currPage;
+    }
+
+    public static function isNotLoggedIn(mixed $value): bool {
+        return (gettype($value) === "object" && get_class($value) == "NotLoggedIn");
     }
 }
