@@ -92,8 +92,8 @@ class BookingController {
             $this->servePage($booking->session, $seats, $date, "Please have a date that is not from the past.");
             return;
         }
-        $booking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $date, $seats, $booking->session->getCost());
-        if ($this->bookingRepository->save($booking)) {
+        $newBooking = new Booking($booking->bookingId, $booking->session, $this->sessionManager->getActiveUser(), $date, $seats, $booking->session->getCost());
+        if ($booking == $newBooking || $this->bookingRepository->save($newBooking)) { // Makes no change to the booking a successful no-op
             $this->serveNotification("Booking Modification Succesful.");
             return;
         }
