@@ -15,7 +15,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Dumping structure for table spxcinemasdb.auditlogs
-DROP TABLE IF EXISTS `auditlogs`;
 CREATE TABLE IF NOT EXISTS `auditlogs` (
   `auditLogId` int NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NOT NULL,
@@ -23,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `auditlogs` (
   `action` enum('update','insert','delete','login','logout','order') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `entry` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`auditLogId`)
-) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=498 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.auditlogs: ~448 rows (approximately)
+-- Dumping data for table spxcinemasdb.auditlogs: ~432 rows (approximately)
 REPLACE INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`) VALUES
 	(19, '2026-03-04 11:33:34', 'Member (id = 8, username = jbloggs)', 'logout', 'Member (username = jbloggs) logged out'),
 	(20, '2026-03-04 11:33:48', 'Member (id = 8, username = jbloggs)', 'login', 'Member (username = jbloggs) logged in'),
@@ -474,10 +473,40 @@ REPLACE INTO `auditlogs` (`auditLogId`, `timestamp`, `entity`, `action`, `entry`
 	(463, '2026-05-28 14:09:11', 'Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25)', 'delete', 'Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25) was deleted'),
 	(464, '2026-05-28 14:09:11', 'Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35)', 'delete', 'Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35) was deleted'),
 	(465, '2026-05-28 14:09:11', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 50, member = Member(id = 8, username = jbloggs), session = Session(id = 9, movie = Minority Report, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 10:00:000, cost = 20), date = 2026-05-29, seats = 103, pricePerSeat = 20), Booking(id = 51, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-05-29, seats = 3, pricePerSeat = 25), Booking(id = 52, member = Member(id = 8, username = jbloggs), session = Session(id = 32, movie = The Godfather, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 20:00:000, cost = 35), date = 2026-05-29, seats = 6, pricePerSeat = 35)'),
-	(466, '2026-05-28 14:10:18', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated');
+	(466, '2026-05-28 14:10:18', 'Member(id = 8, username = jbloggs)', 'update', 'Member(id = 8, username = jbloggs) was updated'),
+	(467, '2026-05-31 23:07:05', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(468, '2026-06-02 22:46:14', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(469, '2026-06-02 22:47:21', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 24, movie = Alita: Battle Angel, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 10:00:000, cost = 20), date = 2026-06-03, seats = 2, pricePerSeat = 20) created'),
+	(470, '2026-06-02 22:47:40', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-07-12, seats = 1, pricePerSeat = 30) created'),
+	(471, '2026-06-02 22:48:03', 'Booking(id = 53, member = Member(id = 8, username = jbloggs), session = Session(id = 24, movie = Alita: Battle Angel, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 10:00:000, cost = 20), date = 2026-08-03, seats = 2, pricePerSeat = 20)', 'update', 'Booking(id = 53, member = Member(id = 8, username = jbloggs), session = Session(id = 24, movie = Alita: Battle Angel, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 10:00:000, cost = 20), date = 2026-08-03, seats = 2, pricePerSeat = 20) was updated'),
+	(472, '2026-06-02 22:53:42', 'Booking(id = 54, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-03, seats = 1, pricePerSeat = 30)', 'update', 'Booking(id = 54, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-03, seats = 1, pricePerSeat = 30) was updated'),
+	(473, '2026-06-08 19:52:23', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(474, '2026-06-08 20:06:36', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(475, '2026-06-08 20:09:30', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-06-09, seats = 2, pricePerSeat = 20) created'),
+	(476, '2026-06-08 20:14:28', 'Booking(id = 55, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-06-09, seats = 1, pricePerSeat = 20)', 'update', 'Booking(id = 55, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-06-09, seats = 1, pricePerSeat = 20) was updated'),
+	(477, '2026-06-08 20:15:34', 'Booking(id = 55, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-06-09, seats = 1, pricePerSeat = 20)', 'delete', 'Booking(id = 55, member = Member(id = 8, username = jbloggs), session = Session(id = 30, movie = Alita: Battle Angel, cinema = Cinema(id = 7, name = Eastwood 1, location = Eastwood), time = 10:00:000, cost = 20), date = 2026-06-09, seats = 1, pricePerSeat = 20) was deleted'),
+	(478, '2026-06-08 20:16:30', 'Booking(id = 53, member = Member(id = 8, username = jbloggs), session = Session(id = 24, movie = Alita: Battle Angel, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 10:00:000, cost = 20), date = 2026-08-03, seats = 2, pricePerSeat = 20)', 'delete', 'Booking(id = 53, member = Member(id = 8, username = jbloggs), session = Session(id = 24, movie = Alita: Battle Angel, cinema = Cinema(id = 5, name = Epping 2, location = Epping), time = 10:00:000, cost = 20), date = 2026-08-03, seats = 2, pricePerSeat = 20) was deleted'),
+	(479, '2026-06-08 20:16:32', 'Booking(id = 54, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-03, seats = 1, pricePerSeat = 30)', 'delete', 'Booking(id = 54, member = Member(id = 8, username = jbloggs), session = Session(id = 20, movie = Inception, cinema = Cinema(id = 4, name = Epping 1, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-03, seats = 1, pricePerSeat = 30) was deleted'),
+	(480, '2026-06-08 20:16:50', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-06-09, seats = 2, pricePerSeat = 25) created'),
+	(481, '2026-06-08 20:17:04', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 46, movie = House of Dynamite, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 15:00:000, cost = 35), date = 2026-06-09, seats = 1, pricePerSeat = 35) created'),
+	(482, '2026-06-08 20:17:17', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 16, movie = Inception, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30) created'),
+	(483, '2026-06-08 20:17:41', 'Orders table', 'insert', 'new Order(id = , member = Member(id = 8, username = jbloggs), time = 2026-06-09 06:17:41, status = Booked) created'),
+	(484, '2026-06-08 20:17:41', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 36, member = Member(id = 8, username = jbloggs), time = 2026-06-09 06:17:41, status = Booked), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-06-09, seats = 2, pricePerSeat = 25) created'),
+	(485, '2026-06-08 20:17:41', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 36, member = Member(id = 8, username = jbloggs), time = 2026-06-09 06:17:41, status = Booked), session = Session(id = 46, movie = House of Dynamite, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 15:00:000, cost = 35), date = 2026-06-09, seats = 1, pricePerSeat = 35) created'),
+	(486, '2026-06-08 20:17:42', 'OrderItems table', 'insert', 'new OrderItem(id = , order = Order(id = 36, member = Member(id = 8, username = jbloggs), time = 2026-06-09 06:17:41, status = Booked), session = Session(id = 16, movie = Inception, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30) created'),
+	(487, '2026-06-08 20:17:42', 'Booking(id = 56, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-06-09, seats = 2, pricePerSeat = 25)', 'delete', 'Booking(id = 56, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-06-09, seats = 2, pricePerSeat = 25) was deleted'),
+	(488, '2026-06-08 20:17:42', 'Booking(id = 57, member = Member(id = 8, username = jbloggs), session = Session(id = 46, movie = House of Dynamite, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 15:00:000, cost = 35), date = 2026-06-09, seats = 1, pricePerSeat = 35)', 'delete', 'Booking(id = 57, member = Member(id = 8, username = jbloggs), session = Session(id = 46, movie = House of Dynamite, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 15:00:000, cost = 35), date = 2026-06-09, seats = 1, pricePerSeat = 35) was deleted'),
+	(489, '2026-06-08 20:17:42', 'Booking(id = 58, member = Member(id = 8, username = jbloggs), session = Session(id = 16, movie = Inception, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30)', 'delete', 'Booking(id = 58, member = Member(id = 8, username = jbloggs), session = Session(id = 16, movie = Inception, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30) was deleted'),
+	(490, '2026-06-08 20:17:42', 'Orders', 'order', 'Member(id = 8, username = jbloggs) placed a new order with items: , Booking(id = 56, member = Member(id = 8, username = jbloggs), session = Session(id = 34, movie = House of Dynamite, cinema = Cinema(id = 8, name = Eastwood 2, location = Eastwood), time = 10:00:000, cost = 25), date = 2026-06-09, seats = 2, pricePerSeat = 25), Booking(id = 57, member = Member(id = 8, username = jbloggs), session = Session(id = 46, movie = House of Dynamite, cinema = Cinema(id = 11, name = Macquarie 2, location = Macquarie Centre ), time = 15:00:000, cost = 35), date = 2026-06-09, seats = 1, pricePerSeat = 35), Booking(id = 58, member = Member(id = 8, username = jbloggs), session = Session(id = 16, movie = Inception, cinema = Cinema(id = 3, name = Chatswood 3, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30)'),
+	(491, '2026-06-08 20:30:25', 'Member(id = 8, username = jbloggs)', 'logout', 'Member(id = 8, username = jbloggs) logged out'),
+	(492, '2026-06-08 20:31:10', 'Member(id = 8, username = jbloggs)', 'login', 'Member(id = 8, username = jbloggs) logged in'),
+	(493, '2026-06-08 20:36:53', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 1, pricePerSeat = 30) created'),
+	(494, '2026-06-08 20:37:52', 'Booking(id = 59, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 1, pricePerSeat = 30)', 'update', 'Booking(id = 59, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 1, pricePerSeat = 30) was updated'),
+	(495, '2026-06-08 20:38:34', 'Booking(id = 59, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30)', 'update', 'Booking(id = 59, member = Member(id = 8, username = jbloggs), session = Session(id = 13, movie = Edge of Tomorrow, cinema = Cinema(id = 2, name = Chatswood 2, location = Chatswood), time = 15:00:000, cost = 30), date = 2026-06-09, seats = 2, pricePerSeat = 30) was updated'),
+	(496, '2026-06-08 20:39:42', 'Bookings table', 'insert', 'new Booking(id = , member = Member(id = 8, username = jbloggs), session = Session(id = 28, movie = Inception, cinema = Cinema(id = 6, name = Epping 3, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-18, seats = 2, pricePerSeat = 30) created'),
+	(497, '2026-06-08 20:40:16', 'Booking(id = 60, member = Member(id = 8, username = jbloggs), session = Session(id = 28, movie = Inception, cinema = Cinema(id = 6, name = Epping 3, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-13, seats = 2, pricePerSeat = 30)', 'update', 'Booking(id = 60, member = Member(id = 8, username = jbloggs), session = Session(id = 28, movie = Inception, cinema = Cinema(id = 6, name = Epping 3, location = Epping), time = 15:00:000, cost = 30), date = 2026-06-13, seats = 2, pricePerSeat = 30) was updated');
 
 -- Dumping structure for table spxcinemasdb.bookings
-DROP TABLE IF EXISTS `bookings`;
 CREATE TABLE IF NOT EXISTS `bookings` (
   `bookingId` int NOT NULL AUTO_INCREMENT,
   `sessionId` int NOT NULL DEFAULT '0',
@@ -490,12 +519,14 @@ CREATE TABLE IF NOT EXISTS `bookings` (
   KEY `FK_bookings_sessions` (`sessionId`),
   CONSTRAINT `FK_bookings_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_bookings_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.bookings: ~0 rows (approximately)
+-- Dumping data for table spxcinemasdb.bookings: ~2 rows (approximately)
+REPLACE INTO `bookings` (`bookingId`, `sessionId`, `memberId`, `seats`, `pricePerSeat`, `date`) VALUES
+	(59, 13, 8, 2, 30.00, '2026-06-09'),
+	(60, 28, 8, 2, 30.00, '2026-06-13');
 
 -- Dumping structure for table spxcinemasdb.cinemas
-DROP TABLE IF EXISTS `cinemas`;
 CREATE TABLE IF NOT EXISTS `cinemas` (
   `cinemaId` int NOT NULL AUTO_INCREMENT,
   `cinemaName` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -521,7 +552,6 @@ REPLACE INTO `cinemas` (`cinemaId`, `cinemaName`, `locationId`) VALUES
 	(12, 'Macquarie 3', 4);
 
 -- Dumping structure for table spxcinemasdb.locations
-DROP TABLE IF EXISTS `locations`;
 CREATE TABLE IF NOT EXISTS `locations` (
   `locationId` int NOT NULL AUTO_INCREMENT,
   `locationName` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -529,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
   UNIQUE KEY `locationName` (`locationName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.locations: ~4 rows (approximately)
+-- Dumping data for table spxcinemasdb.locations: ~5 rows (approximately)
 REPLACE INTO `locations` (`locationId`, `locationName`) VALUES
 	(1, 'Chatswood'),
 	(3, 'Eastwood'),
@@ -537,7 +567,6 @@ REPLACE INTO `locations` (`locationId`, `locationName`) VALUES
 	(4, 'Macquarie Centre ');
 
 -- Dumping structure for table spxcinemasdb.members
-DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `memberId` int NOT NULL AUTO_INCREMENT,
   `username` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -554,7 +583,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   UNIQUE KEY `userName` (`username`(255)) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.members: ~4 rows (approximately)
+-- Dumping data for table spxcinemasdb.members: ~3 rows (approximately)
 REPLACE INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`, `lastName`, `street`, `town`, `postcode`, `phone`, `email`) VALUES
 	(8, 'jbloggs', '$2y$12$sS3Njmlm.Vn5QvqB/HsCbe1RedWloJkWIFqbD/Xb22P52nZO/7RGe', 'User', 'vbM3TY4b/VcbXjSsZ8bNCkphK1pxUUpNZjdjeGIvRlkyb0NkdXc9PQ==', '+m3WdYSgVuSAmvsZm+OucENKRzQzN2o4U0U1dmFsdDJvK2tGSUE9PQ==', 'HTB6Ip1fjkshreaoYZrMV3ZuVmpySWdrWkgvQ0tTcHdNRE81UFo1dmNkZEViSTdBZExqbXFXR25UNDQ9', '1tmyO9ExHHd6gu4DviVkPmFIcjVPR3FLVnMyRlRPdFBMODBaNmc9PQ==', 'PuRhq6OqXg28Wxd18zPcg2RtZC9RVkM3eVF3NDljZ0ttbGI1cUE9PQ==', 'n7fFL37zcYbE++36WngwNEJsajd3KzZCc3FLQUJ0elF2a1E0Y1E9PQ==', 'c/Vw4yZIv6Wq9reUSL7cDHJIRFA4dWxmR1ZReEZWSEh0azVkYUpxVi9GSU0yLzZqUVBaRTlheGo5SGs9'),
 	(14, 'hello', '$2y$12$nRw2.FRaYuT3W/X8fUwP7uSDOEZ4ses7z.gp/cCqM0/Zg8fneY5Nq', 'User', 'XHD/+vCmfYD6u+j9qIUYInFpVTdOdjVTOFBsNXp2V1JtcmhxNkE9PQ==', 'oCr+O6+JSnuB2jHXF/UHbncrYXpBSGxJL2VQUFBtSWJ3TXNHT1E9PQ==', '', '', '', '', ''),
@@ -562,7 +591,6 @@ REPLACE INTO `members` (`memberId`, `username`, `password`, `role`, `firstName`,
 	(17, 'XSS tester', '$2y$12$oAEMfePV5TH61Da8ysKdNONPSmwEnHlMwoLtweuteWWU8u0Zw3Xe.', 'User', 'zDuB1FqONSnE6iD3bq2be1F4ZjRIbXJFKzZYb3FaaDNtTkdjbVZwbk1qQnU2WEd1TzVRZzVXb2gxUE05bXRWaDlxMENxa1dwWWtkb01CeG1pdjZ6OXh0eitpVHpCN3puODRpQW1hTTF5Ny9XeHoyZ1UvRkttSUJjcE40PQ==', 'kOTPyRYiWDr8UvX+wdu3izQ0SjBUVmx6L05ocy9MOUsvbXYrZ1E9PQ==', '', '', '', '', '');
 
 -- Dumping structure for table spxcinemasdb.movies
-DROP TABLE IF EXISTS `movies`;
 CREATE TABLE IF NOT EXISTS `movies` (
   `movieId` int NOT NULL AUTO_INCREMENT,
   `movieName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -582,7 +610,6 @@ REPLACE INTO `movies` (`movieId`, `movieName`, `movieDescription`, `posterFileNa
 	(6, 'House of Dynamite', 'Radars at Fort Greely, Alaska, detect a nuclear missile. The president and his entourage must use the limited time they have to try to shoot down the missile before it reaches Chicago.', 'HouseofDynamite.jpg', 'https://www.youtube.com/embed/bp1QjSGGW_M?si=s-6SHaa0fmhV6r6f');
 
 -- Dumping structure for table spxcinemasdb.orderitems
-DROP TABLE IF EXISTS `orderitems`;
 CREATE TABLE IF NOT EXISTS `orderitems` (
   `orderItemId` int NOT NULL AUTO_INCREMENT,
   `orderId` int DEFAULT NULL,
@@ -595,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
   KEY `FK_orderitems_orders` (`orderId`),
   CONSTRAINT `FK_orderitems_orders` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_orderitems_sessions` FOREIGN KEY (`sessionId`) REFERENCES `sessions` (`sessionId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spxcinemasdb.orderitems: ~36 rows (approximately)
 REPLACE INTO `orderitems` (`orderItemId`, `orderId`, `sessionId`, `seats`, `pricePerSeat`, `date`) VALUES
@@ -634,10 +661,12 @@ REPLACE INTO `orderitems` (`orderItemId`, `orderId`, `sessionId`, `seats`, `pric
 	(44, 34, 7, 81, 35.00, '2026-05-28'),
 	(45, 35, 9, 103, 20.00, '2026-05-29'),
 	(46, 35, 34, 3, 25.00, '2026-05-29'),
-	(47, 35, 32, 6, 35.00, '2026-05-29');
+	(47, 35, 32, 6, 35.00, '2026-05-29'),
+	(48, 36, 34, 2, 25.00, '2026-06-09'),
+	(49, 36, 46, 1, 35.00, '2026-06-09'),
+	(50, 36, 16, 2, 30.00, '2026-06-09');
 
 -- Dumping structure for table spxcinemasdb.orders
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderId` int NOT NULL AUTO_INCREMENT,
   `memberId` int DEFAULT NULL,
@@ -646,9 +675,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`orderId`),
   KEY `FK_orders_members` (`memberId`),
   CONSTRAINT `FK_orders_members` FOREIGN KEY (`memberId`) REFERENCES `members` (`memberId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spxcinemasdb.orders: ~17 rows (approximately)
+-- Dumping data for table spxcinemasdb.orders: ~16 rows (approximately)
 REPLACE INTO `orders` (`orderId`, `memberId`, `orderDate`, `orderStatus`) VALUES
 	(15, 8, '2026-05-09 09:03:59', 'Booked'),
 	(16, 15, '2026-05-09 09:14:32', 'Booked'),
@@ -666,10 +695,10 @@ REPLACE INTO `orders` (`orderId`, `memberId`, `orderDate`, `orderStatus`) VALUES
 	(32, 8, '2026-05-29 00:02:39', 'Booked'),
 	(33, 8, '2026-05-29 00:02:42', 'Booked'),
 	(34, 8, '2026-05-29 00:06:32', 'Booked'),
-	(35, 8, '2026-05-29 00:09:11', 'Booked');
+	(35, 8, '2026-05-29 00:09:11', 'Booked'),
+	(36, 8, '2026-06-09 06:17:41', 'Booked');
 
 -- Dumping structure for table spxcinemasdb.sessions
-DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `sessionId` int NOT NULL AUTO_INCREMENT,
   `sessionTime` time NOT NULL,
